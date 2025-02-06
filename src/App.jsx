@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      Hey There
+      Hey There, Rydo Here!
     </>
   )
 }
