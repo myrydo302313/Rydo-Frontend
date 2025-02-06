@@ -1,0 +1,22 @@
+.social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    gap: 15px;
+    margin-bottom: 60px;
+  }
+  
+  .social span {
+    color: #e71d36;
+    font-size: larger;
+  }
+  
+  .social p {
+    margin: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .social p:hover {
+    transform: scale(1.2);
+  }
