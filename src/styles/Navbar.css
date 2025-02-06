@@ -1,0 +1,242 @@
+.navbar {
+    font-family: "Poppins", serif;
+    font-weight: 800;
+    font-style: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 1rem; */
+    box-sizing: border-box;
+  
+    padding: 6px;
+    padding-right: 45px;
+    padding-left: 45px;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+    position: fixed; /* Fixed position to keep navbar on top */
+    top: 0; /* Place it at the top */
+    left: 0; /* Ensure it's aligned to the left edge */
+    right: 0; /* Ensure it stretches to the right edge */
+    /* background-color: white;  */
+    background: linear-gradient(to right, #2193b0, #6dd5ed, #ffffff);
+
+  
+    margin-bottom: 300px;
+  }
+  
+  .navbar-main {
+    margin-bottom: 150px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 1.7rem;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #ff9f00;
+  }
+  
+  .nav-item {
+    display: block;
+    position: relative; /* Make it relative for positioning dropdown */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+  }
+  
+  .nav-item span {
+    padding: 0; /* Remove padding on the span element */
+    margin: 0; /* Remove margin from the span element */
+  }
+  
+  .logout-button {
+    color: black; /* Black color for larger screens */
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  /* Hover effect for larger screens */
+  .logout-button:hover {
+    color: #ff9f00; /* Optional: Add a hover effect */
+  }
+  
+  .dropdown {
+    display: none;
+    position: absolute;
+    list-style: none;
+    top: 100%;
+    right: -65px;
+    background-color: rgba(127, 214, 242, 255);
+    width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .dropdown a {
+    padding: 1rem;
+    color: red;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown a:hover {
+    background-color: #fff;
+  }
+  
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0px !important;
+  }
+  
+  .ham-btn {
+    display: none;
+  }
+  
+  .logout-button:hover {
+    color: #ff9f00;
+  }
+  
+  @media (max-width: 760px) {
+    .nav-item {
+      display: none;
+    }
+  
+    .menu-nav-item a {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      z-index: 998;
+    }
+  
+    .ham-btn-hidden {
+      display: none;
+    }
+  
+    .hamburger-menu {
+      display: block;
+    }
+    .ham-btn {
+      display: block;
+      font-size: 20px;
+      color: black;
+      background-color: white;
+      border: none;
+      transition: transform 0.3s ease;
+    }
+  
+    .ham-btn:hover {
+      transform: scale(1.2);
+    }
+  
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  
+    .menu-nav-links {
+      background-image: url("/images/nav_background3.avif");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 999;
+      display: flex;
+      width: 100vw;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: aliceblue;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      list-style: none;
+  
+      /* Animation properties */
+      animation: slideIn 0.7s ease-out;
+    }
+  
+    .menu-nav-links a {
+      padding: 1rem;
+      text-align: center;
+      transition: color 0.3s;
+      z-index: 1000;
+    }
+  
+    .menu-nav-links a:hover {
+      color: #ff9f00;
+    }
+  
+    .logout-button {
+      color: white; /* White color for smaller screens */
+    }
+  
+    .logout-button:hover {
+      color: #ff9f00; /* Optional: Maintain hover effect for consistency */
+    }
+  
+    .dropdown {
+      display: flex;
+      /* background-image: url("/images/nav_background3.avif"); */
+      background-color: rgba(127, 214, 242, 255);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-left: 0px !important;
+      position: absolute;
+      top: 43%;
+      right: 185px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dropdown {
+      display: flex;
+      border: 2px solid white;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-left: 0px !important;
+      position: absolute;
+      top: 32%;
+      right: 100px;
+    }
+  
+    .logo-img {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  
+    .ham-btn svg {
+      width: 17px;
+      height: 17px;
+      font-size: 30px;
+    }
+  }
+  
