@@ -169,7 +169,7 @@
     padding: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     list-style: none;
-    animation: slideIn 0.7s ease-out;
+    animation: slideIn 0.5s ease-out;
   }
 
   .menu-nav-links a {
