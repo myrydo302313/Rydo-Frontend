@@ -20,3 +20,14 @@
   .social p:hover {
     transform: scale(1.2);
   }
+
+  @media (max-width: 480px){
+
+    .social{
+      width: 100vw;
+    }
+
+    .social span{
+      font-size: 20px;
+    }
+  }
