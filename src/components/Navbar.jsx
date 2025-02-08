@@ -3,10 +3,13 @@ import "../styles/Navbar.css";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
+import { useAuth } from "../store/auth";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const { LogoutUser, isLoggedIn } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,17 +69,27 @@ const Navbar = () => {
               )}
             </li>
 
-            <li className={showMenu ? "menu-nav-item" : "nav-item"}>
+            {/* <li className={showMenu ? "menu-nav-item" : "nav-item"}>
               <Link to="/blogs">Blogs</Link>
-            </li>
+            </li> */}
             <li className={showMenu ? "menu-nav-item" : "nav-item"}>
-              <Link to="/about">About Us</Link>
+              <Link to="/">About Us</Link>
             </li>
 
             <li className={showMenu ? "menu-nav-item" : "nav-item"}>
-              <Link to="/contact">Contact Us</Link>
+              <Link to="/">Contact Us</Link>
             </li>
 
+            {isLoggedIn ? (
+              <li
+                className={`logout-button ${
+                  showMenu ? "menu-nav-item" : "nav-item"
+                }`}
+                onClick={LogoutUser}
+              >
+                Logout
+              </li>
+            ) : null}
 
             <li className={showMenu ? "menu-nav-item" : "nav-item"}>
               <Link to="/profile">

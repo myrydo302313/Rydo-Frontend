@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +18,7 @@ function App() {
               <Route path="/ride" element={<Home />} />
               <Route path="/pickUp" element={<Home />} />
               <Route path="/drivers" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </Router>
       </div>
