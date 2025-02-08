@@ -22,6 +22,7 @@ const Signup = ({ check, setCheck }) => {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [loading,setLoading]=useState(false);
 
   const { storeTokenInLS } = useAuth();
 
@@ -39,6 +40,7 @@ const Signup = ({ check, setCheck }) => {
     }
 
     try {
+      setLoading(true)
       const response = await fetch(`${baseURL}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -54,7 +56,7 @@ const Signup = ({ check, setCheck }) => {
         toast.error(responseData.message || "Registration failed!");
         return;
       }
-
+      setLoading(false)
       toast.success("Registration successful!");
       storeTokenInLS(responseData.token);
 
@@ -71,6 +73,7 @@ const Signup = ({ check, setCheck }) => {
 
     } catch (e) {
       console.log("Error:", e);
+      setLoading(false)
     }
   };
 
@@ -171,7 +174,7 @@ const Signup = ({ check, setCheck }) => {
             <button onClick={() => setCheck(!check)}>Already a user</button>
           </div>
           <button type="submit" className="signup-button">
-            Sign Up
+            {loading?'Signing Up...':'Sign Up'}
           </button>
         </form>
       </div>

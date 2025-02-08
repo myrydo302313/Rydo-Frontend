@@ -16,6 +16,7 @@ const Login = ({ check, setCheck }) => {
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false); 
+  const [loading,setLoading]=useState(false)
 
   const { storeTokenInLS } = useAuth();
 
@@ -26,6 +27,7 @@ const Login = ({ check, setCheck }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     try {
       const response = await fetch(`${baseURL}/api/auth/login`, {
@@ -45,6 +47,8 @@ const Login = ({ check, setCheck }) => {
       const data = await response.json();
       console.log("Response Data:", data);
 
+      setLoading(false)
+
       toast.success("Login Successful!");
       storeTokenInLS(data.token);
 
@@ -53,6 +57,7 @@ const Login = ({ check, setCheck }) => {
     } catch (error) {
       console.error("Error:", error);
       toast.error("Something went wrong!");
+      setLoading(false)
     }
   };
 
@@ -97,7 +102,7 @@ const Login = ({ check, setCheck }) => {
             </button>
           </div>
           <button type="submit" className="signup-button">
-            Login
+          {loading?'Logging In...':'Login'}
           </button>
         </form>
       </div>
