@@ -33,12 +33,10 @@ const Navbar = () => {
     <>
       <div className="navbar-main">
         <nav className="navbar">
-          <div className="logo-img">
-            <img src="/images/rydoLogo3.png" width={120} alt="Logo" />
-            {/* <div className="logo" style={{ color: "black" }}>
+          <img src="/images/rydoLogo3.png" width={100} alt="Logo" />
+          {/* <div className="logo" style={{ color: "black" }}>
               Rydo
             </div> */}
-          </div>
 
           <ul className={showMenu ? "menu-nav-links" : "nav-links"}>
             <li className={showMenu ? "menu-nav-item" : "nav-item"}>
