@@ -131,7 +131,7 @@ const Signup = ({ check, setCheck }) => {
               onChange={handleChange}
             >
               <option value="user">User</option>
-              <option value="vendor">Driver</option>
+              <option value="driver">Driver</option>
             </select>
           </div>
           <div className="form-group">
