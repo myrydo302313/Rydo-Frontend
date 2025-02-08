@@ -34,7 +34,7 @@ const Navbar = () => {
       <div className="navbar-main">
         <nav className="navbar">
           <div className="logo-img">
-            <img src="/images/logo.png" width={100} alt="Logo" />
+            <img src="/images/rydoLogo2.png" width={100} alt="Logo" />
             {/* <div className="logo" style={{ color: "black" }}>
               Rydo
             </div> */}
