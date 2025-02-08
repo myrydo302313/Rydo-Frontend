@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import '../styles/Login.css'
 import { useAuth } from "../store/auth";
 const baseURL =
-  process.env.REACT_APP_BASE_URL || "http://rydo-backend.vercel.app";
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
 
 const Login = ({ check, setCheck }) => {
   const navigate = useNavigate();
