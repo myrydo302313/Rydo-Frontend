@@ -16,6 +16,11 @@ const AddressSelection = () => {
     country: "",
   });
 
+  // Function to extract address components
+  const getComponent = (addressComponents, type) =>
+    addressComponents?.find((comp) => comp.types.includes(type))?.long_name || "";
+
+  // Function to handle when a place is selected from autocomplete
   const handlePlaceChanged = () => {
     if (autocompleteRef.current) {
       const place = autocompleteRef.current.getPlace();
@@ -24,22 +29,52 @@ const AddressSelection = () => {
         return;
       }
 
-      const addressComponents = place.address_components;
-      const getComponent = (type) =>
-        addressComponents?.find((comp) => comp.types.includes(type))?.long_name || "";
-
       setAddress({
         location: place.formatted_address || "",
-        city: getComponent("locality"),
-        state: getComponent("administrative_area_level_1"),
-        zip: getComponent("postal_code"),
-        country: getComponent("country"),
+        city: getComponent(place.address_components, "locality"),
+        state: getComponent(place.address_components, "administrative_area_level_1"),
+        zip: getComponent(place.address_components, "postal_code"),
+        country: getComponent(place.address_components, "country"),
       });
     }
   };
 
+  // Function to handle manual input changes
   const handleInputChange = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
+  };
+
+  // Function to get user's current location
+  const handleGetCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          const response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`
+          );
+          const data = await response.json();
+
+          if (data.status === "OK") {
+            const place = data.results[0]; // Get first formatted address
+            setAddress({
+              location: place.formatted_address || "",
+              city: getComponent(place.address_components, "locality"),
+              state: getComponent(place.address_components, "administrative_area_level_1"),
+              zip: getComponent(place.address_components, "postal_code"),
+              country: getComponent(place.address_components, "country"),
+            });
+          } else {
+            alert("Failed to get location. Try again.");
+          }
+        },
+        (error) => {
+          alert("Geolocation failed: " + error.message);
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by your browser.");
+    }
   };
 
   return (
@@ -62,6 +97,9 @@ const AddressSelection = () => {
             autoComplete="off" // Prevent browser auto-fill interference
           />
         </Autocomplete>
+
+        {/* Button to get current location */}
+        <button onClick={handleGetCurrentLocation}>Use Current Location</button>
 
         {/* Other fields are outside Autocomplete */}
         <input
