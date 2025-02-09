@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import SocialLinks from "../components/SocialLinks";
 import "../styles/Ride.css"; // Import the stylish CSS
-import DistanceCalculator from "../components/DistanceCalculator";
+import GetCoordinates from "../components/GetCoordinates";
+import GetDistance from "../components/GetDistance";
 
 const Ride = () => {
   const [pickup, setPickup] = useState("");
@@ -48,7 +49,8 @@ const Ride = () => {
         </div>
       </div> */}
 
-      <DistanceCalculator/>
+      {/* <GetCoordinates/> */}
+      <GetDistance/>
 
       <section className="social-links">
         <SocialLinks />
