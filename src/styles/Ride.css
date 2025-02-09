@@ -1,0 +1,116 @@
+/* 🌟 Smooth Gradient Background */
+body {
+    background: linear-gradient(to right, #2193b0, #6dd5ed, #ffffff);
+    background-size: 200% 200%;
+    animation: gradientAnimation 8s ease infinite alternate;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* 🔹 Ride Container - Glassmorphism */
+  .ride-container {
+    max-width: 450px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .ride-container:hover {
+    transform: scale(1.05);
+  }
+  
+  /* 🔹 Title */
+  h1 {
+    font-size: 32px;
+    color: #ffffff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 🎯 Input Group */
+  .input-group {
+    position: relative;
+    margin: 20px 0;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #000;
+    outline: none;
+    transition: 0.3s;
+    text-align: center;
+  }
+  
+  .input-group input:focus {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.02);
+  }
+  
+  /* 🔹 Floating Labels */
+  .input-group label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    font-size: 16px;
+    transition: 0.3s;
+    pointer-events: none;
+  }
+  
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label {
+    top: -15px;
+    left: 50%;
+    font-size: 14px;
+    color: #000;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 2px 6px;
+    border-radius: 5px;
+  }
+  
+  /* 🎯 Search Button */
+  .search-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    background: linear-gradient(to right, #6dd5ed, #2193b0);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(33, 147, 176, 0.3);
+  }
+  
+  .search-btn:hover {
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+    box-shadow: 0 6px 18px rgba(33, 147, 176, 0.5);
+    transform: translateY(-3px);
+  }
+  
+  /* 🌈 Background Animation */
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  /* 🎉 Social Links */
+  .social-links {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
