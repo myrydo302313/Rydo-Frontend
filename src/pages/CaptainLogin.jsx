@@ -8,7 +8,7 @@ import { useAuth } from "../store/auth";
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
 
-const Login = () => {
+const CaptainLogin = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -103,16 +103,21 @@ const Login = () => {
               </button>
               <div>
                 <p>
-                  New Here? <Link className="new-here-btn" to="/signup">Create New account</Link>
+                  New Here?{" "}
+                  <Link className="new-here-btn" to="/signup">
+                    Rehister as a Captain
+                  </Link>
                 </p>
               </div>
             </form>
           </div>
         </div>
-        <Link className="signin-btn-captain" to="/captainLogin">Sign in as Captain</Link>
+        <Link className="signin-btn-captain" to="/login">
+          Sign in as User
+        </Link>
       </div>
     </>
   );
 };
 
-export default Login;
+export default CaptainLogin;

@@ -58,3 +58,15 @@
 .new-here-btn{
     color: #17BEBB;
 }
+
+.signup-button{
+  width: 80%;
+  padding: 12px;
+  background-color: #e71d36;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
