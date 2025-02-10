@@ -1,18 +1,19 @@
-import React from 'react'
+import React from "react";
 
-import '../styles/MainHome.css'
+import "../styles/MainHome.css";
 
 const MainHome = () => {
   return (
     <>
-        <h2 className='main-home-heading'>Get Started With</h2>
+      <div className="main-home">
         <img src="/images/rydoLogo3.png" alt="" />
-        <p className='main-home-subhead1'>Skip The Wait</p>
-        <p className='main-home-subhead1'>Ride With Us</p>
+        <p className="main-home-subhead1">Skip The Wait</p>
+        <p className="main-home-subhead2">Ride With Us</p>
 
-        <button className='main-home-btn'>Continue</button>
+        <button className="main-home-btn">Continue</button>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default MainHome
+export default MainHome;

@@ -1,12 +1,21 @@
+.main-home {
+  background-image: url("/images/bg1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 88vh;
+}
+
 .main-home-heading {
-  font-size: 3.5rem; /* Slightly larger for emphasis */
+  font-size: 2rem; /* Slightly larger for emphasis */
   font-weight: 900; /* Extra bold */
-  text-align: center;
+  text-align: left;
   text-transform: uppercase; /* Professional uppercase look */
   letter-spacing: 3px; /* Enhance spacing */
 
   /* Blackish Gradient */
-    color: #000000;
+  color: #000000;
 
   font-family: "Bebas Neue", serif;
   font-weight: 600;
@@ -33,7 +42,7 @@
   background-color: #000000;
   border-radius: 22px;
   color: #ffffff;
-  width: 100%;
+  width: 80%;
   font-size: larger;
   padding: 13px 20px;
   position: fixed;
@@ -50,9 +59,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
 
-
   color: #1a1a1a;
-
 
   font-family: "Bebas Neue", sans-serif;
 
