@@ -12,10 +12,11 @@ const MainHome = () => {
           <p className="main-home-subhead1">Skip The Wait</p>
           <p className="main-home-subhead2">Ride With Us</p>
         </div>
-
-        <Link to="/profile" className="main-home-btn">
-          Continue
-        </Link>
+        <div className="main-home-bottom">
+          <Link to="/profile" className="main-home-btn">
+            Continue
+          </Link>
+        </div>
       </div>
     </>
   );
