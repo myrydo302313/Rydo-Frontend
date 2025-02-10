@@ -1,43 +1,61 @@
-/* Main container: Full viewport height, no scrolling */
 .main-home {
   height: 100vh; /* Full screen height */
   display: flex;
-  flex-direction: column; /* Ensures top & bottom sections stack */
-  overflow: hidden; /* Prevents scrolling */
+  overflow: hidden; /* Prevent scrolling */
 }
 
-/* Top section: 85% of the viewport */
 .main-home-top {
-  flex: 0 0 85%; /* Takes 85% of parent height */
   background-image: url("/images/bg1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
+  background-attachment: fixed;
+  height: 89%;
 }
 
-/* Bottom section: 15% of the viewport */
-.main-home-bottom {
-  flex: 0 0 15%; /* Takes 15% of parent height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.main-home-heading {
+  font-size: 2rem; /* Slightly larger for emphasis */
+  font-weight: 900; /* Extra bold */
+  text-align: left;
+  text-transform: uppercase; /* Professional uppercase look */
+  letter-spacing: 3px; /* Enhance spacing */
+
+  /* Blackish Gradient */
+  color: #000000;
+
+  font-family: "Bebas Neue", serif;
+  font-weight: 600;
+  font-style: normal;
+
+  /* Smooth animation */
+  animation: fadeIn 1.5s ease-in-out;
 }
 
-/* Continue button: Centered inside bottom section */
+/* Animation for fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .main-home-btn {
   border: none;
   background-color: #000000;
   border-radius: 22px;
   color: #ffffff;
   width: 80%;
-  font-size: 1.5rem;
+  font-size: larger;
   padding: 13px 20px;
   text-align: center;
-  text-decoration: none;
+  position: fixed;
+  bottom: 20px; /* Adjust the space from the bottom */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
 }
 
 /* First Subheading - Eye-catching Gradient */
@@ -47,24 +65,31 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
+
   color: #1a1a1a;
+
   font-family: "Bebas Neue", sans-serif;
+
+  /* Fade-In Animation */
   animation: fadeUp 1.2s ease-in-out;
 }
 
 /* Second Subheading - Bold with Neon Glow */
 .main-home-subhead2 {
-  font-size: 2.2rem;
+  font-size: 2.2rem; /* Slightly bigger */
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 3px;
   color: #1a1a1a;
+
   font-family: "Bebas Neue", sans-serif;
+
+  /* Slide-In Animation */
   animation: slideIn 1.5s ease-in-out;
 }
 
-/* Animations */
+/* Fade-In Animation */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -76,6 +101,7 @@
   }
 }
 
+/* Slide-In Animation */
 @keyframes slideIn {
   from {
     opacity: 0;
