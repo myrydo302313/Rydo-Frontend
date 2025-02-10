@@ -4,6 +4,7 @@ import SocialLinks from "../components/SocialLinks";
 import "../styles/Ride.css"; // Import the stylish CSS
 import GetCoordinates from "../components/GetCoordinates";
 import GetDistance from "../components/GetDistance";
+import TestComponent from "../components/TestComponent";
 
 const Ride = () => {
   const [pickup, setPickup] = useState("");
@@ -50,7 +51,8 @@ const Ride = () => {
       </div> */}
 
       {/* <GetCoordinates/> */}
-      <GetDistance/>
+      {/* <GetDistance/> */}
+      <TestComponent/>
 
       <section className="social-links">
         <SocialLinks />

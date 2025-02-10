@@ -1,0 +1,105 @@
+.main-home-heading {
+  font-size: 3.5rem; /* Slightly larger for emphasis */
+  font-weight: 900; /* Extra bold */
+  text-align: center;
+  text-transform: uppercase; /* Professional uppercase look */
+  letter-spacing: 3px; /* Enhance spacing */
+
+  /* Blackish Gradient */
+  background: linear-gradient(90deg, #2c2c2c, #1a1a1a, #000000, #333333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Soft Neon Glow */
+  text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7);
+
+  font-family: "Bebas Neue", serif;
+  font-weight: 600;
+  font-style: normal;
+
+  /* Smooth animation */
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Animation for fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-home-btn {
+  border: none;
+  background-color: #000000;
+  border-radius: 22px;
+  color: #ffffff;
+  width: 100%;
+  font-size: larger;
+  padding: 13px 20px;
+  position: fixed;
+  bottom: 20px; /* Adjust the space from the bottom */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+}
+
+/* First Subheading - Eye-catching Gradient */
+.main-home-subhead1 {
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+
+  color: #1a1a1a;
+
+
+  font-family: "Bebas Neue", sans-serif;
+
+  /* Fade-In Animation */
+  animation: fadeUp 1.2s ease-in-out;
+}
+
+/* Second Subheading - Bold with Neon Glow */
+.main-home-subhead2 {
+  font-size: 2.2rem; /* Slightly bigger */
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #1a1a1a;
+
+  font-family: "Bebas Neue", sans-serif;
+
+  /* Slide-In Animation */
+  animation: slideIn 1.5s ease-in-out;
+}
+
+/* Fade-In Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide-In Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

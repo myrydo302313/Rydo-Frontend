@@ -6,6 +6,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Ride from "./pages/Ride";
+import MainHome from "./pages/MainHome";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,7 +16,8 @@ function App() {
       <div className="App">
           <Router>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<MainHome />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/ride" element={<Ride />} />
               <Route path="/pickUp" element={<Home />} />
               <Route path="/drivers" element={<Home />} />
