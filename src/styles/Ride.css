@@ -1,10 +1,3 @@
-/* 🌟 Smooth Gradient Background */
-body {
-    background: linear-gradient(to right, #2193b0, #6dd5ed, #ffffff);
-    background-size: 200% 200%;
-    animation: gradientAnimation 8s ease infinite alternate;
-    font-family: "Poppins", sans-serif;
-  }
   
   /* 🔹 Ride Container - Glassmorphism */
   .ride-container {
@@ -13,7 +6,6 @@ body {
     padding: 30px;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(12px);
     text-align: center;
     transition: transform 0.3s ease-in-out;
@@ -27,7 +19,6 @@ body {
   h1 {
     font-size: 32px;
     color: #ffffff;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
   }
   
   /* 🎯 Input Group */

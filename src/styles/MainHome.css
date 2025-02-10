@@ -6,12 +6,7 @@
   letter-spacing: 3px; /* Enhance spacing */
 
   /* Blackish Gradient */
-  background: linear-gradient(90deg, #2c2c2c, #1a1a1a, #000000, #333333);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  /* Soft Neon Glow */
-  text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7);
+    color: #000000;
 
   font-family: "Bebas Neue", serif;
   font-weight: 600;

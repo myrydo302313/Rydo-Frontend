@@ -9,7 +9,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;  */
-  background: linear-gradient(to right, #2193b0, #6dd5ed, #ffffff);
+  /* background: linear-gradient(to right, #2193b0, #6dd5ed, #ffffff); */
+  background:#ffffff;
 
   font-family: "Poppins", serif;
   font-weight: 800;
