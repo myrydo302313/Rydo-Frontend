@@ -1,10 +1,16 @@
 .main-home {
+  height: 100vh; /* Full screen height */
+  display: flex;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.main-home-top {
   background-image: url("/images/bg1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 88vh;
+  height: 89vh;
 }
 
 .main-home-heading {
@@ -45,6 +51,7 @@
   width: 80%;
   font-size: larger;
   padding: 13px 20px;
+  text-align: center;
   position: fixed;
   bottom: 20px; /* Adjust the space from the bottom */
   left: 50%;

@@ -1,16 +1,21 @@
 import React from "react";
 
 import "../styles/MainHome.css";
+import { Link } from "react-router-dom";
 
 const MainHome = () => {
   return (
     <>
       <div className="main-home">
-        <img src="/images/rydoLogo3.png" alt="" />
-        <p className="main-home-subhead1">Skip The Wait</p>
-        <p className="main-home-subhead2">Ride With Us</p>
+        <div className="main-home-top">
+          <img src="/images/rydoLogo3.png" alt="" />
+          <p className="main-home-subhead1">Skip The Wait</p>
+          <p className="main-home-subhead2">Ride With Us</p>
+        </div>
 
-        <button className="main-home-btn">Continue</button>
+        <Link to="/profile" className="main-home-btn">
+          Continue
+        </Link>
       </div>
     </>
   );
