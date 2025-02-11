@@ -40,6 +40,8 @@ const CaptainLogin = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        toast.error(errorData.message || "Login failed!");
+        setLoading(false);
         return;
       }
 
@@ -59,6 +61,7 @@ const CaptainLogin = () => {
 
   return (
     <>
+    <Toaster/>
       <div className="login-main">
         <div className="login-top">
           <img src="/images/rydoLogo3.png" alt="" width={80} />
