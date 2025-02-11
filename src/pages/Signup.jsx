@@ -23,7 +23,7 @@ const Signup = ({ check, setCheck }) => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { storeTokenInLS } = useAuth();
+  const { storeUserToken } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,12 +53,12 @@ const Signup = ({ check, setCheck }) => {
 
       if (!response.ok) {
         toast.error(responseData.message || "Registration failed!");
-        setLoading(false)
+        setLoading(false);
         return;
       }
       setLoading(false);
       toast.success("Registration successful!");
-      storeTokenInLS(responseData.token);
+      storeUserToken(responseData.token);
 
       setFormData({
         name: "",
@@ -81,7 +81,7 @@ const Signup = ({ check, setCheck }) => {
 
   return (
     <>
-    <Toaster/>
+      <Toaster />
       <div className="signup-main">
         <div className="signup-top">
           <img src="/images/rydoLogo3.png" alt="" width={80} />
@@ -147,10 +147,13 @@ const Signup = ({ check, setCheck }) => {
               />
             </div>
             <div>
-                <p>
-                  Already a user? <Link className="new-here-btn" to="/login">Login</Link>
-                </p>
-              </div>
+              <p>
+                Already a user?{" "}
+                <Link className="new-here-btn" to="/login">
+                  Login
+                </Link>
+              </p>
+            </div>
             <button type="submit" className="signup-button">
               {loading ? "Signing Up..." : "Sign Up"}
             </button>

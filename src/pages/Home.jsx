@@ -7,12 +7,14 @@ import { useAuth } from "../store/auth";
 
 const Home = () => {
 
-  const { user, isLoggedIn } = useAuth();
+  const { user, isUserLoggedIn, captain } = useAuth();
   const User = user?.userData;
 
   {console.log("User", User)}
-  {console.log("Login h kya", isLoggedIn)}
+  {console.log("Login h kya", isUserLoggedIn)}
 
+
+  console.log('captain',captain?.captainData.vehicleType)
   return (
     <>
       Home

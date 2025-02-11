@@ -18,7 +18,7 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { storeTokenInLS } = useAuth();
+  const { storeUserToken } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +47,7 @@ const Login = () => {
       console.log("Response Data:", data);
 
       setLoading(false);
-      storeTokenInLS(data.token);
+      storeUserToken(data.token);
 
       setFormData({ email: "", password: "" });
       navigate("/home");

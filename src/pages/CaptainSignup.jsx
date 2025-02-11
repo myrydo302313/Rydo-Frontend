@@ -21,7 +21,7 @@ const CaptainSignup = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const { storeTokenInLS } = useAuth();
+  const { storeCaptainToken } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +48,7 @@ const CaptainSignup = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(`${baseURL}/api/auth/register`, {
+      const response = await fetch(`${baseURL}/api/auth/captainRegister`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const CaptainSignup = () => {
 
       setLoading(false);
       toast.success("Registration successful!");
-      storeTokenInLS(responseData.token);
+      storeCaptainToken(responseData.token);
 
       setFormData({
         name: "",
@@ -94,7 +94,7 @@ const CaptainSignup = () => {
       <Toaster />
       <div className="captain-signup-container">
         <div className="captain-signup-top">
-          <img src="/images/rydoLogo3.png" alt="Logo" width={60} />
+          <img src="/images/rydoLogo3.png" alt="Logo" width={80} />
           <h2>Rydo</h2>
         </div>
         <div className="captain-signup-hero">

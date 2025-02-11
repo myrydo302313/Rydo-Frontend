@@ -6,39 +6,72 @@ const baseURL =
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [isLoggedIn, setIsLoggedIn] = useState(!!token);
+  // User authentication state
+  const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(!!userToken);
   const [user, setUser] = useState(null);
+
+  // Captain authentication state
+  const [captainToken, setCaptainToken] = useState(
+    localStorage.getItem("captainToken")
+  );
+  const [isCaptainLoggedIn, setIsCaptainLoggedIn] = useState(!!captainToken);
+  const [captain, setCaptain] = useState(null);
+
   const [isLoading, setIsLoading] = useState(true);
 
-  const authorizationToken = `Bearer ${token}`;
+  const userAuthToken = `Bearer ${userToken}`;
+  const captainAuthToken = `Bearer ${captainToken}`;
 
-  const storeTokenInLS = (serverToken) => {
-    localStorage.setItem("token", serverToken);
-    setToken(serverToken);
+  // Store tokens in Local Storage
+  const storeUserToken = (token) => {
+    localStorage.setItem("userToken", token);
+    setUserToken(token);
   };
 
-  const LogoutUser = () => {
-    setToken(""); // Clear the token state
-    localStorage.removeItem("token"); // Remove the token from localStorage
-    setUser(null); // Clear the user state
-    setIsLoggedIn(false); // Ensure isLoggedIn reflects the logout
+  const storeCaptainToken = (token) => {
+    localStorage.setItem("captainToken", token);
+    setCaptainToken(token);
   };
 
-  // Update isLoggedIn whenever the token changes
+  // Logout functions
+  const logoutUser = () => {
+    setUserToken("");
+    localStorage.removeItem("userToken");
+    setUser(null);
+    setIsUserLoggedIn(false);
+  };
+
+  const logoutCaptain = () => {
+    setCaptainToken("");
+    localStorage.removeItem("captainToken");
+    setCaptain(null);
+    setIsCaptainLoggedIn(false);
+  };
+
+  // Update login status when tokens change
   useEffect(() => {
-    setIsLoggedIn(!!token); // Update login status based on token presence
-    if (token) {
-      userAuthentication();
+    setIsUserLoggedIn(!!userToken);
+    setIsCaptainLoggedIn(!!captainToken);
+
+    if (userToken) {
+      authenticateUser();
     } else {
       setUser(null);
     }
-  }, [token]);
 
-  const userAuthentication = async () => {
-    if (!token) {
-      console.log("No token found. User not authenticated.");
-      setUser(null); // Clear user state if no token is found
+    if (captainToken) {
+      authenticateCaptain();
+    } else {
+      setCaptain(null);
+    }
+  }, [userToken, captainToken]);
+
+  // User authentication function
+  const authenticateUser = async () => {
+    if (!userToken) {
+      console.log("No user token found. User not authenticated.");
+      setUser(null);
       return;
     }
 
@@ -48,7 +81,7 @@ export const AuthProvider = ({ children }) => {
       const response = await fetch(`${baseURL}/api/auth/user`, {
         method: "GET",
         headers: {
-          Authorization: authorizationToken,
+          Authorization: userAuthToken,
         },
       });
 
@@ -56,15 +89,51 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setUser(data);
       } else if (response.status === 401) {
-        console.warn("Token expired or invalid. Logging out user.");
-        LogoutUser(); // Logout if token is invalid or expired
+        console.warn("User token expired or invalid. Logging out user.");
+        logoutUser();
       } else {
         console.error("Failed to fetch user data. Status:", response.status);
-        setUser(null); // Clear user on error
+        setUser(null);
       }
     } catch (error) {
       console.error("Error during user authentication:", error);
-      setUser(null); // Clear user state on error
+      setUser(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Captain authentication function
+  const authenticateCaptain = async () => {
+    if (!captainToken) {
+      console.log("No captain token found. Captain not authenticated.");
+      setCaptain(null);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      const response = await fetch(`${baseURL}/api/auth/captain`, {
+        method: "GET",
+        headers: {
+          Authorization: captainAuthToken,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCaptain(data);
+      } else if (response.status === 401) {
+        console.warn("Captain token expired or invalid. Logging out captain.");
+        logoutCaptain();
+      } else {
+        console.error("Failed to fetch captain data. Status:", response.status);
+        setCaptain(null);
+      }
+    } catch (error) {
+      console.error("Error during captain authentication:", error);
+      setCaptain(null);
     } finally {
       setIsLoading(false);
     }
@@ -73,11 +142,16 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        storeTokenInLS,
-        LogoutUser,
-        isLoggedIn,
+        storeUserToken,
+        storeCaptainToken,
+        logoutUser,
+        logoutCaptain,
+        isUserLoggedIn,
+        isCaptainLoggedIn,
         user,
-        authorizationToken,
+        captain,
+        userAuthToken,
+        captainAuthToken,
         isLoading,
       }}
     >
@@ -86,6 +160,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// Custom hook for authentication
 export const useAuth = () => {
   return useContext(AuthContext);
 };

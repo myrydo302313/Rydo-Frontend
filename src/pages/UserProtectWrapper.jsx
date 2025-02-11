@@ -4,14 +4,14 @@ import { useAuth } from "../store/auth";
 
 
 const UserProtectWrapper = ({ children }) => {
-  const { isLoggedIn } = useAuth(); // Get auth status from context
+  const { isUserLoggedIn , isCaptainLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isUserLoggedIn && !isCaptainLoggedIn) {
       navigate("/login");
     }
-  }, [isLoggedIn, navigate]); // Depend on isLoggedIn, not localStorage
+  }, [isUserLoggedIn,isCaptainLoggedIn, navigate]); 
 
   return <>{children}</>;
 };

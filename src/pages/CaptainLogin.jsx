@@ -18,7 +18,7 @@ const CaptainLogin = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { storeTokenInLS } = useAuth();
+  const { storeCaptainToken } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +30,7 @@ const CaptainLogin = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${baseURL}/api/auth/login`, {
+      const response = await fetch(`${baseURL}/api/auth/captainLogin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,10 +47,10 @@ const CaptainLogin = () => {
       console.log("Response Data:", data);
 
       setLoading(false);
-      storeTokenInLS(data.token);
+      storeCaptainToken(data.token);
 
       setFormData({ email: "", password: "" });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error("Error:", error);
       setLoading(false);
