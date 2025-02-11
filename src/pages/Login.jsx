@@ -50,7 +50,7 @@ const Login = () => {
       storeTokenInLS(data.token);
 
       setFormData({ email: "", password: "" });
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error("Error:", error);
       setLoading(false);
@@ -59,6 +59,7 @@ const Login = () => {
 
   return (
     <>
+    <Toaster/>
       <div className="login-main">
         <div className="login-top">
           <img src="/images/rydoLogo3.png" alt="" width={80} />

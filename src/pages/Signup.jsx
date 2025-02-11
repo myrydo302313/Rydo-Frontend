@@ -53,6 +53,7 @@ const Signup = ({ check, setCheck }) => {
 
       if (!response.ok) {
         toast.error(responseData.message || "Registration failed!");
+        setLoading(false)
         return;
       }
       setLoading(false);
@@ -80,6 +81,7 @@ const Signup = ({ check, setCheck }) => {
 
   return (
     <>
+    <Toaster/>
       <div className="signup-main">
         <div className="signup-top">
           <img src="/images/rydoLogo3.png" alt="" width={80} />
@@ -146,7 +148,7 @@ const Signup = ({ check, setCheck }) => {
             </div>
             <div>
                 <p>
-                  New Here? <Link className="new-here-btn" to="/login">Login</Link>
+                  Already a user? <Link className="new-here-btn" to="/login">Login</Link>
                 </p>
               </div>
             <button type="submit" className="signup-button">

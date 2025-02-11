@@ -104,7 +104,7 @@ const CaptainLogin = () => {
               <div>
                 <p>
                   New Here?{" "}
-                  <Link className="new-here-btn" to="/signup">
+                  <Link className="new-here-btn" to="/captainSignup">
                     Rehister as a Captain
                   </Link>
                 </p>

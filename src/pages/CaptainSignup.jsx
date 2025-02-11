@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
-import '../styles/Signup.css'
+import "../styles/CaptainSignup.css";
+
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
 
-// import "../styles/Signup.css";
-
-const CaptainSignup = ({ check, setCheck }) => {
+const CaptainSignup = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -17,12 +16,11 @@ const CaptainSignup = ({ check, setCheck }) => {
     phone: "",
     password: "",
     confirmPassword: "",
+    vehicleType: "",
+    vehicleNumber: "",
   });
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [loading,setLoading]=useState(false);
-
+  const [loading, setLoading] = useState(false);
   const { storeTokenInLS } = useAuth();
 
   const handleChange = (e) => {
@@ -38,8 +36,18 @@ const CaptainSignup = ({ check, setCheck }) => {
       return;
     }
 
+    if (!formData.vehicleType) {
+      toast.error("Please select a vehicle type!");
+      return;
+    }
+
+    if (!formData.vehicleNumber) {
+      toast.error("Please enter your vehicle number!");
+      return;
+    }
+
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(`${baseURL}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -49,13 +57,14 @@ const CaptainSignup = ({ check, setCheck }) => {
       });
 
       const responseData = await response.json();
-      console.log("Response from backend:", responseData); 
+      console.log("Response from backend:", responseData);
 
       if (!response.ok) {
         toast.error(responseData.message || "Registration failed!");
         return;
       }
-      setLoading(false)
+
+      setLoading(false);
       toast.success("Registration successful!");
       storeTokenInLS(responseData.token);
 
@@ -65,116 +74,123 @@ const CaptainSignup = ({ check, setCheck }) => {
         phone: "",
         password: "",
         confirmPassword: "",
+        vehicleType: "",
+        vehicleNumber: "",
       });
 
       setTimeout(() => navigate("/"), 2000);
-
     } catch (e) {
       console.log("Error:", e);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
-  useEffect(()=>{
-    console.log(formData)
-  },[formData])
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
   return (
     <>
       <Toaster />
-      <div className="signup-container">
-        <h1 className="signup-heading-color">Sign Up</h1>
-        <form onSubmit={handleSubmit} className="signup-form">
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="phone">Phone:</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="123-456-7890"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          {/* Role Selection */}
-          <div className="form-group">
-            <label htmlFor="role">Register as:</label>
-            <select
-              id="role"
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-            >
-              <option value="user">User</option>
-              <option value="driver">Driver</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type={passwordVisible ? "text" : "password"}
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            <button
-              type="button"
-              className="show-password-btn"
-              onClick={() => setPasswordVisible(!passwordVisible)}
-            >
-              {passwordVisible ? "Hide Password" : "Show Password"}
+      <div className="captain-signup-container">
+        <div className="captain-signup-top">
+          <img src="/images/rydoLogo3.png" alt="Logo" width={60} />
+          <h2>Rydo</h2>
+        </div>
+        <div className="captain-signup-hero">
+          <form onSubmit={handleSubmit} className="captain-signup-form">
+            <div>
+              <label htmlFor="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="phone">Phone:</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="vehicleType">Vehicle Type:</label>
+              <select
+                id="vehicleType"
+                name="vehicleType"
+                value={formData.vehicleType}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Vehicle Type</option>
+                <option value="auto">Auto</option>
+                <option value="car">Car</option>
+                <option value="two-wheeler">Two-Wheeler</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="vehicleNumber">Vehicle Number:</label>
+              <input
+                type="text"
+                id="vehicleNumber"
+                name="vehicleNumber"
+                value={formData.vehicleNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <p>
+              Already a captain?{" "}
+              <Link className="captain-login-btn" to="/captainLogin">
+                Login
+              </Link>
+            </p>
+            <button type="submit" className="captain-signup-button">
+              {loading ? "Signing Up..." : "Sign Up"}
             </button>
-          </div>
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input
-              type={confirmPasswordVisible ? "text" : "password"}
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-            <button
-              type="button"
-              className="show-password-btn"
-              onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
-            >
-              {confirmPasswordVisible ? "Hide Password" : "Show Password"}
-            </button>
-          </div>
-          <div className="user-check">
-            <button onClick={() => setCheck(!check)}>Already a user</button>
-          </div>
-          <button type="submit" className="signup-button">
-            {loading?'Signing Up...':'Sign Up'}
-          </button>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );

@@ -15,16 +15,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="home">
-        <header className="hero-section">
-          <HeroSection />
-        </header>
-
-        <section className="social-links">
-          <SocialLinks />
-        </section>
-      </div>
+      Home
     </>
   );
 };

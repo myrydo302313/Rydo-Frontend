@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import CaptainLogin from "./pages/CaptainLogin";
 import Signup from "./pages/Signup";
 import CaptainSignup from "./pages/CaptainSignup";
+import UserProtectWrapper from "./pages/UserProtectWrapper";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,20 +19,27 @@ function App() {
   return (
     <>
       <div className="App">
-          <Router>
-            <Routes>
-              <Route path="/" element={<MainHome />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/captainLogin" element={<CaptainLogin />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/captainSignup" element={<CaptainSignup/>} />
-              <Route path="/ride" element={<Ride />} />
-              <Route path="/pickUp" element={<Home />} />
-              <Route path="/drivers" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </Router>
+        <Router>
+          <Routes>
+            <Route path="/" element={<MainHome />} />
+            <Route
+              path="/home"
+              element={
+                <UserProtectWrapper>
+                  <Home />
+                </UserProtectWrapper>
+              }
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/captainLogin" element={<CaptainLogin />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/captainSignup" element={<CaptainSignup />} />
+            <Route path="/ride" element={<Ride />} />
+            <Route path="/pickUp" element={<Home />} />
+            <Route path="/drivers" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Router>
       </div>
     </>
   );
