@@ -50,7 +50,7 @@ const CaptainLogin = () => {
       storeCaptainToken(data.token);
 
       setFormData({ email: "", password: "" });
-      navigate("/home");
+      navigate("/captainHome");
     } catch (error) {
       console.error("Error:", error);
       setLoading(false);

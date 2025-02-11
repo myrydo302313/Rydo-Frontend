@@ -78,7 +78,7 @@ const CaptainSignup = () => {
         vehicleNumber: "",
       });
 
-      setTimeout(() => navigate("/"), 2000);
+      setTimeout(() => navigate("/captainHome"), 2000);
     } catch (e) {
       console.log("Error:", e);
       setLoading(false);

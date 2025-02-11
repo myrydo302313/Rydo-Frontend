@@ -40,6 +40,8 @@ const Login = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        setLoading(false)
+        toast.error(errorData.message || "Registration failed!");
         return;
       }
 
@@ -59,7 +61,7 @@ const Login = () => {
 
   return (
     <>
-    <Toaster/>
+      <Toaster />
       <div className="login-main">
         <div className="login-top">
           <img src="/images/rydoLogo3.png" alt="" width={80} />
@@ -104,13 +106,18 @@ const Login = () => {
               </button>
               <div>
                 <p>
-                  New Here? <Link className="new-here-btn" to="/signup">Create New account</Link>
+                  New Here?{" "}
+                  <Link className="new-here-btn" to="/signup">
+                    Create New account
+                  </Link>
                 </p>
               </div>
             </form>
           </div>
         </div>
-        <Link className="signin-btn-captain" to="/captainLogin">Sign in as Captain</Link>
+        <Link className="signin-btn-captain" to="/captainLogin">
+          Sign in as Captain
+        </Link>
       </div>
     </>
   );
