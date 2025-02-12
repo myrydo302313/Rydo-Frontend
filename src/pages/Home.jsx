@@ -9,9 +9,6 @@ const Home = () => {
   const [pickup, setPickup] = useState("");
   const [destination, setDestination] = useState("");
   const [showVehiclePanel, setShowVehiclePanel] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-
-  const toggleExpansion = () => setExpanded(!expanded);
 
   return (
     <>
@@ -52,13 +49,12 @@ const Home = () => {
               onChange={(e) => setDestination(e.target.value)}
             />
           </form>
-          <button onClick={() => setShowVehiclePanel(true)}>Find Ride</button>
+          <button className="find-ride-btn" onClick={() => setShowVehiclePanel(true)}>Find Ride</button>
         </div>
       </div>
 
-      {/* Vehicle Panel */}
-      <div className={`vehicle-show-panel ${showVehiclePanel ? "show" : ""} ${expanded ? "expanded" : ""}`}>
-        <div className="vehicle-handle" onClick={toggleExpansion}></div> {/* Drag handle */}
+      {/* Vehicle Panel (Only Scrollable) */}
+      <div className={`vehicle-show-panel ${showVehiclePanel ? "show" : ""}`}>
         <div className="vehicle-content">
           <VehiclePanel />
         </div>
