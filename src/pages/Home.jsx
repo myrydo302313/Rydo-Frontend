@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Home.css";
 import { FaSearch } from "react-icons/fa";
 import VehiclePanel from "../components/VehiclePanel";
 import BottomNav from "../components/BottomNav";
+import ConfirmRide from "../components/ConfirmRide";
+import SearchingDrivers from "../components/SearchingDrivers";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [pickup, setPickup] = useState("");
   const [destination, setDestination] = useState("");
   const [showVehiclePanel, setShowVehiclePanel] = useState(false);
+  const [showConfirmPanel, setShowConfirmPanel] = useState(false);
+  const [showSearchingPanel, setShowSearchingPanel] = useState(false);
+
+  // When showModal is false, also close the Vehicle Panel
+  useEffect(() => {
+    if (!showModal) {
+      setShowVehiclePanel(false);
+      setShowConfirmPanel(false);
+      setShowSearchingPanel(false);
+    }
+  }, [showModal]);
 
   return (
     <>
@@ -56,9 +69,23 @@ const Home = () => {
       {/* Vehicle Panel (Only Scrollable) */}
       <div className={`vehicle-show-panel ${showVehiclePanel ? "show" : ""}`}>
         <div className="vehicle-content">
-          <VehiclePanel />
+          <VehiclePanel setShowVehiclePanel={setShowVehiclePanel} setShowConfirmPanel={setShowConfirmPanel} />
         </div>
         <button className="close-btn" onClick={() => setShowVehiclePanel(false)}>▼</button>
+      </div>
+
+      <div className={`confirm-vehicle-show-panel ${showConfirmPanel ? "show" : ""}`}>
+        <div className="vehicle-content">
+          <ConfirmRide setShowSearchingPanel={setShowSearchingPanel}/>
+        </div>
+        <button className="close-btn" onClick={() => setShowConfirmPanel(false)}>▼</button>
+      </div>
+
+      <div className={`searching-drivers-show-panel ${showSearchingPanel ? "show" : ""}`}>
+        <div className="vehicle-content">
+          <SearchingDrivers />
+        </div>
+        <button className="close-btn" onClick={() => setShowSearchingPanel(false)}>▼</button>
       </div>
 
       <BottomNav />

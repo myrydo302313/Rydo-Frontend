@@ -13,7 +13,7 @@ const MainHome = () => {
           <p className="main-home-subhead2">Ride With Us</p>
         </div>
         <div className="main-home-bottom">
-          <Link to="/login" className="main-home-btn">
+          <Link to="/home" className="main-home-btn">
             Continue
           </Link>
         </div>
