@@ -69,7 +69,6 @@ const CaptainLogin = () => {
         </div>
         <div className="login-hero">
           <div>
-            <h1>Login</h1>
             <form onSubmit={handleSubmit} className="login-form">
               <div className="login-form-pair">
                 <label htmlFor="email">What's your email : </label>

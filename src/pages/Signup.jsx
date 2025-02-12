@@ -88,7 +88,6 @@ const Signup = ({ check, setCheck }) => {
           <h2>Rydo</h2>
         </div>
         <div className="signup-hero">
-          <h1>Sign Up</h1>
           <form className="signup-form" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name">Name:</label>
