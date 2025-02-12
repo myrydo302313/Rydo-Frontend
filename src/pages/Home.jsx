@@ -1,9 +1,7 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import HeroSection from "../components/HeroSection";
-import SocialLinks from "../components/SocialLinks";
 import '../styles/Home.css'
 import { useAuth } from "../store/auth";
+import BottomNav from "../components/BottomNav";
 
 const Home = () => {
 
@@ -17,7 +15,7 @@ const Home = () => {
   console.log('captain',captain?.captainData.vehicleType)
   return (
     <>
-      Home
+      <BottomNav/>
     </>
   );
 };
