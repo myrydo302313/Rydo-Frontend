@@ -1,0 +1,11 @@
+@keyframes loadingDots {
+  0% { content: "Looking for a Driver"; }
+  33% { content: "Looking for a Driver."; }
+  66% { content: "Looking for a Driver.."; }
+  100% { content: "Looking for a Driver..."; }
+}
+
+.loading-text::after {
+  content: "Looking for a Driver";
+  animation: loadingDots 1.5s infinite;
+}

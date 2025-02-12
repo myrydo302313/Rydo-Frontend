@@ -5,6 +5,7 @@ import VehiclePanel from "../components/VehiclePanel";
 import BottomNav from "../components/BottomNav";
 import ConfirmRide from "../components/ConfirmRide";
 import SearchingDrivers from "../components/SearchingDrivers";
+import Services from "../components/Services";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -46,7 +47,9 @@ const Home = () => {
         <div className="modal-content">
           <div className="modal-header">
             <h2>Find A Ride</h2>
-            <button className="close-btn" onClick={() => setShowModal(false)}>▼</button>
+            <button className="close-btn" onClick={() => setShowModal(false)}>
+              ▼
+            </button>
           </div>
           <form>
             <input
@@ -62,31 +65,66 @@ const Home = () => {
               onChange={(e) => setDestination(e.target.value)}
             />
           </form>
-          <button className="find-ride-btn" onClick={() => setShowVehiclePanel(true)}>Find Ride</button>
+          <button
+            className="find-ride-btn"
+            onClick={() => setShowVehiclePanel(true)}
+          >
+            Find Ride
+          </button>
         </div>
       </div>
 
       {/* Vehicle Panel (Only Scrollable) */}
       <div className={`vehicle-show-panel ${showVehiclePanel ? "show" : ""}`}>
         <div className="vehicle-content">
-          <VehiclePanel setShowVehiclePanel={setShowVehiclePanel} setShowConfirmPanel={setShowConfirmPanel} />
+          <VehiclePanel
+            setShowVehiclePanel={setShowVehiclePanel}
+            setShowConfirmPanel={setShowConfirmPanel}
+          />
         </div>
-        <button className="close-btn" onClick={() => setShowVehiclePanel(false)}>▼</button>
+        <button
+          className="close-btn"
+          onClick={() => setShowVehiclePanel(false)}
+        >
+          ▼
+        </button>
       </div>
 
-      <div className={`confirm-vehicle-show-panel ${showConfirmPanel ? "show" : ""}`}>
+      <div
+        className={`confirm-vehicle-show-panel ${
+          showConfirmPanel ? "show" : ""
+        }`}
+      >
         <div className="vehicle-content">
-          <ConfirmRide setShowSearchingPanel={setShowSearchingPanel}/>
+          <ConfirmRide setShowSearchingPanel={setShowSearchingPanel} />
         </div>
-        <button className="close-btn" onClick={() => setShowConfirmPanel(false)}>▼</button>
+        <button
+          className="close-btn"
+          onClick={() => setShowConfirmPanel(false)}
+        >
+          ▼
+        </button>
       </div>
 
-      <div className={`searching-drivers-show-panel ${showSearchingPanel ? "show" : ""}`}>
+      <div
+        className={`searching-drivers-show-panel ${
+          showSearchingPanel ? "show" : ""
+        }`}
+      >
         <div className="vehicle-content">
           <SearchingDrivers />
         </div>
-        <button className="close-btn" onClick={() => setShowSearchingPanel(false)}>▼</button>
+        <button
+          className="close-btn"
+          onClick={() => setShowSearchingPanel(false)}
+        >
+          ▼
+        </button>
       </div>
+
+      {/* <div className="hero-section">
+        <Services />
+      </div> */}
 
       <BottomNav />
     </>

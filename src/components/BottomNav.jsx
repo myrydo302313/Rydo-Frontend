@@ -1,6 +1,7 @@
 import React from "react";
 import { Home, Briefcase, User } from "lucide-react";
 import "../styles/BottomNav.css"; 
+import { Link } from "react-router-dom";
 
 const BottomNav = () => {
   return (
@@ -8,7 +9,7 @@ const BottomNav = () => {
       {/* Home */}
       <div className="nav-item">
         <Home size={24} />
-        <span>Home</span>
+        <Link to='/home'>Home</Link>
       </div>
 
       {/* Services */}
@@ -20,7 +21,7 @@ const BottomNav = () => {
       {/* Account */}
       <div className="nav-item">
         <User size={24} />
-        <span>Account</span>
+        <Link to='/userAccount'>Account</Link>
       </div>
     </nav>
   );
