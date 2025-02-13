@@ -22,6 +22,8 @@ const Home = () => {
   const [pickupSuggestions, setPickupSuggestions] = useState([]);
   const [destinationSuggestions, setDestinationSuggestions] = useState([]);
   const [activeField, setActiveField] = useState(null);
+  const [fare, setFare] = useState({});
+  const [vehicleType, setVehicleType] = useState(null);
 
   const { userAuthToken } = useAuth();
 
@@ -87,10 +89,61 @@ const Home = () => {
   };
 
   async function findTrip() {
-    setShowVehiclePanel(true)
-    setShowModal(false)
-    setPickupSuggestions([])
-    setDestinationSuggestions([])
+    setShowVehiclePanel(true);
+    setShowModal(false);
+    setPickupSuggestions([]);
+    setDestinationSuggestions([]);
+
+    try {
+      const response = await fetch(
+        `${baseURL}/api/rides/get-fare?pickup=${encodeURIComponent(
+          pickup
+        )}&destination=${encodeURIComponent(destination)}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: userAuthToken,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setFare(data);
+    } catch (error) {
+      console.error("Error fetching trip fare:", error.message);
+    }
+  }
+
+  async function createRide() {
+    try {
+      const response = await fetch(`${baseURL}/api/rides/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: userAuthToken,
+        },
+        body: JSON.stringify({
+          pickup,
+          destination,
+          vehicleType,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+      return data; // Return data if needed
+    } catch (error) {
+      console.error("Error creating ride:", error);
+    }
   }
 
   // When showModal is false, also close the Vehicle Panel
@@ -150,10 +203,7 @@ const Home = () => {
               onChange={handleDestinationChange}
             />
           </form>
-          <button
-            className="find-ride-btn"
-            onClick={findTrip}
-          >
+          <button className="find-ride-btn" onClick={findTrip}>
             Find Ride
           </button>
         </div>
@@ -177,8 +227,10 @@ const Home = () => {
       <div className={`vehicle-show-panel ${showVehiclePanel ? "show" : ""}`}>
         <div className="vehicle-content">
           <VehiclePanel
+            setVehicleType={setVehicleType}
             setShowVehiclePanel={setShowVehiclePanel}
             setShowConfirmPanel={setShowConfirmPanel}
+            fare={fare}
           />
         </div>
         <button
@@ -195,7 +247,15 @@ const Home = () => {
         }`}
       >
         <div className="vehicle-content">
-          <ConfirmRide setShowSearchingPanel={setShowSearchingPanel} />
+          <ConfirmRide
+            setShowSearchingPanel={setShowSearchingPanel}
+            createRide={createRide}
+            setShowConfirmPanel={setShowConfirmPanel}
+            pickup={pickup}
+            destination={destination}
+            fare={fare}
+            vehicleType={vehicleType}
+          />
         </div>
         <button
           className="close-btn"
@@ -211,7 +271,12 @@ const Home = () => {
         }`}
       >
         <div className="vehicle-content">
-          <SearchingDrivers />
+          <SearchingDrivers
+            pickup={pickup}
+            destination={destination}
+            fare={fare}
+            vehicleType={vehicleType}
+          />
         </div>
         <button
           className="close-btn"
