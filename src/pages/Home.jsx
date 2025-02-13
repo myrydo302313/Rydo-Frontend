@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../styles/Home.css";
 import { FaSearch } from "react-icons/fa";
 import VehiclePanel from "../components/VehiclePanel";
 import BottomNav from "../components/BottomNav";
 import ConfirmRide from "../components/ConfirmRide";
 import SearchingDrivers from "../components/SearchingDrivers";
+import { SocketContext } from "../context/SocketContext";
 import Services from "../components/Services";
 import { useAuth } from "../store/auth";
 import LocationSearchPanel from "../components/LocationSearchPanel";
@@ -25,7 +26,18 @@ const Home = () => {
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
 
+  const {socket}=useContext(SocketContext)
+
   const { userAuthToken } = useAuth();
+  const {user}=useAuth();
+
+  const userData=user?.userData || {};
+
+  console.log('ye aya',userData._id)
+
+  useEffect(()=>{
+    socket.emit("join",{userType:"user",userId:userData._id})
+  })
 
   const handlePickupChange = async (e) => {
     const inputValue = e.target.value;

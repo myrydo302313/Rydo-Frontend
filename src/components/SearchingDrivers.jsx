@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/SearchingDrivers.css"; // Custom CSS (optional)
 
-const SearchingDrivers = ({pickup,destination,fare,vehicleType}) => {
+const SearchingDrivers = ({ pickup, destination, fare, vehicleType }) => {
   return (
     <div className="relative p-5 bg-white shadow-lg rounded-lg">
       {/* Close Button */}
@@ -35,14 +35,16 @@ const SearchingDrivers = ({pickup,destination,fare,vehicleType}) => {
           <div className="flex items-center gap-5 p-3 border-b-2">
             <i className="ri-map-pin-user-fill text-blue-500 animate-ping"></i>
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
+              <h3 className="text-lg font-medium">{pickup.split(",")[0]}</h3>
               <p className="text-sm -mt-1 text-gray-600">{pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-b-2">
             <i className="text-lg ri-map-pin-2-fill text-red-500 animate-ping"></i>
             <div>
-              <h3 className="text-lg font-medium">562/11-A</h3>
+              <h3 className="text-lg font-medium">
+                {destination.split(",")[0]}
+              </h3>
               <p className="text-sm -mt-1 text-gray-600">{destination}</p>
             </div>
           </div>
