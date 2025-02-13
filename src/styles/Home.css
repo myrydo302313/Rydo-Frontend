@@ -90,11 +90,12 @@
   background: linear-gradient(135deg, #4a90e2, #007aff);
   color: white;
   padding: 12px 20px;
-  margin-top: 10px;
+  margin-top: 15px;
   border: none;
   border-radius: 18px;
   font-size: 16px;
   cursor: pointer;
+  width: 100%;
   transition: 0.3s ease-in-out;
 }
 
@@ -197,4 +198,8 @@
 
 .hero-section{
   margin-top:50px;
+}
+
+.location-search-panel{
+  margin-top: 20px;
 }

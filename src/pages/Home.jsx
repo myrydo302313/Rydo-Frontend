@@ -6,6 +6,11 @@ import BottomNav from "../components/BottomNav";
 import ConfirmRide from "../components/ConfirmRide";
 import SearchingDrivers from "../components/SearchingDrivers";
 import Services from "../components/Services";
+import { useAuth } from "../store/auth";
+import LocationSearchPanel from "../components/LocationSearchPanel";
+
+const baseURL =
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -14,15 +19,88 @@ const Home = () => {
   const [showVehiclePanel, setShowVehiclePanel] = useState(false);
   const [showConfirmPanel, setShowConfirmPanel] = useState(false);
   const [showSearchingPanel, setShowSearchingPanel] = useState(false);
+  const [pickupSuggestions, setPickupSuggestions] = useState([]);
+  const [destinationSuggestions, setDestinationSuggestions] = useState([]);
+  const [activeField, setActiveField] = useState(null);
+
+  const { userAuthToken } = useAuth();
+
+  const handlePickupChange = async (e) => {
+    const inputValue = e.target.value;
+    setPickup(inputValue);
+
+    // Prevent API call if input length is less than 3 characters
+    if (inputValue.length < 3) {
+      setPickupSuggestions([]); // Clear suggestions
+      return; // Stop execution
+    }
+
+    try {
+      const response = await fetch(
+        `${baseURL}/api/maps/get-suggestions?input=${inputValue}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: userAuthToken,
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch pickup suggestions");
+
+      const data = await response.json();
+      setPickupSuggestions(data);
+    } catch (error) {
+      console.error("Error fetching pickup suggestions:", error);
+    }
+  };
+
+  const handleDestinationChange = async (e) => {
+    const inputValue = e.target.value;
+    setDestination(inputValue);
+
+    if (inputValue.length < 3) {
+      setDestinationSuggestions([]); // Clear suggestions
+      return; // Stop execution
+    }
+
+    try {
+      const response = await fetch(
+        `${baseURL}/api/maps/get-suggestions?input=${e.target.value}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: userAuthToken,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch destination suggestions");
+      }
+
+      const data = await response.json();
+      setDestinationSuggestions(data);
+    } catch (error) {
+      console.error("Error fetching destination suggestions:", error);
+    }
+  };
+
+  async function findTrip() {
+    setShowVehiclePanel(true)
+    setShowModal(false)
+    setPickupSuggestions([])
+    setDestinationSuggestions([])
+  }
 
   // When showModal is false, also close the Vehicle Panel
-  useEffect(() => {
-    if (!showModal) {
-      setShowVehiclePanel(false);
-      setShowConfirmPanel(false);
-      setShowSearchingPanel(false);
-    }
-  }, [showModal]);
+  // useEffect(() => {
+  //   if (!showModal) {
+  //     setShowVehiclePanel(false);
+  //     setShowConfirmPanel(false);
+  //     setShowSearchingPanel(false);
+  //   }
+  // }, [showModal]);
 
   return (
     <>
@@ -42,7 +120,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Full-Screen Input Modal */}
       <div className={`input-modal ${showModal ? "show" : ""}`}>
         <div className="modal-content">
           <div className="modal-header">
@@ -53,24 +130,46 @@ const Home = () => {
           </div>
           <form>
             <input
+              onClick={() => {
+                setShowModal(true);
+                setActiveField("pickup");
+              }}
               type="text"
               placeholder="Pickup Location"
               value={pickup}
-              onChange={(e) => setPickup(e.target.value)}
+              onChange={handlePickupChange}
             />
             <input
+              onClick={() => {
+                setShowModal(true);
+                setActiveField("destination");
+              }}
               type="text"
               placeholder="Drop Location"
               value={destination}
-              onChange={(e) => setDestination(e.target.value)}
+              onChange={handleDestinationChange}
             />
           </form>
           <button
             className="find-ride-btn"
-            onClick={() => setShowVehiclePanel(true)}
+            onClick={findTrip}
           >
             Find Ride
           </button>
+        </div>
+        <div className="location-search-panel bg-white h-0 ">
+          <LocationSearchPanel
+            suggestions={
+              activeField === "pickup"
+                ? pickupSuggestions
+                : destinationSuggestions
+            }
+            setShowModal={setShowModal}
+            setShowVehiclePanel={setShowVehiclePanel}
+            setPickup={setPickup}
+            setDestination={setDestination}
+            activeField={activeField}
+          />
         </div>
       </div>
 
