@@ -30,7 +30,7 @@ const Home = () => {
   const [vehicleType, setVehicleType] = useState(null);
   const [vehicleFound, setVehicleFound] = useState(false);
   const [waitingForDriver, setWaitingForDriver] = useState(false);
-  const [ride,setRide]=useState()
+  const [ride, setRide] = useState();
 
   const waitingForDriverRef = useRef(null);
 
@@ -46,9 +46,8 @@ const Home = () => {
   }, [user]);
 
   socket.on("ride-confirmed", (ride) => {
-    console.log('yes')
-    setVehicleFound(false);
     setWaitingForDriver(true);
+    setShowSearchingPanel(false);
     setRide(ride);
   });
 
@@ -170,20 +169,6 @@ const Home = () => {
     }
   }
 
-  useGSAP(
-    function () {
-      if (waitingForDriver) {
-        gsap.to(waitingForDriverRef.current, {
-          transform: "translateY(0)",
-        });
-      } else {
-        gsap.to(waitingForDriverRef.current, {
-          transform: "translateY(100%)",
-        });
-      }
-    },
-    [waitingForDriver]
-  );
 
   // When showModal is false, also close the Vehicle Panel
   // useEffect(() => {
@@ -318,24 +303,25 @@ const Home = () => {
           />
         </div>
 
-        <div
-          ref={waitingForDriverRef}
-          className="fixed w-full  z-10 bottom-0  bg-white px-3 py-6 pt-12"
-        >
-          <WaitingForDriver
-            ride={ride}
-            setVehicleFound={setVehicleFound}
-            setWaitingForDriver={setWaitingForDriver}
-            waitingForDriver={waitingForDriver}
-          />
-        </div>
-
         <button
           className="close-btn"
           onClick={() => setShowSearchingPanel(false)}
         >
           ▼
         </button>
+      </div>
+
+      <div
+        className={`waiting-for-driver-panel ${
+          waitingForDriver ? "show" : ""
+        }`}
+      >
+        <WaitingForDriver
+          ride={ride}
+          setVehicleFound={setVehicleFound}
+          setWaitingForDriver={setWaitingForDriver}
+          waitingForDriver={waitingForDriver}
+        />
       </div>
 
       {/* <div className="hero-section">

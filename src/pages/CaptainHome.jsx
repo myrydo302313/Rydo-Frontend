@@ -16,7 +16,7 @@ const baseURL =
 
 const CaptainHome = () => {
   const { socket } = useContext(SocketContext);
-  const { userAuthToken, captain , captainAuthToken} = useAuth();
+  const { userAuthToken, captain, captainAuthToken } = useAuth();
 
   const [ridePopupPanel, setRidePopupPanel] = useState(false);
   const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false);
@@ -38,14 +38,6 @@ const CaptainHome = () => {
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          // console.log({
-          //   userId: captainData._id,
-          //   location: {
-          //     ltd: position.coords.latitude,
-          //     lng: position.coords.longitude,
-          //   },
-          // });
-
           socket.emit("update-location-captain", {
             userId: captainData._id,
             location: {
@@ -69,6 +61,21 @@ const CaptainHome = () => {
   });
 
   async function confirmRide() {
+    if (
+      ride.pickupLocation &&
+      ride.pickupLocation.latitude &&
+      ride.pickupLocation.longitude
+    ) {
+      const { latitude, longitude } = ride.pickupLocation;
+
+      // Delay opening Google Maps slightly to ensure it's not blocked
+      setTimeout(() => {
+        window.open(
+          `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`,
+          "_blank"
+        );
+      }, 500); // Adjust delay if necessary
+    }
     try {
       const response = await fetch(`${baseURL}/api/rides/confirm`, {
         method: "POST",
