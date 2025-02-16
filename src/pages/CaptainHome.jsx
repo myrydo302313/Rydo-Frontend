@@ -1,17 +1,34 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useAuth } from "../store/auth";
 import { SocketContext } from "../context/SocketContext";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 import "../styles/CaptainHome.css";
 import { FaRegClock } from "react-icons/fa";
 import { TbReport } from "react-icons/tb";
 import { IoIosSpeedometer } from "react-icons/io";
+import RidePopUp from "../components/RidePopUp";
+import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
+
+const baseURL =
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
 
 const CaptainHome = () => {
   const { socket } = useContext(SocketContext);
-  const { userAuthToken, captain } = useAuth();
+  const { userAuthToken, captain , captainAuthToken} = useAuth();
+
+  const [ridePopupPanel, setRidePopupPanel] = useState(false);
+  const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false);
+
+  const ridePopupPanelRef = useRef(null);
+  const confirmRidePopupPanelRef = useRef(null);
+  const [ride, setRide] = useState(null);
 
   const captainData = captain?.captainData || {};
+  const { user } = useAuth();
+
+  const userData = user?.userData || {};
 
   useEffect(() => {
     if (!captainData._id) return; // Prevent execution if captainData._id is not available
@@ -21,13 +38,13 @@ const CaptainHome = () => {
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          console.log({
-            userId: captainData._id,
-            location: {
-              ltd: position.coords.latitude,
-              lng: position.coords.longitude,
-            },
-          });
+          // console.log({
+          //   userId: captainData._id,
+          //   location: {
+          //     ltd: position.coords.latitude,
+          //     lng: position.coords.longitude,
+          //   },
+          // });
 
           socket.emit("update-location-captain", {
             userId: captainData._id,
@@ -47,10 +64,66 @@ const CaptainHome = () => {
   }, [captainData._id]);
 
   socket.on("new-ride", (data) => {
-    console.log(data);
-    // setRide(data);
-    // setRidePopupPanel(true);
+    setRide(data);
+    setRidePopupPanel(true);
   });
+
+  async function confirmRide() {
+    try {
+      const response = await fetch(`${baseURL}/api/rides/confirm`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: captainAuthToken,
+        },
+        body: JSON.stringify({
+          rideId: ride._id,
+          captainId: captainData._id,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      setRidePopupPanel(false);
+      setConfirmRidePopupPanel(true);
+    } catch (error) {
+      console.error("Failed to confirm ride:", error);
+    }
+  }
+
+  useGSAP(
+    function () {
+      if (ridePopupPanel) {
+        gsap.to(ridePopupPanelRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(ridePopupPanelRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [ridePopupPanel]
+  );
+
+  useGSAP(
+    function () {
+      if (confirmRidePopupPanel) {
+        gsap.to(confirmRidePopupPanelRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(confirmRidePopupPanelRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [confirmRidePopupPanel]
+  );
 
   return (
     <>
@@ -94,6 +167,28 @@ const CaptainHome = () => {
               <p className="second">Total Rides</p>
             </div>
           </div>
+        </div>
+
+        <div
+          ref={ridePopupPanelRef}
+          className="fixed w-full z-10 bottom-0  bg-white px-3 py-10 pt-12"
+        >
+          <RidePopUp
+            ride={ride}
+            setRidePopupPanel={setRidePopupPanel}
+            setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+            confirmRide={confirmRide}
+          />
+        </div>
+        <div
+          ref={confirmRidePopupPanelRef}
+          className="fixed w-full h-screen z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
+        >
+          <ConfirmRidePopUp
+            ride={ride}
+            setConfirmRidePopupPanel={setConfirmRidePopupPanel}
+            setRidePopupPanel={setRidePopupPanel}
+          />
         </div>
       </div>
     </>

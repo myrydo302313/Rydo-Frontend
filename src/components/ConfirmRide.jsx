@@ -55,6 +55,7 @@ const ConfirmRide = ({
             setShowSearchingPanel(true);
             setShowConfirmPanel(false);
             createRide();
+            console.log('Create Ride Called')
           }}
           className="w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg"
         >

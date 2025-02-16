@@ -14,6 +14,7 @@ import CaptainSignup from "./pages/CaptainSignup";
 import UserProtectWrapper from "./pages/UserProtectWrapper";
 import CaptainHome from "./pages/CaptainHome";
 import UserAccount from "./pages/UserAccount";
+import CaptainRiding from "./pages/CaptainRiding";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -44,6 +45,7 @@ function App() {
             <Route path="/captainLogin" element={<CaptainLogin />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/captainSignup" element={<CaptainSignup />} />
+            <Route path="/captain-riding" element={<CaptainRiding />} />
             <Route path="/userAccount" element={<UserAccount />} />
             
 

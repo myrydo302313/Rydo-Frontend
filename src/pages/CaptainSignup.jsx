@@ -16,6 +16,7 @@ const CaptainSignup = () => {
     phone: "",
     password: "",
     confirmPassword: "",
+    vehicleName:"",
     vehicleType: "",
     vehicleNumber: "",
   });
@@ -36,6 +37,10 @@ const CaptainSignup = () => {
       return;
     }
 
+    if (!formData.vehicleName) {
+      toast.error("Please enter your vehicle name!");
+      return;
+    }
     if (!formData.vehicleType) {
       toast.error("Please select a vehicle type!");
       return;
@@ -74,6 +79,7 @@ const CaptainSignup = () => {
         phone: "",
         password: "",
         confirmPassword: "",
+        vehicleName:"",
         vehicleType: "",
         vehicleNumber: "",
       });
@@ -150,6 +156,17 @@ const CaptainSignup = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="vehicleName">Vehicle Name:</label>
+              <input
+                type="text"
+                id="vehicleName"
+                name="vehicleName"
+                value={formData.vehicleName}
                 onChange={handleChange}
                 required
               />

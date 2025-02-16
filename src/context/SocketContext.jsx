@@ -4,11 +4,11 @@ const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
 export const SocketContext = createContext();
 
-const socket = io(`${baseURL}`); // Replace with your server URL
+const socket = io(`${baseURL}`); 
 
 const SocketProvider = ({ children }) => {
   useEffect(() => {
-    // Basic connection logic
+  
     socket.on("connect", () => {
       console.log("Connected to server");
     });

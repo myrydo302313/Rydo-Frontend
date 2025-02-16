@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "../styles/Home.css";
 import { FaSearch } from "react-icons/fa";
 import VehiclePanel from "../components/VehiclePanel";
@@ -9,6 +9,9 @@ import { SocketContext } from "../context/SocketContext";
 import Services from "../components/Services";
 import { useAuth } from "../store/auth";
 import LocationSearchPanel from "../components/LocationSearchPanel";
+import WaitingForDriver from "../components/WaitingForDriver";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
@@ -25,19 +28,28 @@ const Home = () => {
   const [activeField, setActiveField] = useState(null);
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
+  const [vehicleFound, setVehicleFound] = useState(false);
+  const [waitingForDriver, setWaitingForDriver] = useState(false);
+  const [ride,setRide]=useState()
 
-  const {socket}=useContext(SocketContext)
+  const waitingForDriverRef = useRef(null);
+
+  const { socket } = useContext(SocketContext);
 
   const { userAuthToken } = useAuth();
-  const {user}=useAuth();
+  const { user } = useAuth();
 
-  const userData=user?.userData || {};
+  const userData = user?.userData || {};
 
-  console.log('ye aya',userData._id)
+  useEffect(() => {
+    socket.emit("join", { userType: "user", userId: userData._id });
+  }, [user]);
 
-  useEffect(()=>{
-    socket.emit("join",{userType:"user",userId:userData._id})
-  })
+  socket.on("ride-confirmed", (ride) => {
+    setVehicleFound(false);
+    setWaitingForDriver(true);
+    setRide(ride);
+  });
 
   const handlePickupChange = async (e) => {
     const inputValue = e.target.value;
@@ -157,6 +169,21 @@ const Home = () => {
       console.error("Error creating ride:", error);
     }
   }
+
+  useGSAP(
+    function () {
+      if (waitingForDriver) {
+        gsap.to(waitingForDriverRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(waitingForDriverRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [waitingForDriver]
+  );
 
   // When showModal is false, also close the Vehicle Panel
   // useEffect(() => {
@@ -290,6 +317,19 @@ const Home = () => {
             vehicleType={vehicleType}
           />
         </div>
+
+        <div
+          ref={waitingForDriverRef}
+          className="fixed w-full  z-10 bottom-0  bg-white px-3 py-6 pt-12"
+        >
+          <WaitingForDriver
+            ride={ride}
+            setVehicleFound={setVehicleFound}
+            setWaitingForDriver={setWaitingForDriver}
+            waitingForDriver={waitingForDriver}
+          />
+        </div>
+
         <button
           className="close-btn"
           onClick={() => setShowSearchingPanel(false)}
