@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../store/auth";
 
 const baseURL =
-  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 const GetDistance = () => {
   const { authorizationToken } = useAuth();

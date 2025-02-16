@@ -5,7 +5,7 @@ import { useAuth } from "../store/auth";
 import Navbar from "../components/Navbar";
 import '../styles/UserProfile.css'
 const baseURL =
-  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 const UserProfile = () => {
   const [loading, setLoading] = useState(true);

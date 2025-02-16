@@ -12,7 +12,7 @@ import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 
 const baseURL =
-  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 const CaptainHome = () => {
   const { socket } = useContext(SocketContext);

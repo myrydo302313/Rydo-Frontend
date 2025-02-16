@@ -5,7 +5,7 @@ import { useAuth } from "../store/auth";
 import "../styles/CaptainSignup.css";
 
 const baseURL =
-  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 const CaptainSignup = () => {
   const navigate = useNavigate();

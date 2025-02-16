@@ -14,7 +14,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const baseURL =
-  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);

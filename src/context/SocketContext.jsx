@@ -1,16 +1,14 @@
 import React, { createContext, useEffect } from "react";
 import { io } from "socket.io-client";
 const baseURL =
-  process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 export const SocketContext = createContext();
 
-const socket = io("https://rydo-backend.vercel.app", {
-  transports: ["polling"],
-  withCredentials: true,
-});
+const socket = io(`${baseURL}`); 
 
 const SocketProvider = ({ children }) => {
   useEffect(() => {
+    // Basic connection logic
     socket.on("connect", () => {
       console.log("Connected to server");
     });
