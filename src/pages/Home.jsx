@@ -46,6 +46,7 @@ const Home = () => {
   }, [user]);
 
   socket.on("ride-confirmed", (ride) => {
+    console.log('yes')
     setVehicleFound(false);
     setWaitingForDriver(true);
     setRide(ride);
