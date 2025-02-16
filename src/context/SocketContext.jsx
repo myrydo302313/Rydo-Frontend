@@ -4,9 +4,9 @@ const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.vercel.app";
 export const SocketContext = createContext();
 
-const socket = io(`${baseURL}`, {
-  transports: ["websocket"], 
-  withCredentials: true, 
+const socket = io("https://rydo-backend.vercel.app", {
+  transports: ["polling"],
+  withCredentials: true,
 });
 
 const SocketProvider = ({ children }) => {
