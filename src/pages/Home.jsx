@@ -164,7 +164,6 @@ const Home = () => {
       }
 
       const data = await response.json();
-      console.log(data);
       return data; // Return data if needed
     } catch (error) {
       console.error("Error creating ride:", error);
