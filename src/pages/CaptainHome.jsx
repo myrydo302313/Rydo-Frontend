@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useAuth } from "../store/auth";
 import { SocketContext } from "../context/SocketContext";
+import { requestNotificationPermission } from "../firebase";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -55,10 +56,38 @@ const CaptainHome = () => {
     return () => clearInterval(locationInterval); // Cleanup interval on unmount
   }, [captainData._id]);
 
-  socket.on("new-ride", (data) => {
-    setRide(data);
-    setRidePopupPanel(true);
-  });
+  useEffect(() => {
+    if (!captainData?._id) return;
+
+    // Fetch FCM token when component mounts
+    const fetchToken = async () => {
+      const token = await requestNotificationPermission();
+      if (token) {
+        console.log("FCM Token in CaptainHome:", token);
+        // You can send the token to your backend for further use
+      }
+    };
+
+    fetchToken();
+
+    // Listen for ride requests via socket
+    socket.on("new-ride", (data) => {
+      setRide(data);
+      setRidePopupPanel(true);
+
+      // Show push notification
+      if (Notification.permission === "granted") {
+        new Notification("New Ride Request", {
+          body: `Pickup location: ${data.pickupLocation}`,
+          icon: "/path/to/notification/icon.png",
+        });
+      }
+    });
+
+    return () => {
+      socket.off("new-ride"); // Cleanup on unmount
+    };
+  }, [captainData?._id, socket]);
 
   async function confirmRide() {
     if (
