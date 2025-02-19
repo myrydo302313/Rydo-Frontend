@@ -6,7 +6,7 @@ const UserAccount = () => {
 
     const [currUser,setCurrUser]=useState({})
 
-  const { user } = useAuth();
+  const { user,logoutUser } = useAuth();
 
   useEffect(()=>{
     setCurrUser(user?.userData)
@@ -16,6 +16,7 @@ const UserAccount = () => {
   return (
     <>
         <h1>Welcome {currUser?.name}</h1>
+        <button style={{backgroundColor:'#e71d36',padding:'7px',color:'white',width:'100px'}} onClick={logoutUser}>Logout</button>
       <BottomNav />
     </>
   );
