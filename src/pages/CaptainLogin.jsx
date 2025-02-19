@@ -107,7 +107,7 @@ const CaptainLogin = () => {
                 <p>
                   New Here?{" "}
                   <Link className="new-here-btn" to="/captainSignup">
-                    Rehister as a Captain
+                    Register as a Captain
                   </Link>
                 </p>
               </div>
