@@ -4,7 +4,8 @@
   line-height: 1.2;
   letter-spacing: 2px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  color: #e71d36;
+  color:  #378fe9;
+  /* color: linear-gradient(90deg, #a0e9ff, #64b5f6, #378fe9); */
 }
 
 .services-head {
