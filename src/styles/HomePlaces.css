@@ -1,0 +1,58 @@
+.places-heading{
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    color: #0d47a1;
+    margin-left: 10px;
+}
+
+.places-menu {
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+    gap: 15px;
+    padding: 20px;
+    margin-bottom: 150px;
+    margin-top: 0px;
+    
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping */
+    scroll-snap-type: x mandatory; /* Smooth scrolling effect */
+}
+
+/* Custom scrollbar for better UI */
+.places-menu::-webkit-scrollbar {
+    height: 8px;
+}
+
+.places-menu::-webkit-scrollbar-thumb {
+    background: #0d47a1; /* Dark blue scrollbar */
+    border-radius: 4px;
+}
+
+.places-menu-item {
+    flex: 0 0 auto; /* Prevent items from shrinking */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    /* background-color: blue; */
+    width: 150px;
+    scroll-snap-align: start; /* Snap effect while scrolling */
+}
+
+.places-menu-item img {
+    width: 130px;
+    height: 90px;
+    border-radius: 13px;
+}
+
+.places-menu-item span {
+    display: block; /* Ensure span takes full width */
+    word-wrap: break-word; /* Ensure text wraps */
+    white-space: normal; /* Allow wrapping */
+    max-width: 100%; /* Prevent text from overflowing */
+    overflow-wrap: break-word; /* Ensure long words break correctly */
+    font-size: 14px; /* Adjust as needed */
+    color: black; /* Make text readable */
+}

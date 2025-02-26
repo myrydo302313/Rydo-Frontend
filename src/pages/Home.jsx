@@ -12,6 +12,7 @@ import LocationSearchPanel from "../components/LocationSearchPanel";
 import WaitingForDriver from "../components/WaitingForDriver";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import HomePlaces from "../components/HomePlaces";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -328,6 +329,10 @@ const Home = () => {
         {/* <Services /> */}
 
         <img src="/images/banner1.jpeg" alt="" />
+      </div>
+
+      <div className="home-places">
+        <HomePlaces/>
       </div>
 
     
