@@ -15,6 +15,7 @@
     background-color: #CFD8D7;
     padding: 10px;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
+    margin: 10px;
 }
 
 .services .service-element:last-child {
