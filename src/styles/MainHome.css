@@ -2,10 +2,16 @@
   height: 100vh; /* Full screen height */
   display: flex;
   overflow: hidden; /* Prevent scrolling */
+  /* background-image: url("/images/banner3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; */
 }
 
 .main-home-top {
-  background-image: url("/images/bg1.jpg");
+  width: 100%;
+  background-image: url("/images/banner3.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
