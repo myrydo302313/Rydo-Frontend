@@ -44,6 +44,10 @@ const UserAccount = () => {
           <img src="/images/rewards.png" alt="Help" width={25} height={25} />
           <p>My Rewards</p>
         </div>
+        <div className="profile-menu-option">
+          <img src="/images/feedback.png" alt="Help" width={25} height={25} />
+          <p>Feedback</p>
+        </div>
       </div>
 
       <div className="logout-btn-div">
