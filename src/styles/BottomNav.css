@@ -39,11 +39,10 @@
   position: absolute;
   width: 70px;
   height: 70px;
-  background: #a30000; /* Dark Red */
+  background: linear-gradient(90deg, #a0e9ff, #64b5f6, #378fe9); /* Dark Red */
   border-radius: 50%;
   z-index: -1;
   transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
-  box-shadow: 0px 0px 10px rgba(163, 0, 0, 0.6); /* Soft glow effect */
 }
 
 /* Adjust text spacing */
