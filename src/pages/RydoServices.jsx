@@ -14,6 +14,10 @@ const RydoServices = () => {
                 <img src="/images/cabBanner.jpg" alt=""/>
                 <span>Rydo Cab</span>
             </div>
+            <div className="service-element">
+                <img src="/images/parcelBanner.jpg" alt=""/>
+                <span>Rydo Parcel</span>
+            </div>
         </div>
         <BottomNav/>
     </>
