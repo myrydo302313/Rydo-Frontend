@@ -2,20 +2,23 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: black;
     padding: 10px;
+    background-color: aliceblue;
 }
 
 .services .service-element{
     display: flex;
     flex-direction: column;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     border-radius: 13px;
     gap: 10px;
 }
 
 .service-element span{
-    color: #ffffff;
     font-weight: 700;
     margin: auto;
+}
+
+.service-element img{
+    border-radius: 13px;
 }
