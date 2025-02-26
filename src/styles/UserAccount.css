@@ -20,11 +20,12 @@
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 20px;
-  background-color: #33A1FD;
+  background: linear-gradient(90deg, #a0e9ff, #64b5f6, #378fe9); /* Soft sky blue shades */
   display: flex;
   flex-direction: column;
   gap: 40px;
   border-radius: 13px;
+  font-weight: 600;
 }
 
 .profile-menu .profile-menu-option {
