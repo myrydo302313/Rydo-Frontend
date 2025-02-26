@@ -14,7 +14,7 @@
     gap: 10px;
     background-color: #CFD8D7;
     padding: 10px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .service-element span{
