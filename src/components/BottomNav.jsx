@@ -21,7 +21,10 @@ const BottomNav = () => {
       </div>
 
       {/* Services (No Active Highlight) */}
-      <div className="nav-item">
+      <div
+        className={`nav-item ${location.pathname === "/services" ? "active" : ""}`}
+        onClick={() => navigate("/services")}
+      >
         <div className="nav-icon">
           <Briefcase size={24} />
         </div>

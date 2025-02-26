@@ -14,6 +14,7 @@ import CaptainHome from "./pages/CaptainHome";
 import UserAccount from "./pages/UserAccount";
 import CaptainRiding from "./pages/CaptainRiding";
 import { requestNotificationPermission } from "./firebase"; // Import Firebase setup
+import RydoServices from "./pages/RydoServices";
 
 function App() {
   useEffect(() => {
@@ -60,6 +61,7 @@ function App() {
           <Route path="/captainSignup" element={<CaptainSignup />} />
           <Route path="/captain-riding" element={<CaptainRiding />} />
           <Route path="/userAccount" element={<UserAccount />} />
+          <Route path="/services" element={<RydoServices />} />
         </Routes>
       </Router>
     </div>
