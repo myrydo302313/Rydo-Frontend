@@ -17,6 +17,10 @@
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+.services .service-element:last-child {
+    margin-bottom: 100px;
+}
+
 .service-element span{
     font-weight: 700;
     margin: auto;
