@@ -1,15 +1,16 @@
 import React from "react";
 import { Home, Briefcase, User } from "lucide-react";
-import "../styles/BottomNav.css"; 
-import { Link } from "react-router-dom";
+import "../styles/BottomNav.css";
+import { Link, useNavigate } from "react-router-dom";
 
 const BottomNav = () => {
+  const navigate = useNavigate();
   return (
-    <nav className="bottom-nav">
+    <nav className="bottom-nav" >
       {/* Home */}
-      <div className="nav-item">
+      <div className="nav-item" onClick={()=>navigate('/home')}>
         <Home size={24} />
-        <Link to='/home'>Home</Link>
+        <span>Home</span>
       </div>
 
       {/* Services */}
@@ -19,9 +20,9 @@ const BottomNav = () => {
       </div>
 
       {/* Account */}
-      <div className="nav-item">
+      <div className="nav-item" onClick={()=>navigate('/userAccount')}>
         <User size={24} />
-        <Link to='/userAccount'>Account</Link>
+        <span>Account</span>
       </div>
     </nav>
   );
