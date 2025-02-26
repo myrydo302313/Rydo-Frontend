@@ -183,7 +183,7 @@ const Home = () => {
     <>
       <div className="home-main">
         <div className="home-logo">
-          <h3>Rydo</h3>
+          <h3 align='center'>Rydo</h3>
         </div>
 
         <div className="home-input-base">
