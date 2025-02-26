@@ -5,6 +5,7 @@ import '../styles/RydoServices.css'
 const RydoServices = () => {
   return (
     <>
+        <h2 className='services-head' align='center'>Our Services</h2>
         <div className="services">
             <div className="service-element">
                 <img src="/images/autoBanner.jpg" alt=""/>

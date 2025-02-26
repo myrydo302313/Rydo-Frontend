@@ -1,32 +1,46 @@
-.services{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-    background-color: aliceblue;
+.services-head {
+  font-family: "Pacifico", cursive;
+  font-size: 2.9rem;
+  line-height: 1.2;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #e71d36;
 }
 
-.services .service-element{
-    display: flex;
-    flex-direction: column;
-    /* border: 2px solid red; */
-    border-radius: 13px;
-    gap: 10px;
-    background-color: #e3f2fd;
-    padding: 10px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
-    margin: 10px;
+.services-head {
+  margin-top: 7px;
+  margin-bottom: 10px;
+}
+
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  background-color: aliceblue;
+}
+
+.services .service-element {
+  display: flex;
+  flex-direction: column;
+  /* border: 2px solid red; */
+  border-radius: 13px;
+  gap: 10px;
+  background-color: #e3f2fd;
+  padding: 10px;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.5);
+  margin: 10px;
 }
 
 .services .service-element:last-child {
-    margin-bottom: 100px;
+  margin-bottom: 100px;
 }
 
-.service-element span{
-    font-weight: 700;
-    margin: auto;
+.service-element span {
+  font-weight: 700;
+  margin: auto;
 }
 
-.service-element img{
-    border-radius: 13px;
+.service-element img {
+  border-radius: 13px;
 }
