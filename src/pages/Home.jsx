@@ -324,9 +324,13 @@ const Home = () => {
         />
       </div>
 
-      {/* <div className="hero-section">
-        <Services />
-      </div> */}
+      <div className="hero-section">
+        {/* <Services /> */}
+
+        <img src="/images/banner1.jpeg" alt="" />
+      </div>
+
+    
 
       <BottomNav />
     </>
