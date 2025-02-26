@@ -9,7 +9,7 @@ const HomePlaces = () => {
       <div className="places-menu">
         <div className="places-menu-item">
             <img src="/images/railway.jpg" alt=""/>
-            <span>Hazaribagh Railway Station</span>
+            <span>Railway Station</span>
         </div>
         <div className="places-menu-item">
             <img src="/images/bus.jpg" alt="" />
