@@ -14,22 +14,6 @@ import CaptainRiding from "./pages/CaptainRiding";
 import RydoServices from "./pages/RydoServices";
 
 function App() {
-  useEffect(() => {
-    // Request Notification Permission when App Loads
-    requestNotificationPermission();
-
-    // Register the Firebase Service Worker
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/firebase-messaging-sw.js")
-        .then((registration) => {
-          console.log("Service Worker registered:", registration);
-        })
-        .catch((error) => {
-          console.error("Service Worker registration failed:", error);
-        });
-    }
-  }, []);
 
   return (
     <div className="App">
