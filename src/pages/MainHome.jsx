@@ -19,7 +19,9 @@ const MainHome = () => {
     <>
       <div className="main-home">
         <div className="main-home-top">
-        
+          <img src="/images/rydoLogo3.png" alt="" />
+          <p className="main-home-subhead1">Skip The Wait</p>
+          <p className="main-home-subhead2">Ride With Us</p>
         </div>
         <div className="main-home-bottom">
           {who == "captain" ? (
