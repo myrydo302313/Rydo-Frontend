@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import Ride from "./pages/Ride";
 import MainHome from "./pages/MainHome";
 import Login from "./pages/Login";
 import CaptainLogin from "./pages/CaptainLogin";
@@ -13,7 +11,6 @@ import UserProtectWrapper from "./pages/UserProtectWrapper";
 import CaptainHome from "./pages/CaptainHome";
 import UserAccount from "./pages/UserAccount";
 import CaptainRiding from "./pages/CaptainRiding";
-import { requestNotificationPermission } from "./firebase"; // Import Firebase setup
 import RydoServices from "./pages/RydoServices";
 
 function App() {
