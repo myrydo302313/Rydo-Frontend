@@ -12,6 +12,7 @@ import CaptainHome from "./pages/CaptainHome";
 import UserAccount from "./pages/UserAccount";
 import CaptainRiding from "./pages/CaptainRiding";
 import RydoServices from "./pages/RydoServices";
+import Riding from "./pages/Riding";
 
 function App() {
 
@@ -39,6 +40,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/captainLogin" element={<CaptainLogin />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/riding" element={<Riding />} />
+
           <Route path="/captainSignup" element={<CaptainSignup />} />
           <Route path="/captain-riding" element={<CaptainRiding />} />
           <Route path="/userAccount" element={<UserAccount />} />

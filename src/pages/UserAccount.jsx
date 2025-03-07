@@ -60,6 +60,14 @@ const UserAccount = () => {
         </button>
       </div>
 
+      <div className="register-as-captain">
+        <div className="para-part">
+          <p>Drive with Rydo and Earn</p>
+          <p>Become a Captain!</p>
+        </div>
+        <img src="/images/captainSignUp.jpg" alt="" width={100} height={40}/>
+      </div>
+
       <BottomNav />
     </>
   );

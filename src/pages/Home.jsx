@@ -13,6 +13,7 @@ import WaitingForDriver from "../components/WaitingForDriver";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import HomePlaces from "../components/HomePlaces";
+import { useNavigate } from "react-router-dom";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -34,6 +35,7 @@ const Home = () => {
   const [ride, setRide] = useState();
 
   const waitingForDriverRef = useRef(null);
+  const navigate = useNavigate();
 
   const { socket } = useContext(SocketContext);
 
@@ -50,6 +52,12 @@ const Home = () => {
     setWaitingForDriver(true);
     setShowSearchingPanel(false);
     setRide(ride);
+  });
+
+  socket.on("ride-started", (ride) => {
+    console.log("ride");
+    setWaitingForDriver(false);
+    navigate("/riding", { state: { ride } });
   });
 
   const handlePickupChange = async (e) => {
@@ -170,7 +178,6 @@ const Home = () => {
     }
   }
 
-
   // When showModal is false, also close the Vehicle Panel
   // useEffect(() => {
   //   if (!showModal) {
@@ -184,7 +191,7 @@ const Home = () => {
     <>
       <div className="home-main">
         <div className="home-logo">
-          <h3 align='center'>Rydo</h3>
+          <h3 align="center">Rydo</h3>
         </div>
 
         <div className="home-input-base">
@@ -313,9 +320,7 @@ const Home = () => {
       </div>
 
       <div
-        className={`waiting-for-driver-panel ${
-          waitingForDriver ? "show" : ""
-        }`}
+        className={`waiting-for-driver-panel ${waitingForDriver ? "show" : ""}`}
       >
         <WaitingForDriver
           ride={ride}
@@ -332,10 +337,12 @@ const Home = () => {
       </div>
 
       <div className="home-places">
-        <HomePlaces/>
+        <HomePlaces />
       </div>
 
-    
+      <div className="rydoLove-main">
+        <img src="images/rydoLove.png" alt="" />
+      </div>
 
       <BottomNav />
     </>

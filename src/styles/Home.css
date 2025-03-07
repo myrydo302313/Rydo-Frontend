@@ -227,3 +227,9 @@
 .waiting-for-driver-panel.show {
   transform: translateY(0);
 }
+
+.rydoLove-main{
+  width: 100%;
+  margin-bottom: 83px;
+  margin-top: -70px;
+}

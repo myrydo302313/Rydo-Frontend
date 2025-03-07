@@ -1,7 +1,7 @@
 .main-home {
-  height: 100vh; /* Full screen height */
+  height: 100vh; 
   display: flex;
-  overflow: hidden; /* Prevent scrolling */
+  overflow: hidden; 
 }
 
 .main-home-top {
@@ -14,11 +14,11 @@
 }
 
 .main-home-heading {
-  font-size: 2rem; /* Slightly larger for emphasis */
-  font-weight: 900; /* Extra bold */
+  font-size: 2rem; 
+  font-weight: 900; 
   text-align: left;
-  text-transform: uppercase; /* Professional uppercase look */
-  letter-spacing: 3px; /* Enhance spacing */
+  text-transform: uppercase; 
+  letter-spacing: 3px; 
 
   /* Blackish Gradient */
   color: #000000;
