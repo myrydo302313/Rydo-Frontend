@@ -25,7 +25,7 @@
     #a0e9ff,
     #64b5f6,
     #378fe9
-  ); /* Soft sky blue shades */
+  ); 
   display: flex;
   flex-direction: column;
   gap: 40px;

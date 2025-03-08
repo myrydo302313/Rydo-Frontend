@@ -10,6 +10,7 @@ import { TbReport } from "react-icons/tb";
 import { IoIosSpeedometer } from "react-icons/io";
 import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
+import CaptainNav from "../components/CaptainNav";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -38,6 +39,7 @@ const CaptainHome = () => {
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
+          console.log(position.coords.latitude)
           socket.emit("update-location-captain", {
             userId: captainData._id,
             location: {
@@ -49,10 +51,12 @@ const CaptainHome = () => {
       }
     };
 
+    console.log('this is working')
+
     const locationInterval = setInterval(updateLocation, 10000);
     updateLocation();
 
-    return () => clearInterval(locationInterval); // Cleanup interval on unmount
+    return () => clearInterval(locationInterval); 
   }, [captainData._id]);
 
   useEffect(() => {
@@ -62,7 +66,6 @@ const CaptainHome = () => {
     socket.on("new-ride", (data) => {
       setRide(data);
       setRidePopupPanel(true);
-
     });
 
     return () => {
@@ -160,7 +163,6 @@ const CaptainHome = () => {
         </div>
 
         <div className="captain-today-stats">
-          {console.log('ye aya',captainData.name)}
           <div className="captain-info">
             <span className="captain-name">{captainData.name}</span>
             <div className="captain-earning">
@@ -209,6 +211,7 @@ const CaptainHome = () => {
           />
         </div>
       </div>
+      <CaptainNav />
     </>
   );
 };

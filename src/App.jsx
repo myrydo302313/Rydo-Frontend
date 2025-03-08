@@ -13,9 +13,11 @@ import UserAccount from "./pages/UserAccount";
 import CaptainRiding from "./pages/CaptainRiding";
 import RydoServices from "./pages/RydoServices";
 import Riding from "./pages/Riding";
+import CaptainRides from "./pages/CaptainRides";
+import CaptainAccount from "./pages/CaptainAccount";
+import Admin from "./pages/Admin/Admin";
 
 function App() {
-
   return (
     <div className="App">
       <Router>
@@ -46,6 +48,15 @@ function App() {
           <Route path="/captain-riding" element={<CaptainRiding />} />
           <Route path="/userAccount" element={<UserAccount />} />
           <Route path="/services" element={<RydoServices />} />
+
+          {/* Captain Path */}
+          <Route path="/captain-rides" element={<CaptainRides />} />
+          <Route path="/captain-account" element={<CaptainAccount />} />
+
+          {/* Admin Path */}
+          <Route path="/admin" element={<Admin />}>
+
+          </Route>
         </Routes>
       </Router>
     </div>
