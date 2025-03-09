@@ -10,6 +10,7 @@ const baseURL =
 const CaptainRides = () => {
   const [availableRides, setAvailableRides] = useState([]);
   const [cancelledRides, setCancelledRides] = useState([]);
+  const [completedRides, setCompletedRides] = useState([]);
   const [loading, setLoading] = useState(true);
   const { captain, captainAuthToken } = useAuth();
   const [selectedTab, setSelectedTab] = useState("available");
@@ -32,6 +33,8 @@ const CaptainRides = () => {
       fetchAvailableRides();
     } else if (selectedTab === "cancelled") {
       fetchCancelledRides();
+    } else if (selectedTab === "completed") {
+      fetchCompletedRides();
     }
   }, [selectedTab, captainData]); // Fetch data when tab changes
 
@@ -84,6 +87,34 @@ const CaptainRides = () => {
       setLoading(false);
     } catch (error) {
       console.error("Error fetching cancelled rides:", error);
+      setLoading(false);
+    }
+  };
+  
+  const fetchCompletedRides = async () => {
+    if (!captainData || !captainData._id) {
+      console.error("Captain ID is undefined");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${baseURL}/api/captain/completed-rides`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: captainAuthToken,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setCompletedRides(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching completed rides:", error);
       setLoading(false);
     }
   };
@@ -141,6 +172,30 @@ const CaptainRides = () => {
                   </p>
                   <p className="cancel-reason">
                     <strong>Reason:</strong> {ride.cancelReason}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )
+        ) : selectedTab === "completed" ? (
+          cancelledRides.length === 0 ? (
+            <p className="no-rides-text">No completed rides available.</p>
+          ) : (
+            <div className="ride-grid">
+              {completedRides.map((ride) => (
+                <div key={ride._id} className="ride-card completed">
+                  <h3 className="ride-id">{ride.user.name}</h3>
+                  <p>
+                    <strong>Pickup:</strong> {ride.pickup}
+                  </p>
+                  <p>
+                    <strong>Destination:</strong> {ride.destination}
+                  </p>
+                  <p>
+                    <strong>Fare:</strong> ₹{ride.fare}
+                  </p>
+                  <p>
+                    <strong>Distance:</strong> {ride.distance} km
                   </p>
                 </div>
               ))}
