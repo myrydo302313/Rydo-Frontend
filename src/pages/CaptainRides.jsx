@@ -29,14 +29,10 @@ const CaptainRides = () => {
   }, [captain]);
 
   useEffect(() => {
-    if (selectedTab === "available") {
-      fetchAvailableRides();
-    } else if (selectedTab === "cancelled") {
-      fetchCancelledRides();
-    } else if (selectedTab === "completed") {
-      fetchCompletedRides();
-    }
-  }, [selectedTab, captainData]); // Fetch data when tab changes
+    fetchAvailableRides();
+    fetchCancelledRides();
+    fetchCompletedRides();
+  }, [captainData]); // Fetch data when tab changes
 
   const fetchAvailableRides = async () => {
     if (!captainData || !captainData._id) {
@@ -90,7 +86,7 @@ const CaptainRides = () => {
       setLoading(false);
     }
   };
-  
+
   const fetchCompletedRides = async () => {
     if (!captainData || !captainData._id) {
       console.error("Captain ID is undefined");

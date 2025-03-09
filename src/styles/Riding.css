@@ -1,0 +1,152 @@
+/* Riding Page Container */
+.riding-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  /* Home Button */
+  .home-button {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .home-icon {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  /* Map Section */
+  .riding-map-container {
+    height: 50%;
+    background-color: #f0f0f0; /* Placeholder color */
+  }
+  
+  /* Ride Details */
+  .riding-details {
+    height: 50%;
+    padding: 16px;
+    background-color: white;
+  }
+  
+  /* Captain Info */
+  .captain-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .captain-image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+  
+  .captain-text {
+    text-align: right;
+  }
+  
+  .captain-name {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  
+  .captain-vehicle-number {
+    font-size: 20px;
+    font-weight: 600;
+    margin: -5px 0;
+  }
+  
+  .captain-vehicle-name {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  /* Ride Info */
+  .ride-info {
+    margin-top: 20px;
+  }
+  
+  .ride-details {
+    width: 100%;
+  }
+  
+  .ride-location,
+  .ride-fare {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .ride-fare {
+    border-bottom: none;
+  }
+  
+  .location-icon,
+  .fare-icon {
+    font-size: 18px;
+  }
+  
+  .ride-address,
+  .fare-amount {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .ride-destination,
+  .fare-mode {
+    font-size: 14px;
+    color: gray;
+    margin-top: -5px;
+  }
+  
+  /* Payment Button */
+  .payment-button {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .payment-button:hover {
+    background-color: #218838;
+  }
+
+.user-make-payment{
+    background-color: #28a745;
+    margin-top: 15px;
+    padding: 15px;
+    text-align: center;
+    font-weight: 700;
+    color: whitesmoke;
+    border-radius: 23px;
+}
+
+.user-reach-out{
+    background-color:brown;
+    margin-top: 15px;
+    padding: 15px;
+    text-align: center;
+    font-weight: 700;
+    color: whitesmoke;
+    border-radius: 23px;
+}
