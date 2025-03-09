@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CaptainNav from "../components/CaptainNav";
 import { useAuth } from "../store/auth";
 import RideTabs from "../components/RideTabs";
+import '../styles/CaptainRides.css'
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -57,8 +58,8 @@ const CaptainRides = () => {
 
   return (
     <>
-      <CaptainNav />
       <RideTabs />
+      {console.log(rides)}
       <div className="ride-container">
         {loading ? (
           <p className="loading-text">Loading rides...</p>
@@ -68,7 +69,7 @@ const CaptainRides = () => {
           <div className="ride-grid">
             {rides.map((ride) => (
               <div key={ride._id} className="ride-card">
-                <h3 className="ride-id">Ride ID: {ride._id}</h3>
+                <h3 className="ride-id">{ride.user.name}</h3>
                 <p>
                   <strong>Pickup:</strong> {ride.pickup}
                 </p>
@@ -79,10 +80,7 @@ const CaptainRides = () => {
                   <strong>Fare:</strong> ₹{ride.fare}
                 </p>
                 <p>
-                  <strong>Status:</strong> {ride.status}
-                </p>
-                <p>
-                  <strong>Distance:</strong> {(ride.distance / 1000).toFixed(2)}{" "}
+                  <strong>Distance:</strong> {ride.distance}{" "}
                   km
                 </p>
                 <button className="accept-btn">Accept Ride</button>
@@ -91,6 +89,7 @@ const CaptainRides = () => {
           </div>
         )}
       </div>
+      <CaptainNav />
     </>
   );
 };

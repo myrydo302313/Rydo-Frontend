@@ -60,7 +60,6 @@ const CaptainHome = () => {
   useEffect(() => {
     if (!captainData?._id) return;
 
-    // Listen for ride requests via socket
     socket.on("new-ride", (data) => {
       setRide(data);
       setRidePopupPanel(true);
@@ -79,13 +78,12 @@ const CaptainHome = () => {
     ) {
       const { latitude, longitude } = ride.pickupLocation;
 
-      // Delay opening Google Maps slightly to ensure it's not blocked
       setTimeout(() => {
         window.open(
           `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`,
           "_blank"
         );
-      }, 500); // Adjust delay if necessary
+      }, 500); 
     }
     try {
       const response = await fetch(`${baseURL}/api/rides/confirm`, {
@@ -110,6 +108,23 @@ const CaptainHome = () => {
       setConfirmRidePopupPanel(true);
     } catch (error) {
       console.error("Failed to confirm ride:", error);
+    }
+  }
+
+  async function cancelRide(){
+    try{
+      const response = await fetch(`${baseURL}/api/rides/cancelRide`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: captainAuthToken,
+        },
+        body: JSON.stringify({
+          rideId: ride._id,
+        }),
+      });
+    }catch(e){
+      console.log(e)
     }
   }
 
@@ -206,6 +221,7 @@ const CaptainHome = () => {
             ride={ride}
             setConfirmRidePopupPanel={setConfirmRidePopupPanel}
             setRidePopupPanel={setRidePopupPanel}
+            cancelRide={cancelRide}
           />
         </div>
       </div>

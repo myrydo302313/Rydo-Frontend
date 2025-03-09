@@ -5,7 +5,7 @@ export default function RideTabs() {
   const [selectedTab, setSelectedTab] = useState("available");
 
   return (
-    <div className="ride-container">
+    <div className="ride-tabs-container">
       {/* Tab Options */}
       <div className="tabs">
         {["available", "pending", "completed"].map((tab) => (
