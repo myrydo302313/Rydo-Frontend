@@ -55,9 +55,15 @@ const Home = () => {
   });
 
   socket.on("ride-started", (ride) => {
-    console.log("ride");
     setWaitingForDriver(false);
     navigate("/riding", { state: { ride } });
+  });
+
+  socket.on("ride-cancelled", (ride) => {
+    setShowVehiclePanel(true);
+    setWaitingForDriver(false);
+    setShowConfirmPanel(false);
+    setShowSearchingPanel(false);
   });
 
   const handlePickupChange = async (e) => {

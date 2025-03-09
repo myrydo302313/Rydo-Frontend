@@ -66,7 +66,7 @@ const CaptainHome = () => {
     });
 
     return () => {
-      socket.off("new-ride"); // Cleanup on unmount
+      socket.off("new-ride");
     };
   }, [captainData?._id, socket]);
 
