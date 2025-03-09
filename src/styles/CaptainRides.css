@@ -1,0 +1,61 @@
+/* RideList.css */
+
+.ride-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .loading-text,
+  .no-rides-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .ride-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .ride-card {
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .ride-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .ride-id {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .ride-card p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  .accept-btn {
+    margin-top: 10px;
+    background-color: #004aad;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .accept-btn:hover {
+    background-color: #003580;
+  }
+  

@@ -32,7 +32,7 @@ const CaptainHome = () => {
   const userData = user?.userData || {};
 
   useEffect(() => {
-    if (!captainData._id) return; // Prevent execution if captainData._id is not available
+    if (!captainData._id) return; 
 
     socket.emit("join", { userType: "captain", userId: captainData._id });
 
@@ -50,8 +50,6 @@ const CaptainHome = () => {
         });
       }
     };
-
-    console.log('this is working')
 
     const locationInterval = setInterval(updateLocation, 10000);
     updateLocation();
