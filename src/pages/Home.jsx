@@ -184,6 +184,50 @@ const Home = () => {
     }
   }
 
+  const fetchCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log("📍 Current Location:", latitude, longitude); // Debugging log
+
+          try {
+            const response = await fetch(
+              `${baseURL}/api/maps/get-current-location?lat=${latitude}&lng=${longitude}`,
+              {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: userAuthToken, // Ensure this is not empty
+                },
+              }
+            );
+
+            const data = await response.json();
+            console.log("✅ API Response:", data); 
+
+            if (response.ok) {
+              setPickup(data.location);
+            } else {
+              alert(
+                "Error fetching address: " + (data.message || "Unknown error")
+              );
+            }
+          } catch (error) {
+            console.error("❌ Fetch Error:", error);
+            alert("Failed to get current location");
+          }
+        },
+        (error) => {
+          console.error("🚫 Geolocation Error:", error);
+          alert("Unable to access location. Please enable location services.");
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  };
+
   // When showModal is false, also close the Vehicle Panel
   // useEffect(() => {
   //   if (!showModal) {
@@ -220,16 +264,26 @@ const Home = () => {
             </button>
           </div>
           <form>
-            <input
-              onClick={() => {
-                setShowModal(true);
-                setActiveField("pickup");
-              }}
-              type="text"
-              placeholder="Pickup Location"
-              value={pickup}
-              onChange={handlePickupChange}
-            />
+            <div className="pickup-container">
+              <input
+                onClick={() => {
+                  setShowModal(true);
+                  setActiveField("pickup");
+                }}
+                type="text"
+                placeholder="Pickup Location"
+                value={pickup || ""}
+                onChange={handlePickupChange}
+              />
+              <button
+                type="button"
+                onClick={fetchCurrentLocation}
+                className="location-btn"
+              >
+                📍 Use Current Location
+              </button>
+            </div>
+
             <input
               onClick={() => {
                 setShowModal(true);
@@ -241,6 +295,7 @@ const Home = () => {
               onChange={handleDestinationChange}
             />
           </form>
+
           <button className="find-ride-btn" onClick={findTrip}>
             Find Ride
           </button>
