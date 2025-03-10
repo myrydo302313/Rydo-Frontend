@@ -16,29 +16,24 @@ const CaptainRides = () => {
   const [selectedTab, setSelectedTab] = useState("available");
 
   // Store captainData in state
-  const [captainData, setCaptainData] = useState(
-    captain?.captainData || JSON.parse(localStorage.getItem("captainData"))
-  );
+  const [captainData, setCaptainData] = useState(null);
 
-  // Ensure captainData is not lost
   useEffect(() => {
     if (captain?.captainData) {
       setCaptainData(captain.captainData);
-      localStorage.setItem("captainData", JSON.stringify(captain.captainData));
     }
   }, [captain]);
 
   useEffect(() => {
-    fetchAvailableRides();
-    fetchCancelledRides();
-    fetchCompletedRides();
-  }, [captainData]); // Fetch data when tab changes
+    if (captainData) {
+      fetchAvailableRides();
+      fetchCancelledRides();
+      fetchCompletedRides();
+    }
+  }, [captainData]); // Fetch rides when captainData is set
 
   const fetchAvailableRides = async () => {
-    if (!captainData || !captainData._id) {
-      console.error("Captain ID is undefined");
-      return;
-    }
+    if (!captainData?._id) return;
 
     try {
       const response = await fetch(
@@ -46,24 +41,19 @@ const CaptainRides = () => {
         { method: "GET" }
       );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
       const data = await response.json();
       setAvailableRides(data);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching pending rides:", error);
+    } finally {
       setLoading(false);
     }
   };
 
   const fetchCancelledRides = async () => {
-    if (!captainData || !captainData._id) {
-      console.error("Captain ID is undefined");
-      return;
-    }
+    if (!captainData?._id) return;
 
     try {
       const response = await fetch(`${baseURL}/api/captain/cancelled-rides`, {
@@ -74,24 +64,19 @@ const CaptainRides = () => {
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
       const data = await response.json();
       setCancelledRides(data);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching cancelled rides:", error);
+    } finally {
       setLoading(false);
     }
   };
 
   const fetchCompletedRides = async () => {
-    if (!captainData || !captainData._id) {
-      console.error("Captain ID is undefined");
-      return;
-    }
+    if (!captainData?._id) return;
 
     try {
       const response = await fetch(`${baseURL}/api/captain/completed-rides`, {
@@ -102,15 +87,13 @@ const CaptainRides = () => {
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
       const data = await response.json();
       setCompletedRides(data);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching completed rides:", error);
+    } finally {
       setLoading(false);
     }
   };
@@ -129,18 +112,10 @@ const CaptainRides = () => {
               {availableRides.map((ride) => (
                 <div key={ride._id} className="ride-card">
                   <h3 className="ride-id">{ride.user.name}</h3>
-                  <p>
-                    <strong>Pickup:</strong> {ride.pickup}
-                  </p>
-                  <p>
-                    <strong>Destination:</strong> {ride.destination}
-                  </p>
-                  <p>
-                    <strong>Fare:</strong> ₹{ride.fare}
-                  </p>
-                  <p>
-                    <strong>Distance:</strong> {ride.distance} km
-                  </p>
+                  <p><strong>Pickup:</strong> {ride.pickup}</p>
+                  <p><strong>Destination:</strong> {ride.destination}</p>
+                  <p><strong>Fare:</strong> ₹{ride.fare}</p>
+                  <p><strong>Distance:</strong> {ride.distance} km</p>
                   <button className="accept-btn">Accept Ride</button>
                 </div>
               ))}
@@ -154,45 +129,27 @@ const CaptainRides = () => {
               {cancelledRides.map((ride) => (
                 <div key={ride._id} className="ride-card cancelled">
                   <h3 className="ride-id">{ride.user.name}</h3>
-                  <p>
-                    <strong>Pickup:</strong> {ride.pickup}
-                  </p>
-                  <p>
-                    <strong>Destination:</strong> {ride.destination}
-                  </p>
-                  <p>
-                    <strong>Fare:</strong> ₹{ride.fare}
-                  </p>
-                  <p>
-                    <strong>Distance:</strong> {ride.distance} km
-                  </p>
-                  <p className="cancel-reason">
-                    <strong>Reason:</strong> {ride.cancelReason}
-                  </p>
+                  <p><strong>Pickup:</strong> {ride.pickup}</p>
+                  <p><strong>Destination:</strong> {ride.destination}</p>
+                  <p><strong>Fare:</strong> ₹{ride.fare}</p>
+                  <p><strong>Distance:</strong> {ride.distance} km</p>
+                  <p className="cancel-reason"><strong>Reason:</strong> {ride.cancelReason}</p>
                 </div>
               ))}
             </div>
           )
         ) : selectedTab === "completed" ? (
-          cancelledRides.length === 0 ? (
+          completedRides.length === 0 ? (
             <p className="no-rides-text">No completed rides available.</p>
           ) : (
             <div className="ride-grid">
               {completedRides.map((ride) => (
                 <div key={ride._id} className="ride-card completed">
                   <h3 className="ride-id">{ride.user.name}</h3>
-                  <p>
-                    <strong>Pickup:</strong> {ride.pickup}
-                  </p>
-                  <p>
-                    <strong>Destination:</strong> {ride.destination}
-                  </p>
-                  <p>
-                    <strong>Fare:</strong> ₹{ride.fare}
-                  </p>
-                  <p>
-                    <strong>Distance:</strong> {ride.distance} km
-                  </p>
+                  <p><strong>Pickup:</strong> {ride.pickup}</p>
+                  <p><strong>Destination:</strong> {ride.destination}</p>
+                  <p><strong>Fare:</strong> ₹{ride.fare}</p>
+                  <p><strong>Distance:</strong> {ride.distance} km</p>
                 </div>
               ))}
             </div>
