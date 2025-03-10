@@ -73,7 +73,7 @@ const ConfirmRidePopUp = (props) => {
             alt=""
           />
           <h2 className="text-lg font-medium capitalize">
-            {props.ride?.user.name}
+            {props.ride?.user?.name}
           </h2>
         </div>
         <h5 className="text-lg font-semibold">{props.ride?.user.distance}</h5>
