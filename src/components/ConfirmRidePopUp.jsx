@@ -76,7 +76,7 @@ const ConfirmRidePopUp = (props) => {
             {props.ride?.user?.name}
           </h2>
         </div>
-        <h5 className="text-lg font-semibold">{props.ride?.user.distance}</h5>
+        <h5 className="text-lg font-semibold">{props.ride?.user?.distance}</h5>
       </div>
       <div className="flex gap-2 justify-between flex-col items-center">
         <div className="w-full mt-5">
