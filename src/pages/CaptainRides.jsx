@@ -57,6 +57,7 @@ const CaptainRides = () => {
       return;
     }
 
+    console.log('fetching pending rides')
     try {
       const response = await fetch(
         `${baseURL}/api/rides/pending-rides?captainId=${captainDetails._id}`,
