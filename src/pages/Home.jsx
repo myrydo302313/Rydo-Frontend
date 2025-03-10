@@ -187,16 +187,18 @@ const Home = () => {
 
   const fetchCurrentLocation = () => {
     setLoading(true);
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude, accuracy } = position.coords;
           console.log(
-            "📍 High Accuracy Location:",
+            "📍 Current Location:",
             latitude,
             longitude,
-            "Accuracy:",
-            accuracy
+            "✅ Accuracy:",
+            accuracy,
+            "meters"
           );
 
           try {
@@ -223,16 +225,19 @@ const Home = () => {
           } catch (error) {
             console.error("❌ Fetch Error:", error);
             alert("Failed to get current location");
+          } finally {
+            setLoading(false);
           }
         },
         (error) => {
           console.error("🚫 Geolocation Error:", error);
           alert("Unable to access location. Please enable location services.");
+          setLoading(false);
         },
         {
-          enableHighAccuracy: true, // ✅ Request precise GPS
-          timeout: 15000, // ⏳ Wait longer for better accuracy
-          maximumAge: 0, // 🔄 Prevent using old cached locations
+          enableHighAccuracy: true, // Forces GPS to get the best accuracy
+          timeout: 10000, // Wait up to 10 seconds for a better fix
+          maximumAge: 0, // Don't use cached location
         }
       );
     } else {
