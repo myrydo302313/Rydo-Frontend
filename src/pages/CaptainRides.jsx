@@ -15,7 +15,7 @@ const CaptainRides = () => {
   const { captain, captainAuthToken } = useAuth();
   const [selectedTab, setSelectedTab] = useState("available");
 
-  // Store captainData in state
+  // Initialize captainData properly
   const [captainData, setCaptainData] = useState(null);
 
   useEffect(() => {
@@ -30,15 +30,14 @@ const CaptainRides = () => {
       fetchCancelledRides();
       fetchCompletedRides();
     }
-  }, [captainData]); // Fetch rides when captainData is set
+  }, [captainData]); // Fetch data when captainData is set
 
   const fetchAvailableRides = async () => {
     if (!captainData?._id) return;
 
     try {
       const response = await fetch(
-        `${baseURL}/api/rides/pending-rides?captainId=${captainData._id}`,
-        { method: "GET" }
+        `${baseURL}/api/rides/pending-rides?captainId=${captainData._id}`
       );
 
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
@@ -57,7 +56,6 @@ const CaptainRides = () => {
 
     try {
       const response = await fetch(`${baseURL}/api/captain/cancelled-rides`, {
-        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: captainAuthToken,
@@ -80,7 +78,6 @@ const CaptainRides = () => {
 
     try {
       const response = await fetch(`${baseURL}/api/captain/completed-rides`, {
-        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: captainAuthToken,
@@ -112,10 +109,18 @@ const CaptainRides = () => {
               {availableRides.map((ride) => (
                 <div key={ride._id} className="ride-card">
                   <h3 className="ride-id">{ride.user.name}</h3>
-                  <p><strong>Pickup:</strong> {ride.pickup}</p>
-                  <p><strong>Destination:</strong> {ride.destination}</p>
-                  <p><strong>Fare:</strong> ₹{ride.fare}</p>
-                  <p><strong>Distance:</strong> {ride.distance} km</p>
+                  <p>
+                    <strong>Pickup:</strong> {ride.pickup}
+                  </p>
+                  <p>
+                    <strong>Destination:</strong> {ride.destination}
+                  </p>
+                  <p>
+                    <strong>Fare:</strong> ₹{ride.fare}
+                  </p>
+                  <p>
+                    <strong>Distance:</strong> {ride.distance} km
+                  </p>
                   <button className="accept-btn">Accept Ride</button>
                 </div>
               ))}
@@ -129,11 +134,21 @@ const CaptainRides = () => {
               {cancelledRides.map((ride) => (
                 <div key={ride._id} className="ride-card cancelled">
                   <h3 className="ride-id">{ride.user.name}</h3>
-                  <p><strong>Pickup:</strong> {ride.pickup}</p>
-                  <p><strong>Destination:</strong> {ride.destination}</p>
-                  <p><strong>Fare:</strong> ₹{ride.fare}</p>
-                  <p><strong>Distance:</strong> {ride.distance} km</p>
-                  <p className="cancel-reason"><strong>Reason:</strong> {ride.cancelReason}</p>
+                  <p>
+                    <strong>Pickup:</strong> {ride.pickup}
+                  </p>
+                  <p>
+                    <strong>Destination:</strong> {ride.destination}
+                  </p>
+                  <p>
+                    <strong>Fare:</strong> ₹{ride.fare}
+                  </p>
+                  <p>
+                    <strong>Distance:</strong> {ride.distance} km
+                  </p>
+                  <p className="cancel-reason">
+                    <strong>Reason:</strong> {ride.cancelReason}
+                  </p>
                 </div>
               ))}
             </div>
@@ -146,10 +161,18 @@ const CaptainRides = () => {
               {completedRides.map((ride) => (
                 <div key={ride._id} className="ride-card completed">
                   <h3 className="ride-id">{ride.user.name}</h3>
-                  <p><strong>Pickup:</strong> {ride.pickup}</p>
-                  <p><strong>Destination:</strong> {ride.destination}</p>
-                  <p><strong>Fare:</strong> ₹{ride.fare}</p>
-                  <p><strong>Distance:</strong> {ride.distance} km</p>
+                  <p>
+                    <strong>Pickup:</strong> {ride.pickup}
+                  </p>
+                  <p>
+                    <strong>Destination:</strong> {ride.destination}
+                  </p>
+                  <p>
+                    <strong>Fare:</strong> ₹{ride.fare}
+                  </p>
+                  <p>
+                    <strong>Distance:</strong> {ride.distance} km
+                  </p>
                 </div>
               ))}
             </div>
