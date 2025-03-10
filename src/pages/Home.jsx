@@ -33,7 +33,7 @@ const Home = () => {
   const [vehicleFound, setVehicleFound] = useState(false);
   const [waitingForDriver, setWaitingForDriver] = useState(false);
   const [ride, setRide] = useState();
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
 
   const waitingForDriverRef = useRef(null);
   const navigate = useNavigate();
@@ -186,12 +186,18 @@ const Home = () => {
   }
 
   const fetchCurrentLocation = () => {
-    setLoading(true)
+    setLoading(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
-          const { latitude, longitude } = position.coords;
-          console.log("📍 Current Location:", latitude, longitude); 
+          const { latitude, longitude, accuracy } = position.coords;
+          console.log(
+            "📍 High Accuracy Location:",
+            latitude,
+            longitude,
+            "Accuracy:",
+            accuracy
+          );
 
           try {
             const response = await fetch(
@@ -206,19 +212,15 @@ const Home = () => {
             );
 
             const data = await response.json();
-            // console.log("✅ API Response:", data); 
 
             if (response.ok) {
               setPickup(data.location);
-              setLoading(false)
             } else {
               alert(
                 "Error fetching address: " + (data.message || "Unknown error")
               );
-              setLoading(false)
             }
           } catch (error) {
-            setLoading(false)
             console.error("❌ Fetch Error:", error);
             alert("Failed to get current location");
           }
@@ -226,12 +228,16 @@ const Home = () => {
         (error) => {
           console.error("🚫 Geolocation Error:", error);
           alert("Unable to access location. Please enable location services.");
-          setLoading(false)
+        },
+        {
+          enableHighAccuracy: true, // ✅ Request precise GPS
+          timeout: 15000, // ⏳ Wait longer for better accuracy
+          maximumAge: 0, // 🔄 Prevent using old cached locations
         }
       );
     } else {
       alert("Geolocation is not supported by this browser.");
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -278,7 +284,9 @@ const Home = () => {
                   setActiveField("pickup");
                 }}
                 type="text"
-                placeholder={loading?("Fetching Current Location..."):("Pickup Location")}
+                placeholder={
+                  loading ? "Fetching Current Location..." : "Pickup Location"
+                }
                 value={pickup || ""}
                 onChange={handlePickupChange}
               />
