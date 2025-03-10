@@ -15,9 +15,7 @@ const ConfirmRidePopUp = (props) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${
-          baseURL
-        }/api/rides/start-ride?rideId=${encodeURIComponent(
+        `${baseURL}/api/rides/start-ride?rideId=${encodeURIComponent(
           props.ride._id
         )}&otp=${encodeURIComponent(otp)}`,
         {
@@ -33,6 +31,18 @@ const ConfirmRidePopUp = (props) => {
       }
 
       const data = await response.json();
+
+      // Get latitude & longitude
+      const pickupLat = props.ride.pickupLocation.latitude;
+      const pickupLng = props.ride.pickupLocation.longitude;
+      const destLat = props.ride.destinationLocation.latitude;
+      const destLng = props.ride.destinationLocation.longitude;
+
+      // Construct Google Maps URL using coordinates
+      const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${pickupLat},${pickupLng}&destination=${destLat},${destLng}&travelmode=driving`;
+
+      // Open Google Maps in a new tab
+      window.open(googleMapsUrl, "_blank");
 
       props.setConfirmRidePopupPanel(false);
       props.setRidePopupPanel(false);
