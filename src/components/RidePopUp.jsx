@@ -21,7 +21,7 @@ const RidePopUp = (props) => {
             alt=""
           />
           <h2 className="text-lg font-medium">
-            {props.ride?.user.name}
+            {props.ride?.user?.name}
           </h2>
         </div>
         <h5 className="text-lg font-semibold">{props.ride?.distance}km</h5>
