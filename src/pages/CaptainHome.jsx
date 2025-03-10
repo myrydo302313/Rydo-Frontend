@@ -177,7 +177,7 @@ const CaptainHome = () => {
 
         <div className="captain-today-stats">
           <div className="captain-info">
-            <span className="captain-name">{captainData.name}</span>
+            <span className="captain-name">{captainData?.name}</span>
             <div className="captain-earning">
               <span className="captain-today-earning">₹1000</span>
               <span>Earned</span>
