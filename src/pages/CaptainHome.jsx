@@ -21,25 +21,31 @@ const CaptainHome = () => {
 
   const [ridePopupPanel, setRidePopupPanel] = useState(false);
   const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false);
+  const [captainData, setCaptainData] = useState(null); // Initialize state
 
   const ridePopupPanelRef = useRef(null);
   const confirmRidePopupPanelRef = useRef(null);
   const [ride, setRide] = useState(null);
 
-  const captainData = captain?.captainData || {};
+  useEffect(() => {
+    if (captain?.captainData) {
+      setCaptainData(captain.captainData);
+    }
+  }, [captain]); // Runs whenever `captain` changes
+  
   const { user } = useAuth();
 
   const userData = user?.userData || {};
 
   useEffect(() => {
-    if (!captainData._id) return; 
+    if (!captainData._id) return;
 
     socket.emit("join", { userType: "captain", userId: captainData._id });
 
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          console.log(position.coords.latitude)
+          console.log(position.coords.latitude);
           socket.emit("update-location-captain", {
             userId: captainData._id,
             location: {
@@ -54,7 +60,7 @@ const CaptainHome = () => {
     const locationInterval = setInterval(updateLocation, 10000);
     updateLocation();
 
-    return () => clearInterval(locationInterval); 
+    return () => clearInterval(locationInterval);
   }, [captainData._id]);
 
   useEffect(() => {
@@ -83,7 +89,7 @@ const CaptainHome = () => {
           `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`,
           "_blank"
         );
-      }, 500); 
+      }, 500);
     }
     try {
       const response = await fetch(`${baseURL}/api/rides/confirm`, {
@@ -111,8 +117,8 @@ const CaptainHome = () => {
     }
   }
 
-  async function cancelRide(){
-    try{
+  async function cancelRide() {
+    try {
       const response = await fetch(`${baseURL}/api/rides/cancelRide`, {
         method: "POST",
         headers: {
@@ -123,8 +129,8 @@ const CaptainHome = () => {
           rideId: ride._id,
         }),
       });
-    }catch(e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
   }
 
