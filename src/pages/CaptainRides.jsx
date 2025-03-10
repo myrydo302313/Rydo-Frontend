@@ -26,12 +26,6 @@ const CaptainRides = () => {
   }, [captain]);
 
   useEffect(() => {
-    if (captain) {
-      setLoading2(false);
-    }
-  }, [captain]);
-
-  useEffect(() => {
     if (captainDetails._id) {
       fetchAvailableRides();
       fetchCancelledRides();
@@ -39,36 +33,28 @@ const CaptainRides = () => {
     }
   }, [captainDetails]);
 
-  if (loading2) {
-    // ❌ Don't return early and break Hook order, instead use conditional rendering
-    return (
-      <>
-        <div className="loading-container">
-          <p>Loading..</p>
-        </div>
-        <CaptainNav />
-      </>
-    );
-  }
-
   const fetchAvailableRides = async () => {
     if (!captainDetails || !captainDetails._id) {
       console.error("Captain ID is undefined");
       return;
     }
 
-    console.log('fetching pending rides')
+    console.log("fetching pending rides");
     try {
-      const response = await fetch(
-        `${baseURL}/api/rides/pending-rides?captainId=${captainDetails._id}`,
-        { method: "GET" }
-      );
+      const response = await fetch(`${baseURL}/api/captain/available-rides`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: captainAuthToken,
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       const data = await response.json();
+      console.log("ye to aya", data);
       setAvailableRides(data);
       setLoading(false);
     } catch (error) {
@@ -82,6 +68,8 @@ const CaptainRides = () => {
       console.error("Captain ID is undefined");
       return;
     }
+
+    console.log("fetching cancelled rides");
 
     try {
       const response = await fetch(`${baseURL}/api/captain/cancelled-rides`, {
@@ -97,6 +85,7 @@ const CaptainRides = () => {
       }
 
       const data = await response.json();
+      console.log("ye bhi aya", data);
       setCancelledRides(data);
       setLoading(false);
     } catch (error) {
