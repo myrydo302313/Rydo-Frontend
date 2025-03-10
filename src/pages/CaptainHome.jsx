@@ -37,6 +37,7 @@ const CaptainHome = () => {
     socket.emit("join", { userType: "captain", userId: captainData._id });
 
     const updateLocation = () => {
+      console.log('loc update horha')
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           console.log(position.coords.latitude)
@@ -61,6 +62,7 @@ const CaptainHome = () => {
     if (!captainData?._id) return;
 
     socket.on("new-ride", (data) => {
+      console.log('new ride to aya')
       setRide(data);
       setRidePopupPanel(true);
     });
@@ -177,7 +179,7 @@ const CaptainHome = () => {
 
         <div className="captain-today-stats">
           <div className="captain-info">
-            <span className="captain-name">{captainData?.name}</span>
+            <span className="captain-name">{captainData.name}</span>
             <div className="captain-earning">
               <span className="captain-today-earning">₹1000</span>
               <span>Earned</span>
