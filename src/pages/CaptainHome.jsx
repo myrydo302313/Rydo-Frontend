@@ -32,14 +32,20 @@ const CaptainHome = () => {
   const userData = user?.userData || {};
 
   useEffect(() => {
-    if (!captainData._id) return; 
+    if (!captainData._id) return;
 
     socket.emit("join", { userType: "captain", userId: captainData._id });
 
-    const updateLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          console.log(position.coords.latitude)
+    let watchId;
+
+    if (navigator.geolocation) {
+      watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          console.log(
+            "Updated Position:",
+            position.coords.latitude,
+            position.coords.longitude
+          );
           socket.emit("update-location-captain", {
             userId: captainData._id,
             location: {
@@ -47,14 +53,15 @@ const CaptainHome = () => {
               lng: position.coords.longitude,
             },
           });
-        });
-      }
+        },
+        (error) => console.error("Geolocation error:", error),
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      );
+    }
+
+    return () => {
+      if (watchId) navigator.geolocation.clearWatch(watchId);
     };
-
-    const locationInterval = setInterval(updateLocation, 10000);
-    updateLocation();
-
-    return () => clearInterval(locationInterval); 
   }, [captainData._id]);
 
   useEffect(() => {
@@ -83,7 +90,7 @@ const CaptainHome = () => {
           `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`,
           "_blank"
         );
-      }, 500); 
+      }, 500);
     }
     try {
       const response = await fetch(`${baseURL}/api/rides/confirm`, {
@@ -111,8 +118,8 @@ const CaptainHome = () => {
     }
   }
 
-  async function cancelRide(){
-    try{
+  async function cancelRide() {
+    try {
       const response = await fetch(`${baseURL}/api/rides/cancelRide`, {
         method: "POST",
         headers: {
@@ -123,8 +130,8 @@ const CaptainHome = () => {
           rideId: ride._id,
         }),
       });
-    }catch(e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
   }
 
