@@ -233,3 +233,11 @@
   margin-bottom: 83px;
   margin-top: -70px;
 }
+
+.current-location-btn{
+  background-color: turquoise;
+  border: none;
+  padding: 9px;
+  border-radius: 13px;
+  
+}

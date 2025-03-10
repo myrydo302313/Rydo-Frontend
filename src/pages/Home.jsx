@@ -33,6 +33,7 @@ const Home = () => {
   const [vehicleFound, setVehicleFound] = useState(false);
   const [waitingForDriver, setWaitingForDriver] = useState(false);
   const [ride, setRide] = useState();
+  const [loading,setLoading]=useState(false)
 
   const waitingForDriverRef = useRef(null);
   const navigate = useNavigate();
@@ -185,11 +186,12 @@ const Home = () => {
   }
 
   const fetchCurrentLocation = () => {
+    setLoading(true)
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-          console.log("📍 Current Location:", latitude, longitude); // Debugging log
+          console.log("📍 Current Location:", latitude, longitude); 
 
           try {
             const response = await fetch(
@@ -204,16 +206,19 @@ const Home = () => {
             );
 
             const data = await response.json();
-            console.log("✅ API Response:", data); 
+            // console.log("✅ API Response:", data); 
 
             if (response.ok) {
               setPickup(data.location);
+              setLoading(false)
             } else {
               alert(
                 "Error fetching address: " + (data.message || "Unknown error")
               );
+              setLoading(false)
             }
           } catch (error) {
+            setLoading(false)
             console.error("❌ Fetch Error:", error);
             alert("Failed to get current location");
           }
@@ -221,10 +226,12 @@ const Home = () => {
         (error) => {
           console.error("🚫 Geolocation Error:", error);
           alert("Unable to access location. Please enable location services.");
+          setLoading(false)
         }
       );
     } else {
       alert("Geolocation is not supported by this browser.");
+      setLoading(false)
     }
   };
 
@@ -271,14 +278,14 @@ const Home = () => {
                   setActiveField("pickup");
                 }}
                 type="text"
-                placeholder="Pickup Location"
+                placeholder={loading?("Fetching Current Location..."):("Pickup Location")}
                 value={pickup || ""}
                 onChange={handlePickupChange}
               />
               <button
                 type="button"
                 onClick={fetchCurrentLocation}
-                className="location-btn"
+                className="current-location-btn"
               >
                 📍 Use Current Location
               </button>
