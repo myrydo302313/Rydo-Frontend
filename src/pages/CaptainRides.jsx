@@ -183,7 +183,7 @@ const CaptainRides = () => {
             </div>
           )
         ) : selectedTab === "completed" ? (
-          cancelledRides.length === 0 ? (
+          completedRides.length === 0 ? (
             <p className="no-rides-text">No completed rides available.</p>
           ) : (
             <div className="ride-grid">
