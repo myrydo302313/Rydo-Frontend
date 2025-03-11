@@ -37,7 +37,6 @@ const CaptainHome = () => {
     socket.emit("join", { userType: "captain", userId: captainData._id });
 
     const updateLocation = () => {
-      console.log('loc update horha')
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           console.log(position.coords.latitude)
@@ -162,6 +161,7 @@ const CaptainHome = () => {
 
   return (
     <>
+
       <div className="captain-home-main">
         <h1 className="captain-home-heading" align="center">
           Rydo Captain

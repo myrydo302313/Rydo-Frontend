@@ -42,7 +42,7 @@ const Riding = () => {
             <div className="ride-location">
               <i className="location-icon ri-map-pin-2-fill"></i>
               <div>
-                <h3 className="ride-address">562/11-A</h3>
+                <h3 className="ride-address">{ride?.destination.split(",")[0]}</h3>
                 <p className="ride-destination">{ride?.destination}</p>
               </div>
             </div>

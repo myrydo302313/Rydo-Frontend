@@ -26,7 +26,7 @@ const FinishRide = (props) => {
       );
 
       if (response.ok) {
-        navigate("/captainHome");
+        navigate("/captain-ride-final", { state: { rideDetails: props.ride } });
       } else {
         console.error("Failed to end ride");
       }

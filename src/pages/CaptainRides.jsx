@@ -124,6 +124,7 @@ const CaptainRides = () => {
 
   return (
     <>
+    {console.log(availableRides)}
       <RideTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       <div className="ride-container">
         {loading ? (
@@ -135,7 +136,8 @@ const CaptainRides = () => {
             <div className="ride-grid">
               {availableRides.map((ride) => (
                 <div key={ride._id} className="ride-card">
-                  <h3 className="ride-id">{ride.user.name}</h3>
+                  {console.log('ye rha',ride)}
+                  <h3 className="ride-id">{ride.userDetails.name}</h3>
                   <p>
                     <strong>Pickup:</strong> {ride.pickup}
                   </p>

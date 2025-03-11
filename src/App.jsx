@@ -16,6 +16,7 @@ import Riding from "./pages/Riding";
 import CaptainRides from "./pages/CaptainRides";
 import CaptainAccount from "./pages/CaptainAccount";
 import Admin from "./pages/Admin/Admin";
+import CaptainRideFinal from "./pages/CaptainRideFinal";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           {/* Captain Path */}
           <Route path="/captain-rides" element={<CaptainRides />} />
           <Route path="/captain-account" element={<CaptainAccount />} />
+          <Route path="/captain-ride-final" element={<CaptainRideFinal />} />
 
           {/* Admin Path */}
           <Route path="/admin" element={<Admin />}>

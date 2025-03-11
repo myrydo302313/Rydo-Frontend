@@ -1,0 +1,98 @@
+/* Global Styles */
+/* body {
+  background-color: #f5f7fa;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+} */
+
+/* 🎉 Finished Ride Image */
+.finished-ride {
+  width: 100%;
+  padding: 20px ;
+}
+
+/* .finished-ride img {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+} */
+
+/* ✅ Well Done Message */
+.final-ride-para {
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  border-radius: 12px;
+  padding: 12px;
+  margin: 15px auto;
+  max-width: 90%;
+  box-shadow: 0px 3px 10px rgba(255, 117, 140, 0.3);
+}
+
+.final-ride-para h2 {
+  font-size: 1.4rem;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* 📋 Ride Summary Section */
+.final-ride-summary {
+  margin-top: 10px;
+  margin-bottom: 150px;
+}
+
+.final-ride-summary h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2a5298;
+  text-align: center;
+}
+
+/* 🚗 Ride Summary Box */
+.ride-summary-container {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px auto;
+  max-width: 90%;
+  color: white;
+  box-shadow: 0 3px 10px rgba(30, 60, 114, 0.3);
+}
+
+/* 📌 Ride Summary Text */
+.ride-summary-key {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #ffda79;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.ride-summary-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* 🆗 Button (If Needed) */
+.ride-complete-btn {
+  display: block;
+  width: 80%;
+  max-width: 250px;
+  margin: 15px auto;
+  padding: 12px;
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.ride-complete-btn:active {
+  background: linear-gradient(135deg, #96c93d, #00b09b);
+}
