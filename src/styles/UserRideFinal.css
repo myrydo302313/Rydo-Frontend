@@ -1,0 +1,79 @@
+/* ✅ Ride Completion Message */
+.ride-final-message {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  padding: 15px;
+  border-radius: 12px;
+  width: 80%;
+  margin: 15px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ Ride Summary Box */
+.ride-summary-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 85%;
+  margin: 20px auto;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ Ride Summary Title */
+.ride-summary-card h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* ✅ Fare Details */
+.ride-summary-detail {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* ✅ Key and Value Styling */
+.summary-key {
+  color: #ff5733;
+}
+
+.summary-value {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+/* ✅ Payment Instruction */
+.payment-instruction {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  text-align: center;
+}
+
+/* ✅ Thank You Message */
+.ride-thank-you {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 15px;
+  color: #444;
+  text-align: center;
+}
+
+/* ✅ Mobile Optimization */
+@media (max-width: 600px) {
+  .ride-final-logo,
+  .ride-final-message,
+  .ride-summary-card {
+    width: 90%;
+  }
+}

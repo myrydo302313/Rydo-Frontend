@@ -54,6 +54,7 @@ const ConfirmRidePopUp = (props) => {
 
   return (
     <div>
+      {console.log(props.ride)}
       <h5
         className="p-1 text-center w-[93%] absolute top-0"
         onClick={() => {
@@ -65,11 +66,11 @@ const ConfirmRidePopUp = (props) => {
       <h3 className="text-2xl font-semibold mb-5">
         Confirm this ride to Start
       </h3>
-      <div className="flex items-center justify-between p-3 border-2 border-yellow-400 rounded-lg mt-4">
+      <div className="flex items-center justify-between p-3 border-2 bg-gradient-to-r from-[#a1c4fd] to-[#c2e9fb] rounded-lg mt-4">
         <div className="flex items-center gap-3 ">
           <img
             className="h-12 rounded-full object-cover w-12"
-            src="https://i.pinimg.com/236x/af/26/28/af26280b0ca305be47df0b799ed1b12b.jpg"
+            src="/images/profilePic.jpg"
             alt=""
           />
           <h2 className="text-lg font-medium capitalize">
@@ -109,6 +110,16 @@ const ConfirmRidePopUp = (props) => {
               <p className="text-sm -mt-1 text-gray-600">Cash Cash</p>
             </div>
           </div>
+          {props.ride?.user.phone && (
+            <p className="text-blue-600 font-medium underline mt-2">
+              <a
+                href={`tel:${props.ride?.user.phone}`}
+                className="call-captain-btn"
+              >
+                📞 Call Passenger
+              </a>
+            </p>
+          )}
         </div>
 
         <div className="mt-6 w-full">

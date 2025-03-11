@@ -17,6 +17,7 @@ import CaptainRides from "./pages/CaptainRides";
 import CaptainAccount from "./pages/CaptainAccount";
 import Admin from "./pages/Admin/Admin";
 import CaptainRideFinal from "./pages/CaptainRideFinal";
+import UserRideFinal from "./pages/UserRideFinal";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/captain-riding" element={<CaptainRiding />} />
           <Route path="/userAccount" element={<UserAccount />} />
           <Route path="/services" element={<RydoServices />} />
+          <Route path="/user-ride-final" element={<UserRideFinal />} />
 
           {/* Captain Path */}
           <Route path="/captain-rides" element={<CaptainRides />} />
