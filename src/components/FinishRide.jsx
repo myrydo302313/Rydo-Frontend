@@ -54,7 +54,7 @@ const FinishRide = (props) => {
           />
           <h2 className="text-lg font-medium">{props.ride?.user.name}</h2>
         </div>
-        <h5 className="text-lg font-semibold">2.2 KM</h5>
+        <h5 className="text-lg font-semibold">{props.ride?.distance} Km</h5>
       </div>
 
       <div className="flex gap-2 justify-between flex-col items-center">
