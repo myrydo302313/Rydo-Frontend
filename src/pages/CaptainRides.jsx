@@ -187,6 +187,7 @@ const CaptainRides = () => {
             <p className="no-rides-text">No completed rides available.</p>
           ) : (
             <div className="ride-grid">
+              {console.log(completedRides)}
               {completedRides.map((ride) => (
                 <div key={ride._id} className="ride-card completed">
                   <h3 className="ride-id">{ride.user.name}</h3>
