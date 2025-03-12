@@ -19,6 +19,7 @@ import Admin from "./pages/Admin/Admin";
 import CaptainRideFinal from "./pages/CaptainRideFinal";
 import UserRideFinal from "./pages/UserRideFinal";
 import WaitingForDriver from "./pages/WaitingForDriver";
+import ConfirmRidePopUp from "./pages/ConfirmRidePopUp";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path="/captain-rides" element={<CaptainRides />} />
           <Route path="/captain-account" element={<CaptainAccount />} />
           <Route path="/captain-ride-final" element={<CaptainRideFinal />} />
+          <Route path="/captain-ride-pop-up" element={<ConfirmRidePopUp />} />
 
           {/* Admin Path */}
           <Route path="/admin" element={<Admin />}>

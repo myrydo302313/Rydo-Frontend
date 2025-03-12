@@ -1,11 +1,13 @@
 import { toast, Toaster } from "react-hot-toast";
 import { CloudCog } from "lucide-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 const RidePopUp = (props) => {
+  const navigate = useNavigate();
   const checkRideStatus = async (rideId) => {
     try {
       const response = await fetch(
@@ -30,8 +32,6 @@ const RidePopUp = (props) => {
       return;
     }
 
-    console.log("Checking ride status for:", props.ride._id);
-
     try {
       const isAccepted = await checkRideStatus(props.ride._id);
 
@@ -42,8 +42,12 @@ const RidePopUp = (props) => {
           props.setRidePopupPanel(false);
         }, 4000); // Delay execution by 4 seconds
       } else {
-        props.setConfirmRidePopupPanel(true);
+        // props.setConfirmRidePopupPanel(true);
         props.confirmRide();
+        {console.log('yr aya to',props.ride)}
+        navigate("/captain-ride-pop-up", {
+          state: { ride: props.ride }, 
+        });
       }
     } catch (error) {
       console.error("Error checking ride status:", error);
