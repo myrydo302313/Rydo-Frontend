@@ -65,7 +65,7 @@ const CaptainLogin = () => {
       <div className="login-main">
         <div className="login-top">
           <img src="/images/rydoLogo3.png" alt="" width={80} />
-          <h2>Rydo</h2>
+          <h2>Rydo Captain</h2>
         </div>
         <div className="login-hero">
           <div>

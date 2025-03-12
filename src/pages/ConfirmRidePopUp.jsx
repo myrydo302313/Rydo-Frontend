@@ -20,7 +20,7 @@ const ConfirmRidePopUp = () => {
     try {
       const response = await fetch(
         `${baseURL}/api/rides/start-ride?rideId=${encodeURIComponent(
-          props.ride._id
+          ride._id
         )}&otp=${encodeURIComponent(otp)}`,
         {
           method: "GET",
@@ -37,10 +37,10 @@ const ConfirmRidePopUp = () => {
       const data = await response.json();
 
       // Get latitude & longitude
-      const pickupLat = props.ride.pickupLocation.latitude;
-      const pickupLng = props.ride.pickupLocation.longitude;
-      const destLat = props.ride.destinationLocation.latitude;
-      const destLng = props.ride.destinationLocation.longitude;
+      const pickupLat = ride.pickupLocation.latitude;
+      const pickupLng = ride.pickupLocation.longitude;
+      const destLat = ride.destinationLocation.latitude;
+      const destLng = ride.destinationLocation.longitude;
 
       // Construct Google Maps URL using coordinates
       const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${pickupLat},${pickupLng}&destination=${destLat},${destLng}&travelmode=driving`;
@@ -48,9 +48,7 @@ const ConfirmRidePopUp = () => {
       // Open Google Maps in a new tab
       window.open(googleMapsUrl, "_blank");
 
-      props.setConfirmRidePopupPanel(false);
-      props.setRidePopupPanel(false);
-      navigate("/captain-riding", { state: { ride: props.ride } });
+      navigate("/captain-riding", { state: { ride: ride } });
     } catch (error) {
       console.error("Error starting ride:", error);
     }
