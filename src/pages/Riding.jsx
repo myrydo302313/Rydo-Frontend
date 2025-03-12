@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SocketContext } from "../context/SocketContext";
 import "../styles/Riding.css"; // Importing the new CSS file
@@ -9,9 +9,25 @@ const Riding = () => {
   const { socket } = useContext(SocketContext);
   const navigate = useNavigate();
 
-  socket.on("ride-ended", () => {
-    navigate("/user-ride-final", { state: { rideDetails: ride } });
-  });
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleRideEnded = () => {
+      navigate("/user-ride-final", { state: { rideDetails: ride } });
+    };
+
+    socket.on("ride-ended", handleRideEnded);
+
+    return () => {
+      socket.off("ride-ended", handleRideEnded);
+    };
+  }, [socket, navigate, ride]);
+
+  useEffect(() => {
+    if (socket && ride) {
+      socket.emit("join", { userType: "user", userId: ride.user._id });
+    }
+  }, [socket, ride]);
 
   return (
     <div className="riding-container">
@@ -42,7 +58,9 @@ const Riding = () => {
             <div className="ride-location">
               <i className="location-icon ri-map-pin-2-fill"></i>
               <div>
-                <h3 className="ride-address">{ride?.destination.split(",")[0]}</h3>
+                <h3 className="ride-address">
+                  {ride?.destination.split(",")[0]}
+                </h3>
                 <p className="ride-destination">{ride?.destination}</p>
               </div>
             </div>
@@ -58,14 +76,12 @@ const Riding = () => {
 
         <p className="riding-message-user"></p>
 
-        <p className="user-make-payment">
-          Reaching the destination soon
-        </p>
+        <p className="user-make-payment">Reaching the destination soon</p>
         <p className="user-make-payment">
           Make the payment directly to the captain
         </p>
         <p className="user-reach-out">
-        Have any query or feedback, Reach out to us!
+          Have any query or feedback, Reach out to us!
         </p>
       </div>
     </div>

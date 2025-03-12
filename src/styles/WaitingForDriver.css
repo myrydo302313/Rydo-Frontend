@@ -1,0 +1,162 @@
+/* 🔹 Panel: Waiting for Driver */
+.waiting-driver-container {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding: 25px 20px;
+  background: rgba(255, 255, 255, 0.95); /* Soft transparency */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  animation: slideUp 0.4s ease-out;
+}
+
+/* 🔹 Smooth Slide-Up Animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 🔹 Heading: "Waiting for the Captain" */
+.waiting-driver-title {
+  font-weight: 700;
+  font-size: 22px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* 🔹 Captain Information */
+.waiting-driver-captain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.waiting-driver-captain img {
+  height: 80px;
+  width: 180px;
+  margin-bottom: 10px;
+}
+
+.waiting-driver-captain-info {
+  text-align: right;
+}
+
+.waiting-driver-captain-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+.waiting-driver-captain-vehicle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+}
+
+.waiting-driver-otp {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* 🔹 Ride Details */
+.waiting-driver-ride-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.waiting-driver-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  width: 100%;
+  border-radius: 12px;
+  background: #f8f8f8;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.waiting-driver-detail i {
+  font-size: 20px;
+  color: #555;
+}
+
+.waiting-driver-detail-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+.waiting-driver-detail-text {
+  font-size: 14px;
+  color: #777;
+}
+
+/* 🔹 Call Captain Button */
+.waiting-driver-call-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  width: 90%;
+  text-align: center;
+  margin-top: 15px;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Button Hover & Press Effect */
+.waiting-driver-call-btn:hover {
+  background: linear-gradient(135deg, #009688, #7cb342);
+}
+
+.waiting-driver-call-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cancel-ride-btn-user {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  /* 🔴 Stylish Cancel Button */
+  .cancel-ride-btn-user button {
+    background: linear-gradient(135deg, #ff4e50, #ff0000); /* Reddish Gradient */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 90%;
+    max-width: 300px;
+    box-shadow: 0px 5px 12px rgba(255, 0, 0, 0.4); /* Soft red shadow */
+    text-transform: uppercase;
+  }

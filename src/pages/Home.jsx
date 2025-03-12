@@ -46,35 +46,55 @@ const Home = () => {
   const userData = user?.userData || {};
 
   useEffect(() => {
-    socket.emit("join", { userType: "user", userId: userData._id });
-  }, [user]);
+    if (socket && userData._id) {
+      socket.emit("join", { userType: "user", userId: userData._id });
+    }
+  }, [socket, userData]);
 
-  socket.on("ride-confirmed", (ride) => {
-    setWaitingForDriver(true);
-    setShowSearchingPanel(false);
-    setRide(ride);
-  });
+  useEffect(() => {
+    if (!socket) return;
 
-  socket.on("ride-started", (ride) => {
-    setWaitingForDriver(false);
-    navigate("/riding", { state: { ride } });
-  });
+    const handleRideConfirmed = (ride) => {
+      console.log("Ride confirmed event received 🚗");
+      setShowSearchingPanel(false);
+      setRide(ride);
+      navigate("/waiting-for-driver", {
+        state: {
+          ride: ride,
+        },
+      });
+    };
 
-  socket.on("ride-cancelled", (ride) => {
-    setShowVehiclePanel(true);
-    setWaitingForDriver(false);
-    setShowConfirmPanel(false);
-    setShowSearchingPanel(false);
-  });
+    const handleRideStarted = (ride) => {
+      setWaitingForDriver(false);
+      navigate("/riding", { state: { ride } });
+    };
+
+    const handleRideCancelled = (ride) => {
+      setShowVehiclePanel(true);
+      setWaitingForDriver(false);
+      setShowConfirmPanel(false);
+      setShowSearchingPanel(false);
+    };
+
+    socket.on("ride-confirmed", handleRideConfirmed);
+    socket.on("ride-started", handleRideStarted);
+    socket.on("ride-cancelled", handleRideCancelled);
+
+    return () => {
+      socket.off("ride-confirmed", handleRideConfirmed);
+      socket.off("ride-started", handleRideStarted);
+      socket.off("ride-cancelled", handleRideCancelled);
+    };
+  }, [socket, navigate]);
 
   const handlePickupChange = async (e) => {
     const inputValue = e.target.value;
     setPickup(inputValue);
 
-    // Prevent API call if input length is less than 3 characters
     if (inputValue.length < 3) {
-      setPickupSuggestions([]); // Clear suggestions
-      return; // Stop execution
+      setPickupSuggestions([]);
+      return;
     }
 
     try {
@@ -102,8 +122,8 @@ const Home = () => {
     setDestination(inputValue);
 
     if (inputValue.length < 3) {
-      setDestinationSuggestions([]); // Clear suggestions
-      return; // Stop execution
+      setDestinationSuggestions([]);
+      return;
     }
 
     try {
@@ -179,7 +199,7 @@ const Home = () => {
       }
 
       const data = await response.json();
-      return data; // Return data if needed
+      return data;
     } catch (error) {
       console.error("Error creating ride:", error);
     }
@@ -208,7 +228,7 @@ const Home = () => {
                 method: "GET",
                 headers: {
                   "Content-Type": "application/json",
-                  Authorization: userAuthToken, // Ensure this is not empty
+                  Authorization: userAuthToken,
                 },
               }
             );
@@ -235,9 +255,9 @@ const Home = () => {
           setLoading(false);
         },
         {
-          enableHighAccuracy: true, // Forces GPS to get the best accuracy
-          timeout: 10000, // Wait up to 10 seconds for a better fix
-          maximumAge: 0, // Don't use cached location
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
         }
       );
     } else {
@@ -245,15 +265,6 @@ const Home = () => {
       setLoading(false);
     }
   };
-
-  // When showModal is false, also close the Vehicle Panel
-  // useEffect(() => {
-  //   if (!showModal) {
-  //     setShowVehiclePanel(false);
-  //     setShowConfirmPanel(false);
-  //     setShowSearchingPanel(false);
-  //   }
-  // }, [showModal]);
 
   return (
     <>
@@ -336,7 +347,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Vehicle Panel (Only Scrollable) */}
       <div className={`vehicle-show-panel ${showVehiclePanel ? "show" : ""}`}>
         <div className="vehicle-content">
           <VehiclePanel
@@ -400,20 +410,7 @@ const Home = () => {
         </button>
       </div>
 
-      <div
-        className={`waiting-for-driver-panel ${waitingForDriver ? "show" : ""}`}
-      >
-        <WaitingForDriver
-          ride={ride}
-          setVehicleFound={setVehicleFound}
-          setWaitingForDriver={setWaitingForDriver}
-          waitingForDriver={waitingForDriver}
-        />
-      </div>
-
       <div className="hero-section">
-        {/* <Services /> */}
-
         <img src="/images/banner1.jpeg" alt="" />
       </div>
 
