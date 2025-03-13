@@ -8,9 +8,9 @@ const Footer = () => {
       <div className="footer-links">
         <Link to="/privacy-policy">Privacy Policy</Link>
         <Link to="/terms-of-use">Terms Of Use</Link>
+        <Link to="/contact-us">Contact Us</Link>
 
-        {/* <a href="/refund-policy">Refund Policy</a>
-        <a href="/disclaimer">Disclaimer</a> */ }
+
       </div>
       <p className="footer-text">© 2025 Rydo. All Rights Reserved.</p>
     </footer>
