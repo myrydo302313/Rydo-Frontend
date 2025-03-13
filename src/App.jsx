@@ -25,6 +25,7 @@ import TermsOfUse from "./pages/TermsOfUse";
 import ContactUs from "./pages/ContactUs";
 import CancellationRefund from "./pages/CancellationRefund";
 import ShippingDelivery from "./pages/ShippingDelivery";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />}/>
           <Route path="/cancel-refund" element={<CancellationRefund />}/>
           <Route path="/shipping-delivery" element={<ShippingDelivery />}/>
+          <Route path="/about-us" element={<AboutUs />}/>
         </Routes>
       </Router>
     </div>

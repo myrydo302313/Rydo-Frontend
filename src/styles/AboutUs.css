@@ -1,0 +1,104 @@
+/* About Us Page Styling */
+
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+    padding: 60px 20px;
+    min-height: 100vh;
+  }
+  
+  .about-content {
+    background: #ffffff;
+    padding: 40px;
+    max-width: 800px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .about-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .highlight {
+    color: #007bff;
+  }
+  
+  .about-intro {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  .about-section {
+    margin-top: 20px;
+  }
+  
+  .about-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  
+  .about-text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .about-list {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .about-list li {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .about-list li svg {
+    margin-right: 10px;
+    color: #007bff;
+  }
+  
+  .contact-info {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f3f8ff;
+    border-radius: 8px;
+  }
+  
+  .contact-info h2 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .contact-info p {
+    font-size: 16px;
+    color: #444;
+  }
+  
+  .contact-info a {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  
