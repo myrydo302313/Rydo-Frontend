@@ -35,6 +35,7 @@ const Home = () => {
   const [ride, setRide] = useState();
   const [loading, setLoading] = useState(false);
   const [isWebView, setIsWebView] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
 
   useEffect(() => {
     const userAgent = navigator.userAgent || "";
@@ -281,6 +282,27 @@ const Home = () => {
 
   return (
     <>
+      <div>
+        {!isWebView && showBanner && (
+          <div className="popup-banner">
+            <div className="banner-top">
+              <span>
+                🚀 Get a smoother and faster experience with our mobile app!
+              </span>
+              <button
+                className="close-button"
+                onClick={() => setShowBanner(false)}
+              >
+                ❌
+              </button>
+            </div>
+
+            <a href="/Rydo.apk" download className="download-button">
+              Download APK
+            </a>
+          </div>
+        )}
+      </div>
       <div className="home-main">
         <div className="home-logo">
           <h3 align="center">Rydo</h3>
@@ -434,28 +456,6 @@ const Home = () => {
       <div className="rydoLove-main">
         <img src="images/rydoLove.png" alt="" />
       </div>
-      {!isWebView && ( // Hide this div in WebView
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: "50px",
-            marginBottom: "150px",
-          }}
-        >
-          <a href="/Rydo.apk" download>
-            <button
-              style={{
-                padding: "10px 20px",
-                fontSize: "16px",
-                cursor: "pointer",
-                backgroundColor:"#f5a623",
-              }}
-            >
-              Download APK
-            </button>
-          </a>
-        </div>
-      )}
 
       <BottomNav />
     </>
