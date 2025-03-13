@@ -1,0 +1,35 @@
+.footer {
+    background: linear-gradient(135deg, #0072ff, #00c6ff); /* Bluish gradient */
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    width: 100%;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 80px;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #e0f3ff;
+  }
+  
+  .footer-text {
+    margin-top: 10px;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+  

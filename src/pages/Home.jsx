@@ -14,6 +14,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import HomePlaces from "../components/HomePlaces";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -457,6 +458,8 @@ const Home = () => {
       <div className="rydoLove-main">
         <img src="images/rydoLove.png" alt="" />
       </div>
+
+      <Footer/>
 
       <BottomNav />
     </>

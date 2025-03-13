@@ -20,6 +20,7 @@ import CaptainRideFinal from "./pages/CaptainRideFinal";
 import UserRideFinal from "./pages/UserRideFinal";
 import WaitingForDriver from "./pages/WaitingForDriver";
 import ConfirmRidePopUp from "./pages/ConfirmRidePopUp";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -53,7 +54,6 @@ function App() {
           <Route path="/userAccount" element={<UserAccount />} />
           <Route path="/services" element={<RydoServices />} />
 
-
           <Route path="/waiting-for-driver" element={<WaitingForDriver />} />
           <Route path="/user-ride-final" element={<UserRideFinal />} />
 
@@ -64,9 +64,8 @@ function App() {
           <Route path="/captain-ride-pop-up" element={<ConfirmRidePopUp />} />
 
           {/* Admin Path */}
-          <Route path="/admin" element={<Admin />}>
-
-          </Route>
+          <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
         </Routes>
       </Router>
     </div>
