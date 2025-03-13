@@ -1,0 +1,78 @@
+/* Terms of Use Page Styles */
+.terms-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(to right, #4b79a1, #283e51); /* Cool Bluish Gradient */
+    min-height: 100vh;
+  }
+  
+  .terms-content {
+    background: #ffffff;
+    width: 90%;
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Titles & Headings */
+  .terms-title {
+    color: #1e3c72;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .terms-update {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .terms-section {
+    margin-bottom: 20px;
+  }
+  
+  .terms-heading {
+    font-size: 20px;
+    color: #f5a623;
+    margin-bottom: 10px;
+  }
+  
+  .terms-text {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+  }
+  
+  /* List Styles */
+  .terms-list {
+    margin-left: 15px;
+    list-style-type: disc;
+  }
+  
+  .terms-contact {
+    margin-top: 10px;
+  }
+  
+  .terms-contact a {
+    font-weight: bold;
+    color: #f5a623;
+    text-decoration: none;
+  }
+  
+  .terms-contact a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .privacy-policy-content {
+      padding: 20px;
+    }
+  }
+  

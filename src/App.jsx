@@ -21,6 +21,7 @@ import UserRideFinal from "./pages/UserRideFinal";
 import WaitingForDriver from "./pages/WaitingForDriver";
 import ConfirmRidePopUp from "./pages/ConfirmRidePopUp";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
 
 function App() {
   return (
@@ -65,7 +66,9 @@ function App() {
 
           {/* Admin Path */}
           <Route path="/admin" element={<Admin />}></Route>
+
           <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
+          <Route path="/terms-of-use" element={<TermsOfUse />}/>
         </Routes>
       </Router>
     </div>
