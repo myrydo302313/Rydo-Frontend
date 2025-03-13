@@ -34,6 +34,19 @@ const Home = () => {
   const [waitingForDriver, setWaitingForDriver] = useState(false);
   const [ride, setRide] = useState();
   const [loading, setLoading] = useState(false);
+  const [isWebView, setIsWebView] = useState(false);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent || "";
+
+    // Check if the user is inside WebView
+    if (
+      /Android/i.test(userAgent) &&
+      (userAgent.includes("wv") || userAgent.includes("Version/"))
+    ) {
+      setIsWebView(true);
+    }
+  }, []);
 
   const waitingForDriverRef = useRef(null);
   const navigate = useNavigate();
@@ -421,6 +434,28 @@ const Home = () => {
       <div className="rydoLove-main">
         <img src="images/rydoLove.png" alt="" />
       </div>
+      {!isWebView && ( // Hide this div in WebView
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "50px",
+            marginBottom: "150px",
+          }}
+        >
+          <a href="/Rydo.apk" download>
+            <button
+              style={{
+                padding: "10px 20px",
+                fontSize: "16px",
+                cursor: "pointer",
+                backgroundColor:"#f5a623",
+              }}
+            >
+              Download APK
+            </button>
+          </a>
+        </div>
+      )}
 
       <BottomNav />
     </>
