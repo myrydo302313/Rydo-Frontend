@@ -1,0 +1,87 @@
+/* Shipping & Delivery Policy Page Styling */
+
+.shipping-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #48c6ef, #6f86d6);
+    padding: 25px 20px;
+  }
+  
+  .shipping-content {
+    background: #fff;
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .shipping-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2d3e50;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .shipping-intro {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .policy-section {
+    margin-top: 20px;
+  }
+  
+  .policy-heading {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f7a440;
+    padding-bottom: 5px;
+  }
+  
+  .policy-text {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .policy-text strong {
+    color: #ff6600;
+  }
+  
+  .contact-info {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fef3e5;
+    border-radius: 10px;
+  }
+  
+  .contact-info h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .contact-info p {
+    font-size: 16px;
+    color: #444;
+  }
+  
+  .contact-info a {
+    color: #ff6600;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  

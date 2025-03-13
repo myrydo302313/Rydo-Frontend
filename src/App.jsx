@@ -23,6 +23,8 @@ import ConfirmRidePopUp from "./pages/ConfirmRidePopUp";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import ContactUs from "./pages/ContactUs";
+import CancellationRefund from "./pages/CancellationRefund";
+import ShippingDelivery from "./pages/ShippingDelivery";
 
 function App() {
   return (
@@ -71,6 +73,8 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
           <Route path="/terms-of-use" element={<TermsOfUse />}/>
           <Route path="/contact-us" element={<ContactUs />}/>
+          <Route path="/cancel-refund" element={<CancellationRefund />}/>
+          <Route path="/shipping-delivery" element={<ShippingDelivery />}/>
         </Routes>
       </Router>
     </div>
