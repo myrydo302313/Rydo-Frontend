@@ -298,7 +298,7 @@ const Home = () => {
             </div>
 
 
-            <a href="/rydo.apk" download className="download-button">
+            <a href="/Rydo.apk" download className="download-button">
               Download APK
             </a>
           </div>
