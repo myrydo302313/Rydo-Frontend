@@ -278,7 +278,6 @@ const Home = () => {
 
   return (
     <>
-    {/* {console.log('ye h key',process.env.RAZOR_PAY_KEY)} */}
       <div>
         {!isWebView && showBanner && (
           <div className="popup-banner">

@@ -23,7 +23,6 @@ const UserAccount = () => {
 
   return (
     <>
-      <PaymentComponent />
       <div className="profile-main">
         <div className="user-name">{currUser?.name}</div>
         <div className="user-phone">{currUser?.phone}</div>
