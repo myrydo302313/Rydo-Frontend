@@ -3,6 +3,7 @@ import { useAuth } from "../store/auth";
 import BottomNav from "../components/BottomNav";
 import "../styles/UserAccount.css";
 import { useNavigate } from "react-router-dom";
+import PaymentComponent from "../components/PaymentComponent";
 
 const UserAccount = () => {
   const [currUser, setCurrUser] = useState({});
@@ -22,6 +23,7 @@ const UserAccount = () => {
 
   return (
     <>
+      <PaymentComponent />
       <div className="profile-main">
         <div className="user-name">{currUser?.name}</div>
         <div className="user-phone">{currUser?.phone}</div>
@@ -65,7 +67,7 @@ const UserAccount = () => {
           <p className="cap-main-head">Drive with Rydo and Earn</p>
           <p>Become a Captain!</p>
         </div>
-        <img src="/images/captainSignUp.jpg" alt="" width={100} height={40}/>
+        <img src="/images/captainSignUp.jpg" alt="" width={100} height={40} />
       </div>
 
       <BottomNav />

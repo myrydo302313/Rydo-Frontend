@@ -4,6 +4,7 @@ import "../styles/AboutUs.css";
 const AboutUs = () => {
   return (
     <div className="about-container">
+      
       <div className="about-content">
         <h1 className="about-title">About <span className="highlight">MyRydo</span></h1>
         <p className="about-intro">

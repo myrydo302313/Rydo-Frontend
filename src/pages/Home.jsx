@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import "../styles/Home.css";
 import { FaSearch } from "react-icons/fa";
 import VehiclePanel from "../components/VehiclePanel";
@@ -6,12 +6,8 @@ import BottomNav from "../components/BottomNav";
 import ConfirmRide from "../components/ConfirmRide";
 import SearchingDrivers from "../components/SearchingDrivers";
 import { SocketContext } from "../context/SocketContext";
-import Services from "../components/Services";
 import { useAuth } from "../store/auth";
 import LocationSearchPanel from "../components/LocationSearchPanel";
-import WaitingForDriver from "../components/WaitingForDriver";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import HomePlaces from "../components/HomePlaces";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -282,6 +278,7 @@ const Home = () => {
 
   return (
     <>
+    {/* {console.log('ye h key',process.env.RAZOR_PAY_KEY)} */}
       <div>
         {!isWebView && showBanner && (
           <div className="popup-banner">
