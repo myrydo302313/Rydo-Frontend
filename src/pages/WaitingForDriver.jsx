@@ -33,6 +33,19 @@ const WaitingForDriver = () => {
     }
   }, [socket, ride]);
 
+  useEffect(() => {
+    const handleBackButton = () => {
+      window.history.pushState(null, "", window.location.href);
+    };
+
+    window.history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", handleBackButton);
+
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, []);
+
   return (
     <>
       <div className="home-logo">
