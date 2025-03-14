@@ -3,7 +3,6 @@ import { useAuth } from "../store/auth";
 import { SocketContext } from "../context/SocketContext";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-
 import "../styles/CaptainHome.css";
 import { FaRegClock } from "react-icons/fa";
 import { TbReport } from "react-icons/tb";
@@ -32,14 +31,14 @@ const CaptainHome = () => {
   const userData = user?.userData || {};
 
   useEffect(() => {
-    if (!captainData._id) return; 
+    if (!captainData._id) return;
 
     socket.emit("join", { userType: "captain", userId: captainData._id });
 
     const updateLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          console.log(position.coords.latitude)
+          console.log(position.coords.latitude);
           socket.emit("update-location-captain", {
             userId: captainData._id,
             location: {
@@ -54,14 +53,14 @@ const CaptainHome = () => {
     const locationInterval = setInterval(updateLocation, 10000);
     updateLocation();
 
-    return () => clearInterval(locationInterval); 
+    return () => clearInterval(locationInterval);
   }, [captainData._id]);
 
   useEffect(() => {
     if (!captainData?._id) return;
 
     socket.on("new-ride", (data) => {
-      console.log('new ride to aya')
+      console.log("new ride to aya");
       setRide(data);
       setRidePopupPanel(true);
     });
@@ -84,7 +83,7 @@ const CaptainHome = () => {
           `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`,
           "_blank"
         );
-      }, 500); 
+      }, 500);
     }
     try {
       const response = await fetch(`${baseURL}/api/rides/confirm`, {
@@ -112,8 +111,8 @@ const CaptainHome = () => {
     }
   }
 
-  async function cancelRide(){
-    try{
+  async function cancelRide() {
+    try {
       const response = await fetch(`${baseURL}/api/rides/cancelRide`, {
         method: "POST",
         headers: {
@@ -124,8 +123,8 @@ const CaptainHome = () => {
           rideId: ride._id,
         }),
       });
-    }catch(e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -161,7 +160,6 @@ const CaptainHome = () => {
 
   return (
     <>
-
       <div className="captain-home-main">
         <h1 className="captain-home-heading" align="center">
           Rydo Captain
@@ -215,17 +213,6 @@ const CaptainHome = () => {
             confirmRide={confirmRide}
           />
         </div>
-        {/* <div
-          ref={confirmRidePopupPanelRef}
-          className="fixed w-full h-screen z-10 bottom-0 translate-y-full bg-white px-3 py-10 pt-12"
-        >
-          <ConfirmRidePopUp
-            ride={ride}
-            setConfirmRidePopupPanel={setConfirmRidePopupPanel}
-            setRidePopupPanel={setRidePopupPanel}
-            cancelRide={cancelRide}
-          />
-        </div> */}
       </div>
       <CaptainNav />
     </>

@@ -9,9 +9,10 @@ const CaptainNav = () => {
 
   return (
     <nav className="bottom-nav">
-      {/* Home */}
       <div
-        className={`nav-item ${location.pathname === "/captainHome" ? "active" : ""}`}
+        className={`nav-item ${
+          location.pathname === "/captainHome" ? "active" : ""
+        }`}
         onClick={() => navigate("/captainHome")}
       >
         <div className="nav-icon">
@@ -21,7 +22,9 @@ const CaptainNav = () => {
       </div>
 
       <div
-        className={`nav-item ${location.pathname === "/captain-rides" ? "active" : ""}`}
+        className={`nav-item ${
+          location.pathname === "/captain-rides" ? "active" : ""
+        }`}
         onClick={() => navigate("/captain-rides")}
       >
         <div className="nav-icon">

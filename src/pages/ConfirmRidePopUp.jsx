@@ -56,7 +56,7 @@ const ConfirmRidePopUp = () => {
 
   return (
     <div className="confirm-ride-popup">
-        {console.log(ride)}
+        {console.log('ye le bhai',ride)}
       <h3 className="text-2xl font-semibold mb-5">
         Confirm this ride to Start
       </h3>

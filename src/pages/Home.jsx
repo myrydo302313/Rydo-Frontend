@@ -50,7 +50,6 @@ const Home = () => {
     }
   }, []);
 
-  const waitingForDriverRef = useRef(null);
   const navigate = useNavigate();
 
   const { socket } = useContext(SocketContext);

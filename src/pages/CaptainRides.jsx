@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { toast, Toaster } from "react-hot-toast";
 import CaptainNav from "../components/CaptainNav";
 import { useAuth } from "../store/auth";
 import RideTabs from "../components/RideTabs";
 import "../styles/CaptainRides.css";
+import { useNavigate } from "react-router-dom";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -16,8 +18,7 @@ const CaptainRides = () => {
   const { captain, captainAuthToken } = useAuth();
   const [selectedTab, setSelectedTab] = useState("available");
   const [captainDetails, setCaptainDetails] = useState({});
-
-  // Store captainData in state
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (captain && captain.captainData) {
@@ -122,9 +123,94 @@ const CaptainRides = () => {
     }
   };
 
+  async function confirmRide(ride) {
+    if (
+      ride.pickupLocation &&
+      ride.pickupLocation.latitude &&
+      ride.pickupLocation.longitude
+    ) {
+      const { latitude, longitude } = ride.pickupLocation;
+
+      setTimeout(() => {
+        window.open(
+          `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`,
+          "_blank"
+        );
+      }, 500);
+    }
+    try {
+      const response = await fetch(`${baseURL}/api/rides/confirm`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: captainAuthToken,
+        },
+        body: JSON.stringify({
+          rideId: ride._id,
+          captainId: captainDetails._id,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+    } catch (error) {
+      console.error("Failed to confirm ride:", error);
+    }
+  }
+
+
+  const checkRideStatus = async (rideId) => {
+    try {
+      const response = await fetch(
+        `${baseURL}/api/rides/is-ride-accepted/${rideId}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch ride status");
+      }
+
+      const data = await response.json();
+      return data.isAccepted; // Access `isAccepted` from JSON response
+    } catch (error) {
+      console.error("Error checking ride status:", error);
+      return false; // Return false on error
+    }
+  };
+
+  const handleAcceptRide = async (ride) => {
+    if (!ride?._id) {
+      toast.error("Invalid ride data.");
+      return;
+    }
+
+    try {
+      const isAccepted = await checkRideStatus(ride._id);
+
+      if (isAccepted) {
+        toast.error("The ride is already accepted by another captain.");
+      } else {
+        if (typeof confirmRide === "function") {
+          confirmRide(ride);
+        } else {
+          console.error("confirmRide is not a function");
+        }
+        navigate("/captain-ride-pop-up", {
+          state: { ride: ride },
+        });
+      }
+    } catch (error) {
+      console.error("Error checking ride status:", error);
+      toast.error("Something went wrong!");
+    }
+  };
+
   return (
     <>
-    {console.log(availableRides)}
+      <Toaster />
       <RideTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       <div className="ride-container">
         {loading ? (
@@ -136,8 +222,8 @@ const CaptainRides = () => {
             <div className="ride-grid">
               {availableRides.map((ride) => (
                 <div key={ride._id} className="ride-card">
-                  {console.log('ye rha',ride)}
-                  <h3 className="ride-id">{ride.userDetails.name}</h3>
+                  {console.log("ye rha", ride)}
+                  <h3 className="ride-id">{ride.user.name}</h3>
                   <p>
                     <strong>Pickup:</strong> {ride.pickup}
                   </p>
@@ -150,7 +236,12 @@ const CaptainRides = () => {
                   <p>
                     <strong>Distance:</strong> {ride.distance} km
                   </p>
-                  <button className="accept-btn">Accept Ride</button>
+                  <button
+                    className="accept-btn"
+                    onClick={() => handleAcceptRide(ride)}
+                  >
+                    Accept Ride
+                  </button>
                 </div>
               ))}
             </div>

@@ -44,7 +44,6 @@ const RidePopUp = (props) => {
       } else {
         // props.setConfirmRidePopupPanel(true);
         props.confirmRide();
-        {console.log('yr aya to',props.ride)}
         navigate("/captain-ride-pop-up", {
           state: { ride: props.ride }, 
         });
