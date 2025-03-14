@@ -38,7 +38,7 @@ const PaymentComponent = () => {
       const response = await fetch(`${baseURL}/api/payments/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 500 }), // Set ride amount dynamically
+        body: JSON.stringify({ amount: 1 }), // Set ride amount dynamically
       });
 
       if (!response.ok) {
