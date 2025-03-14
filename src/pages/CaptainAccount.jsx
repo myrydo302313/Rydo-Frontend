@@ -102,7 +102,8 @@ const CaptainAccount = () => {
 
       <div className="pay-commission">
         <h3>Pay Your Commission To Stay Active</h3>
-        <PaymentComponent amt={currUser?.commission} />
+        {currUser?.commission>0 ? (<PaymentComponent amt={currUser?.commission} />):(<span>No Commission to pay</span>)}
+        
       </div>
 
       <div className="profile-menu">
