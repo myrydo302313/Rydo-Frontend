@@ -61,12 +61,12 @@ const UserAccount = () => {
         </button>
       </div>
 
-      <div className="register-as-captain">
+      <div className="register-as-captain" onClick={()=>{navigate('/captainLogin')}}>
         <div className="para-part">
           <p className="cap-main-head">Drive with Rydo and Earn</p>
           <p>Become a Captain!</p>
         </div>
-        <img src="/images/captainSignUp.jpg" alt="" width={100} height={40} />
+        <img src="/images/new-driver.png" alt="" width={100} height={40} />
       </div>
 
       <BottomNav />
