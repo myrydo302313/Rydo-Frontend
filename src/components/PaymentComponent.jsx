@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useAuth } from "../store/auth";
 
-const baseURL = process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
+const baseURL =
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
-const PaymentComponent = () => {
+const PaymentComponent = ({ amt }) => {
+  const { captain, captainAuthToken } = useAuth();
+
   const [loading, setLoading] = useState(false);
-  const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY; // Use REACT_APP_ prefix
+  const RAZORPAY_KEY = process.env.REACT_APP_RAZORPAY_KEY; 
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: captainAuthToken,
+  };
 
   // ✅ Function to load Razorpay SDK dynamically
   const loadRazorpayScript = () => {
@@ -35,10 +44,11 @@ const PaymentComponent = () => {
     }
 
     try {
+      // Create Order with Authorization Header
       const response = await fetch(`${baseURL}/api/payments/create-order`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 1 }), // Set ride amount dynamically
+        headers: headers,
+        body: JSON.stringify({ amount: amt }),
       });
 
       if (!response.ok) {
@@ -55,27 +65,34 @@ const PaymentComponent = () => {
         description: "Ride Payment",
         order_id: data.id,
         handler: async function (response) {
-          const verifyResponse = await fetch(`${baseURL}/api/payments/verify-payment`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            }),
-          });
+          
+          const verifyResponse = await fetch(
+            `${baseURL}/api/payments/verify-payment`,
+            {
+              method: "POST",
+              headers: headers,
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            }
+          );
 
           const verifyData = await verifyResponse.json();
           if (verifyData.success) {
-            alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+            alert(
+              `Payment Successful! Payment ID: ${response.razorpay_payment_id}`
+            );
           } else {
             alert("Payment verification failed. Please try again.");
           }
         },
         prefill: {
-          name: "User Name",
-          email: "user@example.com",
-          contact: "9999999999",
+          name: captain?.captainData.name,
+          email: captain?.captainData.email,
+          contact: captain?.captainData.phone,
+          vpa: "" ,
         },
         theme: { color: "#007bff" },
       };
@@ -92,7 +109,8 @@ const PaymentComponent = () => {
 
   return (
     <button onClick={initiatePayment} disabled={loading} className="pay-button">
-      {loading ? "Processing..." : "Pay ₹500"}
+      {/* {console.log("Captain le:", captain.captainData)} */}
+      {loading ? "Processing..." : `Pay ₹${amt}`}
     </button>
   );
 };

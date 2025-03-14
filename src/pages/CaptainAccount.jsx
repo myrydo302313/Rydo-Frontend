@@ -4,6 +4,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { useAuth } from "../store/auth";
 import { useNavigate } from "react-router-dom";
 import "../styles/CaptainAccount.css";
+import PaymentComponent from "../components/PaymentComponent";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -104,6 +105,11 @@ const CaptainAccount = () => {
             <p>{text}</p>
           </div>
         ))}
+      </div>
+
+      <div className="pay-commission">
+        <h3>Pay Your Commission To Stay Active</h3>
+        <PaymentComponent amt={currUser?.commission}/>
       </div>
 
       <div className="logout-btn-div">
