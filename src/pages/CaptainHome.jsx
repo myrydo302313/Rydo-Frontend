@@ -20,6 +20,10 @@ const CaptainHome = () => {
 
   const [ridePopupPanel, setRidePopupPanel] = useState(false);
   const [confirmRidePopupPanel, setConfirmRidePopupPanel] = useState(false);
+  const [totalEarnings, setTotalEarnings] = useState(0);
+  const [totalRides, setTotalRides] = useState(0);
+  const [totalDistance, setTotalDistance] = useState(0);
+  const [totalCommission, setTotalCommission] = useState(0);
 
   const ridePopupPanelRef = useRef(null);
   const confirmRidePopupPanelRef = useRef(null);
@@ -128,6 +132,113 @@ const CaptainHome = () => {
     }
   }
 
+  useEffect(() => {
+    const fetchTotalEarnings = async () => {
+      try {
+        const response = await fetch(
+          `${baseURL}/api/captain/total-earnings`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: captainAuthToken,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch earnings");
+        }
+
+        const data = await response.json();
+        setTotalEarnings(data.totalEarnings);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+      }
+    };
+    
+    const fetchTotalCommission = async () => {
+      try {
+        const response = await fetch(
+          `${baseURL}/api/captain/total-commission`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: captainAuthToken,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch earnings");
+        }
+
+        const data = await response.json();
+        setTotalCommission(data.totalCommission);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+      }
+    };
+
+    const fetchTotalRides = async () => {
+      try {
+        const response = await fetch(
+          `${baseURL}/api/captain/completed-rides-count`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: captainAuthToken,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch earnings");
+        }
+
+        const data = await response.json();
+        setTotalRides(data.completedRidesCount);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+      }
+    };
+   
+    const fetchTotalDistance = async () => {
+      try {
+        const response = await fetch(
+          `${baseURL}/api/captain/total-distance`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: captainAuthToken,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch earnings");
+        }
+
+        const data = await response.json();
+        setTotalDistance(data.totalDistance);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+      }
+    };
+
+    fetchTotalEarnings();
+    fetchTotalRides();
+    fetchTotalDistance();
+    fetchTotalCommission();
+  }, []);
+
   useGSAP(
     function () {
       if (ridePopupPanel) {
@@ -160,6 +271,7 @@ const CaptainHome = () => {
 
   return (
     <>
+    {console.log(totalDistance)}
       <div className="captain-home-main">
         <h1 className="captain-home-heading" align="center">
           Rydo Captain
@@ -179,24 +291,24 @@ const CaptainHome = () => {
           <div className="captain-info">
             <span className="captain-name">{captainData.name}</span>
             <div className="captain-earning">
-              <span className="captain-today-earning">₹1000</span>
+              <span className="captain-today-earning">₹{totalEarnings}</span>
               <span>Earned</span>
             </div>
           </div>
           <div className="captain-stats">
             <div className="category">
               <FaRegClock />
-              <p className="first">10.2</p>
-              <p className="second">Hours Online</p>
+              <p className="first">{totalCommission}</p>
+              <p className="second">Total Commission</p>
             </div>
             <div className="category">
               <IoIosSpeedometer />
-              <p className="first">50KM</p>
+              <p className="first">{totalDistance} Km</p>
               <p className="second">Total Distance</p>
             </div>
             <div className="category">
               <TbReport />
-              <p className="first">35</p>
+              <p className="first">{totalRides}</p>
               <p className="second">Total Rides</p>
             </div>
           </div>
