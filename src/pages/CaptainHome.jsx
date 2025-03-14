@@ -135,16 +135,13 @@ const CaptainHome = () => {
   useEffect(() => {
     const fetchTotalEarnings = async () => {
       try {
-        const response = await fetch(
-          `${baseURL}/api/captain/total-earnings`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: captainAuthToken,
-            },
-          }
-        );
+        const response = await fetch(`${baseURL}/api/captain/total-earnings`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: captainAuthToken,
+          },
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch earnings");
@@ -157,7 +154,7 @@ const CaptainHome = () => {
       } finally {
       }
     };
-    
+
     const fetchTotalCommission = async () => {
       try {
         const response = await fetch(
@@ -207,19 +204,16 @@ const CaptainHome = () => {
       } finally {
       }
     };
-   
+
     const fetchTotalDistance = async () => {
       try {
-        const response = await fetch(
-          `${baseURL}/api/captain/total-distance`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: captainAuthToken,
-            },
-          }
-        );
+        const response = await fetch(`${baseURL}/api/captain/total-distance`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: captainAuthToken,
+          },
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch earnings");
@@ -271,13 +265,13 @@ const CaptainHome = () => {
 
   return (
     <>
-    {console.log(totalDistance)}
+      {console.log(totalDistance)}
       <div className="captain-home-main">
         <h1 className="captain-home-heading" align="center">
           Rydo Captain
         </h1>
 
-        <div className="captain-home-status">
+        {/* <div className="captain-home-status">
           <div className="logo-status">
             <img src="/images/car-icon.png" alt="" width={60} height={60} />
           </div>
@@ -285,6 +279,10 @@ const CaptainHome = () => {
             <p className="status-description-first">You are offline ! </p>
             <p>Go online to start accepting rides</p>
           </div>
+        </div> */}
+
+        <div className="hero-section">
+          <img src="/images/banner1.jpeg" alt="" />
         </div>
 
         <div className="captain-today-stats">
