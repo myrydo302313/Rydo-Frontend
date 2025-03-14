@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../styles/Home.css";
 import { FaSearch } from "react-icons/fa";
 import VehiclePanel from "../components/VehiclePanel";
@@ -278,28 +278,6 @@ const Home = () => {
 
   return (
     <>
-      <div>
-        {!isWebView && showBanner && (
-          <div className="popup-banner">
-            <div className="banner-top">
-              <span>
-                🚀 Get a smoother and faster experience with our mobile app!
-              </span>
-              <button
-                className="close-button"
-                onClick={() => setShowBanner(false)}
-              >
-                ❌
-              </button>
-            </div>
-
-
-            <a href="/Rydo.apk" download className="download-button">
-              Download APK
-            </a>
-          </div>
-        )}
-      </div>
       <div className="home-main">
         <div className="home-logo">
           <h3 align="center">Rydo</h3>
@@ -314,6 +292,17 @@ const Home = () => {
             readOnly
           />
         </div>
+      </div>
+
+      <div>
+        {!isWebView && showBanner && (
+          <div className="popup-banner-app">
+            <span>Book Ride with Rydo App Now</span>
+            <a href="/Rydo.apk" download className="download-button">
+              Download
+            </a>
+          </div>
+        )}
       </div>
 
       <div className={`input-modal ${showModal ? "show" : ""}`}>
@@ -454,7 +443,7 @@ const Home = () => {
         <img src="images/rydoLove.png" alt="" />
       </div>
 
-      <Footer/>
+      <Footer />
 
       <BottomNav />
     </>

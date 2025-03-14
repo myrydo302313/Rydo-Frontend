@@ -53,7 +53,8 @@
 }
 
 .register-as-captain {
-  border: 2px solid black;
+  border: none;
+  border-radius: 13px;
 
   display: flex;
   padding: 13px;
