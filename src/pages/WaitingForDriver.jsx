@@ -34,15 +34,18 @@ const WaitingForDriver = () => {
   }, [socket, ride]);
 
   useEffect(() => {
-    const handleBackButton = () => {
-      window.history.pushState(null, "", window.location.href);
+    const blockBackNavigation = () => {
+      history.pushState(null, "", window.location.href);
     };
 
-    window.history.pushState(null, "", window.location.href);
-    window.addEventListener("popstate", handleBackButton);
+    // Push new state to prevent back navigation
+    history.pushState(null, "", window.location.href);
+
+    // Listen for back/forward button clicks
+    window.addEventListener("popstate", blockBackNavigation);
 
     return () => {
-      window.removeEventListener("popstate", handleBackButton);
+      window.removeEventListener("popstate", blockBackNavigation);
     };
   }, []);
 
