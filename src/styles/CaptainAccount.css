@@ -100,7 +100,30 @@
   color: #555;
 }
 
-.pay-commission{
-  background-color: #28a745;
-  
+.pay-commission {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6, #60a5fa);
+  border-radius: 25px;
+  margin: 15px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.pay-commission h3{
+  color: white;
+  font-size: larger;
+  text-align: center;
+  font-weight: 700;
+}
+
+.pay-commission-button{
+  border: none;
+  background-color: #333;
+  color: aliceblue;
+  padding: 11px;
+  border-radius: 17px;
+  width: 100%;
 }

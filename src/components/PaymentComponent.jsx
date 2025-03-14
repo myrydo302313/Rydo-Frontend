@@ -108,7 +108,7 @@ const PaymentComponent = ({ amt }) => {
   };
 
   return (
-    <button onClick={initiatePayment} disabled={loading} className="pay-button">
+    <button onClick={initiatePayment} disabled={loading} className="pay-commission-button">
       {/* {console.log("Captain le:", captain.captainData)} */}
       {loading ? "Processing..." : `Pay ₹${amt}`}
     </button>

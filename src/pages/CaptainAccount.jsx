@@ -50,13 +50,16 @@ const CaptainAccount = () => {
     formData.append("image", selectedFile);
 
     try {
-      const response = await fetch(`${baseURL}/api/documents/upload-${uploadType}`, {
-        method: "POST",
-        headers: {
-          Authorization: captainAuthToken,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `${baseURL}/api/documents/upload-${uploadType}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: captainAuthToken,
+          },
+          body: formData,
+        }
+      );
 
       const result = await response.json();
 
@@ -82,13 +85,24 @@ const CaptainAccount = () => {
       <div className="profile-main">
         <div className="user-photo">
           {currUser?.profilePic ? (
-            <img src={currUser.profilePic} alt="Profile" className="profile-pic" width={60} height={60} />
+            <img
+              src={currUser.profilePic}
+              alt="Profile"
+              className="profile-pic"
+              width={60}
+              height={60}
+            />
           ) : (
             <span>No Profile Photo</span>
           )}
         </div>
         <div className="user-name">{currUser?.name}</div>
         <div className="user-phone">{currUser?.phone}</div>
+      </div>
+
+      <div className="pay-commission">
+        <h3>Pay Your Commission To Stay Active</h3>
+        <PaymentComponent amt={currUser?.commission} />
       </div>
 
       <div className="profile-menu">
@@ -105,11 +119,6 @@ const CaptainAccount = () => {
             <p>{text}</p>
           </div>
         ))}
-      </div>
-
-      <div className="pay-commission">
-        <h3>Pay Your Commission To Stay Active</h3>
-        <PaymentComponent amt={currUser?.commission}/>
       </div>
 
       <div className="logout-btn-div">
@@ -130,7 +139,12 @@ const CaptainAccount = () => {
             <div className="doc-info">
               <span className="doc-label">{label}:</span>
               {currUser?.[key] ? (
-                <a href={currUser[key]} target="_blank" rel="noopener noreferrer" className="view-doc">
+                <a
+                  href={currUser[key]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="view-doc"
+                >
                   View {label}
                 </a>
               ) : (
@@ -140,7 +154,11 @@ const CaptainAccount = () => {
             {!currUser?.[key] && (
               <div className="upload-section">
                 <label htmlFor={key} className="file-label">
-                  <img src="/images/upload-icon.png" alt="Upload" className="upload-icon" />
+                  <img
+                    src="/images/upload-icon.png"
+                    alt="Upload"
+                    className="upload-icon"
+                  />
                   Choose File
                 </label>
                 <input
