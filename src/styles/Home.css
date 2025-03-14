@@ -265,7 +265,6 @@
 .popup-banner-app {
   background: linear-gradient(135deg, #001f3f, #0074d9);
 
-
   margin-top: 20px;
 
   width: 100%;
@@ -318,4 +317,90 @@
 
 .close-button:hover {
   color: #d48806;
+}
+
+.accepted-ride {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.accepted-ride-card {
+  background: linear-gradient(
+    135deg,
+    #ff7b72,
+    #ffd700
+  ); /* Light Red to Yellow */
+  color: white;
+  padding: 20px;
+  width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.accepted-ride-card:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.accepted-ride-card h3 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.accepted-ride-card p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.accepted-ride-card strong {
+  font-weight: 600;
+}
+
+.accepted-ride-card div {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.accepted-ride-card a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 15px;
+  background: white;
+  color: #ff4d4d; /* Red shade */
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.accepted-ride-card a:hover {
+  background: #ffe066; /* Light yellow */
+}
+
+.accepted-ride-btn {
+  padding: 13px;
+  border: none;
+  background: linear-gradient(135deg, #ff5252, #ffcc00); /* Red to Yellow */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  width: 90%;
+  transition: 0.3s ease-in-out;
+}
+
+.accepted-ride-btn:hover {
+  background: linear-gradient(
+    135deg,
+    #ff3333,
+    #ffdb4d
+  ); /* Darker Red to Lighter Yellow */
+  cursor: pointer;
 }

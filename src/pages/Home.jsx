@@ -34,6 +34,8 @@ const Home = () => {
   const [isWebView, setIsWebView] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
 
+  const [acceptedRide, setAcceptedRide] = useState(null);
+
   useEffect(() => {
     const userAgent = navigator.userAgent || "";
 
@@ -276,8 +278,33 @@ const Home = () => {
     }
   };
 
+  const findAcceptedRide = async () => {
+    try {
+      const response = await fetch(`${baseURL}/api/user/accepted-rides`, {
+        method: "GET",
+        headers: {
+          Authorization: userAuthToken,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch ongoing ride");
+      }
+
+      const data = await response.json();
+      setAcceptedRide(data.ride);
+    } catch (error) {
+      console.error("Error fetching ongoing ride:", error);
+    }
+  };
+
+  useEffect(() => {
+    findAcceptedRide();
+  }, []);
+
   return (
     <>
+      {console.log("yeeee", acceptedRide)}
       <div className="home-main">
         <div className="home-logo">
           <h3 align="center">Rydo</h3>
@@ -292,6 +319,49 @@ const Home = () => {
             readOnly
           />
         </div>
+      </div>
+
+      <div className="accepted-ride">
+        {acceptedRide && (
+          <div className="accepted-ride-card">
+            <h3>Current Ride</h3>
+            <div>
+              <p>
+                <strong>Driver:</strong> {acceptedRide.captain.name}
+              </p>
+              <p>
+                <strong>Vehicle:</strong> {acceptedRide.captain.vehicleName}
+              </p>
+              <p>
+                <strong>Plate Number:</strong>{" "}
+                {acceptedRide.captain.vehicleNumber}
+              </p>
+              <p>
+                <strong>Phone:</strong> {acceptedRide.captain.phone}
+              </p>
+              <button
+                className="accepted-ride-btn"
+                onClick={() => {
+                  if (acceptedRide.status === "accepted") {
+                    navigate("/waiting-for-driver", {
+                      state: {
+                        ride: acceptedRide,
+                      },
+                    });
+                  } else if (acceptedRide.status === "ongoing") {
+                    navigate("/riding", {
+                      state: {
+                        ride: acceptedRide,
+                      },
+                    });
+                  }
+                }}
+              >
+                Move to ride page
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       <div>
