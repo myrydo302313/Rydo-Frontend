@@ -298,7 +298,7 @@ const CaptainHome = () => {
           <div className="captain-stats">
             <div className="category">
               <FaRegClock />
-              <p className="first">{totalCommission}</p>
+              <p className="first">{captainData?.commission}</p>
               <p className="second">Total Commission</p>
             </div>
             <div className="category">
