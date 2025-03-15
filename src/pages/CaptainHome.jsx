@@ -296,7 +296,6 @@ const CaptainHome = () => {
 
   return (
     <>
-      {console.log(acceptedRide)}
       <div className="captain-home-main">
         <h1 className="captain-home-heading" align="center">
           Rydo Captain
