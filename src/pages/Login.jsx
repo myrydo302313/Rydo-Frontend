@@ -38,6 +38,8 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
 
+      console.log("Response:", response);
+
       if (!response.ok) {
         const errorData = await response.json();
         setLoading(false)
