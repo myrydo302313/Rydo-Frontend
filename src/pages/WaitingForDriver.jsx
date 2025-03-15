@@ -15,11 +15,18 @@ const WaitingForDriver = () => {
     console.log("Socket listener attached ✅");
 
     const handleRideStarted = (rideData) => {
-      console.log("Ride started event received 🚗");
+      // console.log("Ride started event received 🚗");
       navigate("/riding", { state: { ride: rideData } });
     };
 
+    const handleRideCancelled = (rideData) => {
+      // console.log("Ride started event received 🚗");
+      navigate("/home", { state: { ride: rideData } });
+    };
+
     socket.on("ride-started", handleRideStarted);
+    socket.on("ride-cancelled", handleRideCancelled);
+
 
     return () => {
       console.log("Socket listener removed ❌");

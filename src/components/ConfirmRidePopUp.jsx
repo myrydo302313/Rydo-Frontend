@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 
@@ -11,46 +10,7 @@ const ConfirmRidePopUp = (props) => {
   const navigate = useNavigate();
   const { captainAuthToken } = useAuth();
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `${baseURL}/api/rides/start-ride?rideId=${encodeURIComponent(
-          props.ride._id
-        )}&otp=${encodeURIComponent(otp)}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: captainAuthToken,
-          },
-        }
-      );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // Get latitude & longitude
-      const pickupLat = props.ride.pickupLocation.latitude;
-      const pickupLng = props.ride.pickupLocation.longitude;
-      const destLat = props.ride.destinationLocation.latitude;
-      const destLng = props.ride.destinationLocation.longitude;
-
-      // Construct Google Maps URL using coordinates
-      const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${pickupLat},${pickupLng}&destination=${destLat},${destLng}&travelmode=driving`;
-
-      // Open Google Maps in a new tab
-      window.open(googleMapsUrl, "_blank");
-
-      props.setConfirmRidePopupPanel(false);
-      props.setRidePopupPanel(false);
-      navigate("/captain-riding", { state: { ride: props.ride } });
-    } catch (error) {
-      console.error("Error starting ride:", error);
-    }
-  };
 
   return (
     <div>
@@ -123,7 +83,6 @@ const ConfirmRidePopUp = (props) => {
         </div>
 
         <div className="mt-6 w-full">
-          <form onSubmit={submitHandler}>
             <input
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
@@ -132,20 +91,19 @@ const ConfirmRidePopUp = (props) => {
               placeholder="Enter OTP"
             />
 
-            <button className="w-full mt-5 text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg">
+            <button
+              type="submit"
+              className="w-full mt-5 text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg"
+            >
               Confirm
             </button>
             <button
-              onClick={() => {
-                props.setConfirmRidePopupPanel(false);
-                props.setRidePopupPanel(false);
-                props.cancelRide();
-              }}
+              type="button"
+              onClick={cancelRideHandler}
               className="w-full mt-2 bg-red-600 text-lg text-white font-semibold p-3 rounded-lg"
             >
               Cancel
             </button>
-          </form>
         </div>
       </div>
     </div>

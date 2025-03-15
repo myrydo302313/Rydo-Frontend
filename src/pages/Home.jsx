@@ -304,7 +304,6 @@ const Home = () => {
 
   return (
     <>
-      {console.log("yeeee", acceptedRide)}
       <div className="home-main">
         <div className="home-logo">
           <h3 align="center">Rydo</h3>

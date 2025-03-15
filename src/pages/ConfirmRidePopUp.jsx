@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
-import '../styles/ConfirmRidePopUp.css'
+import "../styles/ConfirmRidePopUp.css";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -54,9 +54,47 @@ const ConfirmRidePopUp = () => {
     }
   };
 
+  const cancelRideHandler = async () => {
+    try {
+      if (!ride || !ride._id) {
+        alert("Ride ID is missing. Cannot cancel the ride.");
+        return;
+      }
+
+      console.log("Cancelling ride with ID:", ride._id);
+
+      const response = await fetch(
+        `${baseURL}/api/rides/cancel-ride?rideId=${encodeURIComponent(
+          ride._id
+        )}`,
+        {
+          method: "POST", // Check if API requires POST or GET
+          headers: {
+            Authorization: captainAuthToken,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ rideId: ride._id }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Ride cancelled successfully:", data);
+      alert("Ride has been cancelled successfully!");
+      navigate("/captainHome");
+
+    } catch (error) {
+      console.error("Error cancelling ride:", error);
+      alert("Failed to cancel ride. Please try again.");
+    }
+  };
+
   return (
     <div className="confirm-ride-popup">
-        {console.log('ye le bhai',ride)}
+      {console.log("ye le bhai", ride)}
       <h3 className="text-2xl font-semibold mb-5">
         Confirm this ride to Start
       </h3>
@@ -67,9 +105,7 @@ const ConfirmRidePopUp = () => {
             src="/images/profilePic.jpg"
             alt=""
           />
-          <h2 className="text-lg font-medium capitalize">
-            {ride?.user?.name}
-          </h2>
+          <h2 className="text-lg font-medium capitalize">{ride?.user?.name}</h2>
         </div>
         <h5 className="text-lg font-semibold">{ride?.user?.distance}</h5>
       </div>
@@ -81,9 +117,7 @@ const ConfirmRidePopUp = () => {
               <h3 className="text-lg font-medium">
                 {ride?.pickup.split(",")[0]}
               </h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                {ride?.pickup}
-              </p>
+              <p className="text-sm -mt-1 text-gray-600">{ride?.pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-b-2">
@@ -92,9 +126,7 @@ const ConfirmRidePopUp = () => {
               <h3 className="text-lg font-medium">
                 {ride?.destination.split(",")[0]}
               </h3>
-              <p className="text-sm -mt-1 text-gray-600">
-                {ride?.destination}
-              </p>
+              <p className="text-sm -mt-1 text-gray-600">{ride?.destination}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3">
@@ -106,10 +138,7 @@ const ConfirmRidePopUp = () => {
           </div>
           {ride?.user.phone && (
             <p className="text-blue-600 font-medium underline mt-2">
-              <a
-                href={`tel:${ride?.user.phone}`}
-                className="call-captain-btn"
-              >
+              <a href={`tel:${ride?.user.phone}`} className="call-captain-btn">
                 📞 Call Passenger
               </a>
             </p>
@@ -130,10 +159,12 @@ const ConfirmRidePopUp = () => {
               Confirm
             </button>
             <button
-              onClick={() => {
+              onClick={(e) => {
                 // props.setConfirmRidePopupPanel(false);
                 // props.setRidePopupPanel(false);
                 // props.cancelRide();
+                e.preventDefault()
+                cancelRideHandler()
               }}
               className="w-full mt-2 bg-red-600 text-lg text-white font-semibold p-3 rounded-lg"
             >
