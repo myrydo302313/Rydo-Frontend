@@ -24,6 +24,8 @@ const CaptainHome = () => {
   const [totalRides, setTotalRides] = useState(0);
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalCommission, setTotalCommission] = useState(0);
+    const [isWebView, setIsWebView] = useState(false);
+    const [showBanner, setShowBanner] = useState(true);
 
   const ridePopupPanelRef = useRef(null);
   const confirmRidePopupPanelRef = useRef(null);
@@ -280,9 +282,15 @@ const CaptainHome = () => {
             <p>Go online to start accepting rides</p>
           </div>
         </div> */}
-
-        <div className="hero-section">
-          <img src="/images/banner1.jpeg" alt="" />
+        <div>
+          {!isWebView && showBanner && (
+            <div className="popup-banner-app">
+              <span>Book Ride with Rydo App Now</span>
+              <a href="/Rydo.apk" download className="download-button">
+                Download
+              </a>
+            </div>
+          )}
         </div>
 
         <div className="captain-today-stats">
@@ -295,17 +303,19 @@ const CaptainHome = () => {
           </div>
           <div className="captain-stats">
             <div className="category">
-              <FaRegClock />
-              <p className="first">{captainData?.commission}</p>
+              {/* <FaRegClock /> */}
+              <img src="/images/commission.png" alt="" width={35} height={35} />
+              <p className="first">₹{captainData?.commission}</p>
               <p className="second">Total Commission</p>
             </div>
             <div className="category">
-              <IoIosSpeedometer />
+              <img src="/images/distance.png" alt="" width={35} height={35} />
               <p className="first">{totalDistance} Km</p>
               <p className="second">Total Distance</p>
             </div>
             <div className="category">
-              <TbReport />
+              {/* <TbReport /> */}
+              <img src="/images/bike2.png" alt="" width={35} height={35} />
               <p className="first">{totalRides}</p>
               <p className="second">Total Rides</p>
             </div>
