@@ -24,8 +24,8 @@ const CaptainHome = () => {
   const [totalRides, setTotalRides] = useState(0);
   const [totalDistance, setTotalDistance] = useState(0);
   const [totalCommission, setTotalCommission] = useState(0);
-    const [isWebView, setIsWebView] = useState(false);
-    const [showBanner, setShowBanner] = useState(true);
+  const [isWebView, setIsWebView] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
 
   const ridePopupPanelRef = useRef(null);
   const confirmRidePopupPanelRef = useRef(null);
@@ -273,15 +273,22 @@ const CaptainHome = () => {
           Rydo Captain
         </h1>
 
-        {/* <div className="captain-home-status">
+        <div className="captain-home-status">
           <div className="logo-status">
             <img src="/images/car-icon.png" alt="" width={60} height={60} />
           </div>
-          <div className="status-description">
-            <p className="status-description-first">You are offline ! </p>
-            <p>Go online to start accepting rides</p>
-          </div>
-        </div> */}
+          {captainData.active ? (
+            <div className="status-description">
+              <p className="status-description-first">You are online ! </p>
+              <p>Keep Earning by completing your rides</p>
+            </div>
+          ) : (
+            <div className="status-description">
+              <p className="status-description-first">You are offline ! </p>
+              <p>Pay your due commission to get online</p>
+            </div>
+          )}
+        </div>
         <div>
           {!isWebView && showBanner && (
             <div className="popup-banner-app">
