@@ -329,16 +329,6 @@ const Home = () => {
               <p>
                 <strong>Driver:</strong> {acceptedRide.captain.name}
               </p>
-              <p>
-                <strong>Vehicle:</strong> {acceptedRide.captain.vehicleName}
-              </p>
-              <p>
-                <strong>Plate Number:</strong>{" "}
-                {acceptedRide.captain.vehicleNumber}
-              </p>
-              <p>
-                <strong>Phone:</strong> {acceptedRide.captain.phone}
-              </p>
               <button
                 className="accepted-ride-btn"
                 onClick={() => {

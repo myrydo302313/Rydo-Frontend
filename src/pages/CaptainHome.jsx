@@ -10,6 +10,7 @@ import { IoIosSpeedometer } from "react-icons/io";
 import RidePopUp from "../components/RidePopUp";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import CaptainNav from "../components/CaptainNav";
+import { useNavigate } from "react-router-dom";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -26,6 +27,7 @@ const CaptainHome = () => {
   const [totalCommission, setTotalCommission] = useState(0);
   const [isWebView, setIsWebView] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
+  const [acceptedRide, setAcceptedRide] = useState(null);
 
   const ridePopupPanelRef = useRef(null);
   const confirmRidePopupPanelRef = useRef(null);
@@ -35,6 +37,8 @@ const CaptainHome = () => {
   const { user } = useAuth();
 
   const userData = user?.userData || {};
+
+  const navigate=useNavigate();
 
   useEffect(() => {
     if (!captainData._id) return;
@@ -265,14 +269,71 @@ const CaptainHome = () => {
     [confirmRidePopupPanel]
   );
 
+  const findAcceptedRide = async () => {
+    try {
+      const response = await fetch(`${baseURL}/api/captain/accepted-rides`, {
+        method: "GET",
+        headers: {
+          Authorization: captainAuthToken,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch ongoing ride");
+      }
+
+      const data = await response.json();
+      setAcceptedRide(data.ride);
+    } catch (error) {
+      console.error("Error fetching ongoing ride:", error);
+    }
+  };
+
+  useEffect(() => {
+    findAcceptedRide();
+  }, []);
+
   return (
     <>
-      {console.log(totalDistance)}
+      {console.log(acceptedRide)}
       <div className="captain-home-main">
         <h1 className="captain-home-heading" align="center">
           Rydo Captain
         </h1>
 
+        <div className="accepted-ride">
+          {acceptedRide && (
+            <div className="accepted-ride-card">
+              <h3>Current Ride</h3>
+              <div>
+                <p>
+                  <strong>Passenger:</strong> {acceptedRide.user.name}
+                </p>
+    
+                <button
+                  className="accepted-ride-btn"
+                  onClick={() => {
+                    if (acceptedRide.status === "accepted") {
+                      navigate("/captain-ride-pop-up", {
+                        state: {
+                          ride: acceptedRide,
+                        },
+                      });
+                    } else if (acceptedRide.status === "ongoing") {
+                      navigate("/captain-riding", {
+                        state: {
+                          ride: acceptedRide,
+                        },
+                      });
+                    }
+                  }}
+                >
+                  Move to ride page
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
         <div className="captain-home-status">
           <div className="logo-status">
             <img src="/images/car-icon.png" alt="" width={60} height={60} />
@@ -289,6 +350,7 @@ const CaptainHome = () => {
             </div>
           )}
         </div>
+
         <div>
           {!isWebView && showBanner && (
             <div className="popup-banner-app">
