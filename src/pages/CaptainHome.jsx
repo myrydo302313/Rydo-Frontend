@@ -38,7 +38,7 @@ const CaptainHome = () => {
 
   const userData = user?.userData || {};
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!captainData._id) return;
@@ -91,7 +91,8 @@ const CaptainHome = () => {
       setTimeout(() => {
         window.open(
           `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`,
-          "_blank"
+          "_blank",
+          "noopener,noreferrer"
         );
       }, 500);
     }
@@ -309,7 +310,7 @@ const CaptainHome = () => {
                 <p>
                   <strong>Passenger:</strong> {acceptedRide.user.name}
                 </p>
-    
+
                 <button
                   className="accepted-ride-btn"
                   onClick={() => {
