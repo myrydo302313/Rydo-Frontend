@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import "../styles/Login.css";
 import { useAuth } from "../store/auth";
-import EmailOTPLogin from "../components/EmailOTPLogin";
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
