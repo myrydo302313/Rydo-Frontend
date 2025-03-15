@@ -224,7 +224,7 @@ const CaptainHome = () => {
         }
 
         const data = await response.json();
-        setTotalDistance(data.totalDistance);
+        setTotalDistance(data.totalDistance.toFixed(2));
       } catch (err) {
         setError(err.message);
       } finally {
@@ -293,7 +293,6 @@ const CaptainHome = () => {
 
   return (
     <>
-      {console.log(acceptedRide)}
       <div className="captain-home-main">
         <h1 className="captain-home-heading" align="center">
           Rydo Captain
