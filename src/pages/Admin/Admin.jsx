@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/auth";
 import AdminNavbar from "./AdminNavbar";
 import AdminHome from "../../components/Admin/AdminHome";
@@ -7,6 +7,11 @@ import AdminHome from "../../components/Admin/AdminHome";
 const Admin = () => {
   const { user } = useAuth();
   const location = useLocation();
+  const navigate=useNavigate();
+
+  {console.log('ye rha be',user)}
+
+  {user?.userData.role!='admin' && navigate('/home')}
 
   const isHome = location.pathname === "/admin";
 

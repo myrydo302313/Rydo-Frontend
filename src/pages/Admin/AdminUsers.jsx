@@ -52,7 +52,7 @@ const AdminUsers = () => {
           </tbody>
         </table>
       ) : (
-        <p className="no-orders">No orders found.</p>
+        <p className="no-orders">No users found.</p>
       )}
     </div>
   );
