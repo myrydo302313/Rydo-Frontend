@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../store/auth";
-import { FaArrowAltCircleLeft } from "react-icons/fa";
 import AdminNavbar from "./AdminNavbar";
+import AdminHome from "../../components/Admin/AdminHome";
 
 const Admin = () => {
   const { user } = useAuth();
@@ -10,20 +10,22 @@ const Admin = () => {
 
   const isHome = location.pathname === "/admin";
 
-  if (!user?.userData?.role == "admin") {
-    return <Navigate to="/" />;
-  }
+  // Apply gradient background only on admin pages
+  useEffect(() => {
+    document.body.style.background = "linear-gradient(135deg, #1e3c72, #2a5298)";
+    document.body.style.backgroundAttachment = "fixed"; // Keep the gradient fixed
+    document.body.style.backgroundSize = "cover";
+    document.body.style.height = "100vh";
+
+    return () => {
+      document.body.style.background = ""; // Reset when leaving admin page
+    };
+  }, []);
 
   return (
     <>
-    This is admin
-    <AdminNavbar/>
-    {/* {isHome ? <VendorHome /> : <Outlet />} */}
-      {/* <Link to="/" className="back-to-home-btn">
-        <FaArrowAltCircleLeft /> Back To Home Page
-      </Link> */}
-      {/* <VendorNavbar /> */}
-      {/* {isHome ? <VendorHome /> : <Outlet />} */}
+      <AdminNavbar />
+      {isHome ? <AdminHome /> : <Outlet />}
     </>
   );
 };

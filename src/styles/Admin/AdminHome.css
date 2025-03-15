@@ -1,0 +1,78 @@
+/* Admin Home Heading */
+.admin-home-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.0rem;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+/* Main Container */
+.rydo-counts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Cards */
+.admin-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Smooth blue gradient */
+  width: 220px;
+  padding: 50px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Attractive shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+/* Hover Effect */
+.admin-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Heading */
+.admin-card h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Image */
+.admin-card img {
+  width: 60px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.admin-card:hover img {
+  transform: scale(1.1);
+}
+
+/* Number Counter */
+.admin-card p {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 10px;
+  background: linear-gradient(90deg, #ffdd00, #ff8800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

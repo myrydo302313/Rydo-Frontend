@@ -1,0 +1,30 @@
+.navbar-main {
+  margin: 20px;
+  background: linear-gradient(90deg, #000d33, #003366);
+    border-radius: 10px;
+  padding: 15px;
+  color: white;
+  font-weight: 800;
+}
+
+.navbar-main .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar .nav-options {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  color: white;
+}
+
+.logo-img-admin{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+}
