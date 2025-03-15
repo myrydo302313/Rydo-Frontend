@@ -27,6 +27,7 @@ import CancellationRefund from "./pages/CancellationRefund";
 import ShippingDelivery from "./pages/ShippingDelivery";
 import AboutUs from "./pages/AboutUs";
 import AdminUsers from "./pages/Admin/AdminUsers";
+import AdminCaptains from "./pages/Admin/AdminCaptains";
 
 function App() {
   return (
@@ -72,8 +73,8 @@ function App() {
           {/* Admin Path */}
           <Route path="/admin" element={<Admin />}>
             <Route path="users" element={<AdminUsers />} />
-            {/* <Route path="captains" element={<AdminCaptains />} />
-            <Route path="rides" element={<AdminRides />} /> */}
+            <Route path="captains" element={<AdminCaptains />} />
+            {/* <Route path="rides" element={<AdminRides />} /> */}
           </Route>
 
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
