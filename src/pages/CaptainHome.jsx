@@ -38,7 +38,7 @@ const CaptainHome = () => {
 
   const userData = user?.userData || {};
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!captainData._id) return;
@@ -89,9 +89,9 @@ const CaptainHome = () => {
       const { latitude, longitude } = ride.pickupLocation;
 
       setTimeout(() => {
-        window.location.href = `intent://maps.google.com/maps?daddr=${latitude},${longitude}&mode=d#Intent;scheme=https;package=com.google.android.apps.maps;end;`;
+        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`;
+        window.open(googleMapsUrl, "_blank");
       }, 500);
-      
     }
     try {
       const response = await fetch(`${baseURL}/api/rides/confirm`, {
@@ -307,7 +307,7 @@ const CaptainHome = () => {
                 <p>
                   <strong>Passenger:</strong> {acceptedRide.user.name}
                 </p>
-    
+
                 <button
                   className="accepted-ride-btn"
                   onClick={() => {
