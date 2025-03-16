@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
-// import "../styles/Login.css";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import "../styles/Login.css";
 import { useAuth } from "../store/auth";
+
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
@@ -38,18 +37,14 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
 
-      console.log("Response:", response);
-
       if (!response.ok) {
         const errorData = await response.json();
-        setLoading(false)
-        toast.error(errorData.message || "Registration failed!");
+        setLoading(false);
+        toast.error(errorData.message || "Login failed!");
         return;
       }
 
       const data = await response.json();
-      console.log("Response Data:", data);
-
       setLoading(false);
       storeUserToken(data.token);
 
@@ -84,7 +79,7 @@ const Login = () => {
                   required
                 />
               </div>
-              <div lassName="login-form-pair">
+              <div className="login-form-pair">
                 <label htmlFor="password">Enter Password :</label>
                 <input
                   type={passwordVisible ? "text" : "password"}
@@ -95,12 +90,12 @@ const Login = () => {
                   onChange={handleChange}
                   required
                 />
-                {/* <button
+                <button
                   type="button"
                   onClick={() => setPasswordVisible(!passwordVisible)} // Toggle password visibility
                 >
                   {passwordVisible ? "Hide Password" : "Show Password"}
-                </button> */}
+                </button>
               </div>
               <button type="submit" className="signup-button">
                 {loading ? "Logging In..." : "Login"}
@@ -110,6 +105,12 @@ const Login = () => {
                   New Here?{" "}
                   <Link className="new-here-btn" to="/signup">
                     Create New account
+                  </Link>
+                </p>
+                <p>
+                  Forgot Password?{" "}
+                  <Link className="forgot-password-btn" to="/forgot-password">
+                    Reset Password
                   </Link>
                 </p>
               </div>

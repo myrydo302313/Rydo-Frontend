@@ -498,9 +498,9 @@ const Home = () => {
         <HomePlaces />
       </div>
 
-      <div className="rydoLove-main">
+      {/* <div className="rydoLove-main">
         <img src="images/rydoLove.png" alt="" />
-      </div>
+      </div> */}
 
       <Footer />
 

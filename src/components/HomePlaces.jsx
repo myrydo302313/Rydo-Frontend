@@ -13,11 +13,11 @@ const HomePlaces = () => {
         </div>
         <div className="places-menu-item">
             <img src="/images/bus.jpg" alt="" />
-            <span>New Bus Stand</span>
+            <span>Bus Stand</span>
         </div>
         <div className="places-menu-item">
             <img src="/images/jheel.jpg" alt="" />
-            <span>Jheel</span>
+            <span>Cafeteria</span>
         </div>
       </div>
     </>

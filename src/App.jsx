@@ -37,6 +37,8 @@ import ContactUs from "./pages/ContactUs";
 import CancellationRefund from "./pages/CancellationRefund";
 import ShippingDelivery from "./pages/ShippingDelivery";
 import AboutUs from "./pages/AboutUs";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
           <Route path="/cancel-refund" element={<CancellationRefund />} />
           <Route path="/shipping-delivery" element={<ShippingDelivery />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* 🚀 User Protected Routes */}
           <Route
