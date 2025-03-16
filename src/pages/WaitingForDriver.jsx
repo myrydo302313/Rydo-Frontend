@@ -2,12 +2,18 @@ import React, { useContext, useEffect } from "react";
 import "../styles/WaitingForDriver.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SocketContext } from "../context/SocketContext";
+import { useAuth } from "../store/auth";
+
+const baseURL =
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 const WaitingForDriver = () => {
   const location = useLocation();
   const { ride } = location.state || {};
   const navigate = useNavigate();
   const { socket } = useContext(SocketContext);
+
+  const {userAuthToken} = useAuth();   
 
   useEffect(() => {
     if (!socket) return;
@@ -55,6 +61,27 @@ const WaitingForDriver = () => {
       window.removeEventListener("popstate", blockBackNavigation);
     };
   }, []);
+
+  const handleCancelRide = async () => {
+    try {
+      const response = await fetch(`${baseURL}/api/rides/cancel-ride-user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": userAuthToken,
+        },
+        body: JSON.stringify({ rideId: ride._id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to cancel the ride");
+      }
+
+      navigate("/home");
+    } catch (error) {
+      console.error("Error cancelling the ride:", error);
+    }
+  }
 
   return (
     <>
@@ -119,7 +146,7 @@ const WaitingForDriver = () => {
           </div>
         </div>
         <div className="cancel-ride-btn-user">
-          <button>Cancel Ride</button>
+          <button onClick={handleCancelRide}>Cancel Ride</button>
         </div>
       </div>
     </>

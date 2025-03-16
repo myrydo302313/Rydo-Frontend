@@ -210,7 +210,7 @@ const CaptainSignup = () => {
         </div>
       </div>
     </>
-  );
+  )
 };
 
 export default CaptainSignup;

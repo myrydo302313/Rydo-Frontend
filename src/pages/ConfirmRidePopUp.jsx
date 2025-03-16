@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import "../styles/ConfirmRidePopUp.css";
+import { SocketContext } from "../context/SocketContext";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -11,6 +12,7 @@ const ConfirmRidePopUp = () => {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
   const { captainAuthToken } = useAuth();
+  const { socket } = useContext(SocketContext);
 
   const location = useLocation();
   const { ride } = location.state || {};
@@ -54,6 +56,17 @@ const ConfirmRidePopUp = () => {
     }
   };
 
+  useEffect(() => {
+    socket.on("ride-cancelled", (data) => {
+      console.log("Ride cancelled event received 🚗");
+      navigate("/captainHome");
+    });
+
+    return () => {
+      socket.off("ride-cancelled"); // Clean up the event listener
+    };
+  }, [socket]);
+
   const cancelRideHandler = async () => {
     try {
       if (!ride || !ride._id) {
@@ -85,7 +98,6 @@ const ConfirmRidePopUp = () => {
       console.log("Ride cancelled successfully:", data);
       alert("Ride has been cancelled successfully!");
       navigate("/captainHome");
-
     } catch (error) {
       console.error("Error cancelling ride:", error);
       alert("Failed to cancel ride. Please try again.");
@@ -163,8 +175,8 @@ const ConfirmRidePopUp = () => {
                 // props.setConfirmRidePopupPanel(false);
                 // props.setRidePopupPanel(false);
                 // props.cancelRide();
-                e.preventDefault()
-                cancelRideHandler()
+                e.preventDefault();
+                cancelRideHandler();
               }}
               className="w-full mt-2 bg-red-600 text-lg text-white font-semibold p-3 rounded-lg"
             >
