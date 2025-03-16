@@ -288,7 +288,17 @@ const CaptainHome = () => {
   };
 
   useEffect(() => {
+    const userAgent = navigator.userAgent || "";
+
+    // Check if the user is inside WebView
+    if (
+      /Android/i.test(userAgent) &&
+      (userAgent.includes("wv") || userAgent.includes("Version/"))
+    ) {
+      setIsWebView(true);
+    }
     findAcceptedRide();
+
     if (window.location.pathname === "/captainHome") {
       document.body.style.minHeight = "120vh";
     }
