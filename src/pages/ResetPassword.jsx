@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useLocation } from "react-router-dom";
-// import "../styles/ResetPassword.css";
+import "../styles/ResetPassword.css"; // Ensure this file is present
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -46,26 +46,34 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="reset-password-container">
+    <div className="reset-password__container">
       <Toaster />
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="newPassword">Enter new password:</label>
-          <input
-            type="password"
-            id="newPassword"
-            name="newPassword"
-            placeholder="New password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="submit-button">
-          {loading ? "Resetting..." : "Reset Password"}
-        </button>
-      </form>
+      <div className="reset-password__box">
+        <h2 className="reset-password__title">Reset Password</h2>
+        <p className="reset-password__description">
+          Enter your new password below to reset your account.
+        </p>
+        <form onSubmit={handleSubmit} className="reset-password__form">
+          <div className="reset-password__form-group">
+            <label htmlFor="newPassword" className="reset-password__label">
+              New Password
+            </label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              className="reset-password__input"
+              placeholder="Enter new password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="reset-password__button">
+            {loading ? "Resetting..." : "Reset Password"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

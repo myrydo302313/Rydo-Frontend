@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-// import "../styles/ForgotPassword.css";
+import "../styles/ForgotPassword.css"; // Ensure this file is present
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -43,26 +43,34 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="forgot-password-container">
+    <div className="forgot-password__container">
       <Toaster />
-      <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Enter your email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="email@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="submit-button">
-          {loading ? "Sending..." : "Send Reset Email"}
-        </button>
-      </form>
+      <div className="forgot-password__box">
+        <h2 className="forgot-password__title">Forgot Password?</h2>
+        <p className="forgot-password__description">
+          No worries! Enter your email below and we'll send you a reset link.
+        </p>
+        <form onSubmit={handleSubmit} className="forgot-password__form">
+          <div className="forgot-password__form-group">
+            <label htmlFor="email" className="forgot-password__label">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="forgot-password__input"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="forgot-password__button">
+            {loading ? "Sending..." : "Send Reset Link"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
