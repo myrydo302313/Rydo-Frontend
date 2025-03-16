@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-// import "../styles/Login.css";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import icons
 import "../styles/Login.css";
 import { useAuth } from "../store/auth";
+
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
@@ -61,17 +61,17 @@ const CaptainLogin = () => {
 
   return (
     <>
-    <Toaster/>
+      <Toaster />
       <div className="login-main">
         <div className="login-top">
-          <img src="/images/rydoLogo3.png" alt="" width={80} />
+          <img src="/images/rydoLogo3.png" alt="Rydo Logo" width={80} />
           <h2>Rydo Captain</h2>
         </div>
         <div className="login-hero">
           <div>
             <form onSubmit={handleSubmit} className="login-form">
               <div className="login-form-pair">
-                <label htmlFor="email">What's your email : </label>
+                <label htmlFor="email">What's your email :</label>
                 <input
                   type="email"
                   id="email"
@@ -82,23 +82,25 @@ const CaptainLogin = () => {
                   required
                 />
               </div>
-              <div lassName="login-form-pair">
+              <div className="login-form-pair">
                 <label htmlFor="password">Enter Password :</label>
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  placeholder="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-                {/* <button
-                  type="button"
-                  onClick={() => setPasswordVisible(!passwordVisible)} // Toggle password visibility
-                >
-                  {passwordVisible ? "Hide Password" : "Show Password"}
-                </button> */}
+                <div className="password-wrapper">
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    placeholder="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
+                  <span
+                    className="eye-icon"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                  >
+                    {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                  </span>
+                </div>
               </div>
               <button type="submit" className="signup-button">
                 {loading ? "Logging In..." : "Login"}
@@ -108,6 +110,12 @@ const CaptainLogin = () => {
                   New Here?{" "}
                   <Link className="new-here-btn" to="/captainSignup">
                     Register as a Captain
+                  </Link>
+                </p>
+                <p className="forgot-password-user">
+                  Forgot Password?{" "}
+                  <Link className="forgot-password-btn" to="/forgot-password">
+                    Reset Password
                   </Link>
                 </p>
               </div>

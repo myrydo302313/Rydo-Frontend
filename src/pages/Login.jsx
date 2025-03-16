@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import icons
 import "../styles/Login.css";
 import { useAuth } from "../store/auth";
 
@@ -61,26 +62,26 @@ const Login = () => {
       <Toaster />
       <div className="login-main">
         <div className="login-top">
-          <img src="/images/rydoLogo3.png" alt="" width={80} />
+          <img src="/images/rydoLogo3.png" alt="Rydo Logo" width={80} />
           <h2>Rydo</h2>
         </div>
         <div className="login-hero">
-          <div>
-            <form onSubmit={handleSubmit} className="login-form">
-              <div className="login-form-pair">
-                <label htmlFor="email">What's your email : </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="email@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="login-form-pair">
-                <label htmlFor="password">Enter Password :</label>
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="login-form-pair">
+              <label htmlFor="email">What's your email :</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="email@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="login-form-pair">
+              <label htmlFor="password">Enter Password :</label>
+              <div className="password-wrapper">
                 <input
                   type={passwordVisible ? "text" : "password"}
                   id="password"
@@ -90,32 +91,32 @@ const Login = () => {
                   onChange={handleChange}
                   required
                 />
-                <button
-                  type="button"
-                  onClick={() => setPasswordVisible(!passwordVisible)} // Toggle password visibility
+                <span
+                  className="eye-icon"
+                  onClick={() => setPasswordVisible(!passwordVisible)}
                 >
-                  {passwordVisible ? "Hide Password" : "Show Password"}
-                </button>
+                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                </span>
               </div>
-              <button type="submit" className="signup-button">
-                {loading ? "Logging In..." : "Login"}
-              </button>
-              <div>
-                <p>
-                  New Here?{" "}
-                  <Link className="new-here-btn" to="/signup">
-                    Create New account
-                  </Link>
-                </p>
-                <p>
-                  Forgot Password?{" "}
-                  <Link className="forgot-password-btn" to="/forgot-password">
-                    Reset Password
-                  </Link>
-                </p>
-              </div>
-            </form>
-          </div>
+            </div>
+            <button type="submit" className="signup-button">
+              {loading ? "Logging In..." : "Login"}
+            </button>
+            <div>
+              <p>
+                New Here?{" "}
+                <Link className="new-here-btn" to="/signup">
+                  Create New account
+                </Link>
+              </p>
+              <p className="forgot-password-user">
+                Forgot Password?{" "}
+                <Link className="forgot-password-btn" to="/forgot-password">
+                  Reset Password
+                </Link>
+              </p>
+            </div>
+          </form>
         </div>
         <Link className="signin-btn-captain" to="/captainLogin">
           Sign in as Captain

@@ -1,23 +1,23 @@
-.login-main{
-    padding: 18px;
+.login-main {
+  padding: 18px;
 }
 
-.login-top{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.login-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.login-top h2{
-    font-size: 2rem;
+.login-top h2 {
+  font-size: 2rem;
 }
 
 .login-hero .login-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
 .login-hero .login-form input {
@@ -39,6 +39,7 @@
   outline: none;
 }
 
+
 .signin-btn-captain {
   position: absolute;
   bottom: 20px; /* Distance from bottom */
@@ -55,11 +56,11 @@
   cursor: pointer;
 }
 
-.new-here-btn{
-    color: #17BEBB;
+.new-here-btn {
+  color: #17bebb;
 }
 
-.signup-button{
+.signup-button {
   width: 80%;
   padding: 12px;
   background-color: #e71d36;
@@ -69,4 +70,36 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 90vw;
+}
+
+.password-wrapper input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.eye-icon:hover {
+  color: #000;
+}
+
+.forgot-password-user{
+  margin-top: 35px;
+}
+
+.forgot-password-user a{
+  color: #17bebb;
 }
