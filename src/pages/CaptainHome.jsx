@@ -289,6 +289,9 @@ const CaptainHome = () => {
 
   useEffect(() => {
     findAcceptedRide();
+    if (window.location.pathname === "/captainHome") {
+      document.body.style.minHeight = "120vh";
+    }
   }, []);
 
   return (

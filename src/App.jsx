@@ -1,41 +1,63 @@
-import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
 import MainHome from "./pages/MainHome";
 import Login from "./pages/Login";
 import CaptainLogin from "./pages/CaptainLogin";
 import Signup from "./pages/Signup";
 import CaptainSignup from "./pages/CaptainSignup";
 import UserProtectWrapper from "./pages/UserProtectWrapper";
-import CaptainHome from "./pages/CaptainHome";
+import CaptainProtectWrapper from "./pages/CaptainProtectWrapper";
+
+// User Pages
+import Home from "./pages/Home";
 import UserAccount from "./pages/UserAccount";
-import CaptainRiding from "./pages/CaptainRiding";
-import RydoServices from "./pages/RydoServices";
 import Riding from "./pages/Riding";
-import CaptainRides from "./pages/CaptainRides";
-import CaptainAccount from "./pages/CaptainAccount";
-import Admin from "./pages/Admin/Admin";
-import CaptainRideFinal from "./pages/CaptainRideFinal";
 import UserRideFinal from "./pages/UserRideFinal";
 import WaitingForDriver from "./pages/WaitingForDriver";
+
+// Captain Pages
+import CaptainHome from "./pages/CaptainHome";
+import CaptainAccount from "./pages/CaptainAccount";
+import CaptainRides from "./pages/CaptainRides";
+import CaptainRideFinal from "./pages/CaptainRideFinal";
+import CaptainRiding from "./pages/CaptainRiding";
 import ConfirmRidePopUp from "./pages/ConfirmRidePopUp";
+
+// Admin Pages
+import Admin from "./pages/Admin/Admin";
+import AdminUsers from "./pages/Admin/AdminUsers";
+import AdminCaptains from "./pages/Admin/AdminCaptains";
+import AdminRides from "./pages/Admin/AdminRides";
+
+// Public Pages
+import RydoServices from "./pages/RydoServices";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import ContactUs from "./pages/ContactUs";
 import CancellationRefund from "./pages/CancellationRefund";
 import ShippingDelivery from "./pages/ShippingDelivery";
 import AboutUs from "./pages/AboutUs";
-import AdminUsers from "./pages/Admin/AdminUsers";
-import AdminCaptains from "./pages/Admin/AdminCaptains";
-import AdminRides from "./pages/Admin/AdminRides";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<MainHome />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/captainLogin" element={<CaptainLogin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/captainSignup" element={<CaptainSignup />} />
+          <Route path="/services" element={<RydoServices />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/cancel-refund" element={<CancellationRefund />} />
+          <Route path="/shipping-delivery" element={<ShippingDelivery />} />
+          <Route path="/about-us" element={<AboutUs />} />
+
+          {/* 🚀 User Protected Routes */}
           <Route
             path="/home"
             element={
@@ -45,45 +67,94 @@ function App() {
             }
           />
           <Route
-            path="/captainHome"
+            path="/userAccount"
             element={
               <UserProtectWrapper>
-                <CaptainHome />
+                <UserAccount />
               </UserProtectWrapper>
             }
           />
-          <Route path="/login" element={<Login />} />
-          <Route path="/captainLogin" element={<CaptainLogin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/riding" element={<Riding />} />
+          <Route
+            path="/riding"
+            element={
+              <UserProtectWrapper>
+                <Riding />
+              </UserProtectWrapper>
+            }
+          />
+          <Route
+            path="/user-ride-final"
+            element={
+              <UserProtectWrapper>
+                <UserRideFinal />
+              </UserProtectWrapper>
+            }
+          />
+          <Route
+            path="/waiting-for-driver"
+            element={
+              <UserProtectWrapper>
+                <WaitingForDriver />
+              </UserProtectWrapper>
+            }
+          />
 
-          <Route path="/captainSignup" element={<CaptainSignup />} />
-          <Route path="/captain-riding" element={<CaptainRiding />} />
-          <Route path="/userAccount" element={<UserAccount />} />
-          <Route path="/services" element={<RydoServices />} />
+          {/* 🚀 Captain Protected Routes */}
+          <Route
+            path="/captainHome"
+            element={
+              <CaptainProtectWrapper>
+                <CaptainHome />
+              </CaptainProtectWrapper>
+            }
+          />
+          <Route
+            path="/captain-account"
+            element={
+              <CaptainProtectWrapper>
+                <CaptainAccount />
+              </CaptainProtectWrapper>
+            }
+          />
+          <Route
+            path="/captain-rides"
+            element={
+              <CaptainProtectWrapper>
+                <CaptainRides />
+              </CaptainProtectWrapper>
+            }
+          />
+          <Route
+            path="/captain-riding"
+            element={
+              <CaptainProtectWrapper>
+                <CaptainRiding />
+              </CaptainProtectWrapper>
+            }
+          />
+          <Route
+            path="/captain-ride-final"
+            element={
+              <CaptainProtectWrapper>
+                <CaptainRideFinal />
+              </CaptainProtectWrapper>
+            }
+          />
+          <Route
+            path="/captain-ride-pop-up"
+            element={
+              <CaptainProtectWrapper>
+                <ConfirmRidePopUp />
+              </CaptainProtectWrapper>
+            }
+          />
 
-          <Route path="/waiting-for-driver" element={<WaitingForDriver />} />
-          <Route path="/user-ride-final" element={<UserRideFinal />} />
-
-          {/* Captain Path */}
-          <Route path="/captain-rides" element={<CaptainRides />} />
-          <Route path="/captain-account" element={<CaptainAccount />} />
-          <Route path="/captain-ride-final" element={<CaptainRideFinal />} />
-          <Route path="/captain-ride-pop-up" element={<ConfirmRidePopUp />} />
-
-          {/* Admin Path */}
+          {/* 🚀 Admin Routes */}
           <Route path="/admin" element={<Admin />}>
             <Route path="users" element={<AdminUsers />} />
             <Route path="captains" element={<AdminCaptains />} />
             <Route path="rides" element={<AdminRides />} />
           </Route>
-
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-use" element={<TermsOfUse />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/cancel-refund" element={<CancellationRefund />} />
-          <Route path="/shipping-delivery" element={<ShippingDelivery />} />
-          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </Router>
     </div>

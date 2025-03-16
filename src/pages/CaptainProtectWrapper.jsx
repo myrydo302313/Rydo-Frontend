@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 
-const UserProtectWrapper = ({ children }) => {
-  const { isUserLoggedIn } = useAuth();
+const CaptainProtectWrapper = ({ children }) => {
+  const { isCaptainLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isUserLoggedIn) {
+    if (!isCaptainLoggedIn) {
       navigate("/login");
     }
-  }, [isUserLoggedIn, navigate]);
+  }, [isCaptainLoggedIn, navigate]);
 
   return <>{children}</>;
 };
 
-export default UserProtectWrapper;
+export default CaptainProtectWrapper;

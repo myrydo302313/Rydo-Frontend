@@ -37,13 +37,7 @@ const FinishRide = (props) => {
 
   return (
     <div>
-      <h5
-        className="p-1 text-center w-[93%] absolute top-0"
-        onClick={() => {
-          props.setFinishRidePanel(false);
-        }}
-      >
-      </h5>
+      <img src="/images/captain-riding.jpg" alt="" width={550} />
       <h3 className="text-2xl font-semibold mb-5" align='center'>Finish this Ride</h3>
       <div className="flex items-center justify-between p-4  bg-gradient-to-r from-[#a1c4fd] to-[#c2e9fb] rounded-lg mt-4">
         <div className="flex items-center gap-3">
