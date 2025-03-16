@@ -67,7 +67,18 @@ const Home = () => {
     if (!socket) return;
 
     const handleRideConfirmed = (ride) => {
-      console.log("Ride confirmed event received 🚗");
+      console.log("🚗 Ride confirmed event received!");
+    
+      // Show a system notification
+      if (Notification.permission === "granted") {
+        new Notification("Ride Confirmed! 🚖", {
+          body: `Your ride is on the way! 🚗 Driver: ${ride.driverName}, ETA: ${ride.eta} mins`,
+          icon: "/ride-icon.png", // Replace with your own ride icon
+        });
+      } else {
+        console.log("⚠️ Notification permission not granted.");
+      }
+    
       setShowSearchingPanel(false);
       setRide(ride);
       navigate("/waiting-for-driver", {
@@ -76,6 +87,7 @@ const Home = () => {
         },
       });
     };
+    
 
     const handleRideStarted = (ride) => {
       setWaitingForDriver(false);

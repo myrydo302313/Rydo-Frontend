@@ -39,8 +39,11 @@ import ShippingDelivery from "./pages/ShippingDelivery";
 import AboutUs from "./pages/AboutUs";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import { useEffect } from "react";
 
 function App() {
+
+
   return (
     <div className="App">
       <Router>
