@@ -72,8 +72,8 @@ const Home = () => {
       // Show a system notification
       if (Notification.permission === "granted") {
         new Notification("Ride Confirmed! 🚖", {
-          body: `Your ride is on the way! 🚗 Driver: ${ride.driverName}, ETA: ${ride.eta} mins`,
-          icon: "/ride-icon.png", // Replace with your own ride icon
+          body: `Your ride is on the way! `,
+          icon: "",
         });
       } else {
         console.log("⚠️ Notification permission not granted.");
