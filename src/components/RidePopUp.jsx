@@ -9,8 +9,8 @@ const baseURL =
 
 const RidePopUp = (props) => {
   const navigate = useNavigate();
-const { captain, captainAuthToken } = useAuth();
-const captainData = captain?.captainData || {};
+  const { captain, captainAuthToken } = useAuth();
+  const captainData = captain?.captainData || {};
 
   async function confirmRide(ride) {
     if (
@@ -52,7 +52,6 @@ const captainData = captain?.captainData || {};
     }
   }
 
-
   const checkRideStatus = async (rideId) => {
     try {
       const response = await fetch(
@@ -87,12 +86,14 @@ const captainData = captain?.captainData || {};
           props.setRidePopupPanel(false);
         }, 4000); // Delay execution by 4 seconds
       } else {
-
         // props.confirmRide();
         confirmRide(props.ride);
-        navigate("/captain-ride-pop-up", {
-          state: { ride: props.ride }, 
-        });
+        // Add a delay before navigating
+        setTimeout(() => {
+          navigate("/captain-ride-pop-up", {
+            state: { ride:props.ride },
+          });
+        }, 1000);
       }
     } catch (error) {
       console.error("Error checking ride status:", error);
