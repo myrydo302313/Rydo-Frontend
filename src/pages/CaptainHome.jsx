@@ -70,7 +70,6 @@ const CaptainHome = () => {
     if (!captainData?._id) return;
 
     socket.on("new-ride", (data) => {
-      console.log("new ride to aya");
       setRide(data);
       setRidePopupPanel(true);
     });
@@ -78,7 +77,7 @@ const CaptainHome = () => {
     return () => {
       socket.off("new-ride");
     };
-  }, [captainData?._id, socket]);
+  }, [socket]);
 
   async function confirmRide() {
     if (
