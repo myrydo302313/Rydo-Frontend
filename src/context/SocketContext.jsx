@@ -14,7 +14,7 @@ export const SocketProvider = ({ children }) => {
     const storedSocketId = localStorage.getItem("socket_id"); // 🔹 Get saved socket ID
 
     const newSocket = io(baseURL, {
-      transports: ["websocket"],
+      transports: ["websocket","polling"],
       withCredentials: true,
       reconnection: true,
       reconnectionAttempts: 10,
