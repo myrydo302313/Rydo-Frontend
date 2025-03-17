@@ -1,6 +1,6 @@
 import { toast, Toaster } from "react-hot-toast";
 import { CloudCog } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 
@@ -70,6 +70,14 @@ const RidePopUp = (props) => {
     }
   };
 
+  const [navigateToRide, setNavigateToRide] = useState(false);
+
+  useEffect(() => {
+    if (navigateToRide) {
+      navigate("/captain-ride-pop-up", { state: { ride: props.ride } });
+    }
+  }, [navigateToRide, navigate, props.ride]);
+
   const handleAcceptRide = async () => {
     if (!props.ride?._id) {
       toast.error("Invalid ride data.");
@@ -90,9 +98,7 @@ const RidePopUp = (props) => {
         confirmRide(props.ride);
         // Add a delay before navigating
         setTimeout(() => {
-          navigate("/captain-ride-pop-up", {
-            state: { ride:props.ride },
-          });
+          setNavigateToRide(true);
         }, 1000);
       }
     } catch (error) {
