@@ -45,8 +45,8 @@ const captainData = captain?.captainData || {};
 
       console.log("Yaha agya:", "ab dekho");
 
-      props.setRidePopupPanel(false);
       props.setConfirmRidePopupPanel(true);
+      props.setRidePopupPanel(false);
     } catch (error) {
       console.error("Failed to confirm ride:", error);
     }
