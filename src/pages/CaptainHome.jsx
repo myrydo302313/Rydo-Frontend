@@ -112,7 +112,6 @@ const CaptainHome = () => {
       const data = await response.json();
 
       setRidePopupPanel(false);
-      setConfirmRidePopupPanel(true);
     } catch (error) {
       console.error("Failed to confirm ride:", error);
     }
@@ -407,7 +406,6 @@ const CaptainHome = () => {
           <RidePopUp
             ride={ride}
             setRidePopupPanel={setRidePopupPanel}
-            setConfirmRidePopupPanel={setConfirmRidePopupPanel}
             // confirmRide={confirmRide}
             cancelRide={cancelRide}
           />

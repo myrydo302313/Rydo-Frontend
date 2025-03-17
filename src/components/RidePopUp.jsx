@@ -11,17 +11,20 @@ const RidePopUp = (props) => {
   const navigate = useNavigate();
 const { captain, captainAuthToken } = useAuth();
 const captainData = captain?.captainData || {};
-  async function confirmRide() {
+
+  async function confirmRide(ride) {
     if (
-      props.ride.pickupLocation &&
-      props.ride.pickupLocation.latitude &&
-      props.ride.pickupLocation.longitude
+      ride.pickupLocation &&
+      ride.pickupLocation.latitude &&
+      ride.pickupLocation.longitude
     ) {
-      const { latitude, longitude } = props.ride.pickupLocation;
+      const { latitude, longitude } = ride.pickupLocation;
 
       setTimeout(() => {
-        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`;
-        window.open(googleMapsUrl, "_blank");
+        window.open(
+          `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`,
+          "_blank"
+        );
       }, 500);
     }
     try {
@@ -32,7 +35,7 @@ const captainData = captain?.captainData || {};
           Authorization: captainAuthToken,
         },
         body: JSON.stringify({
-          rideId: props.ride._id,
+          rideId: ride._id,
           captainId: captainData._id,
         }),
       });
@@ -43,9 +46,6 @@ const captainData = captain?.captainData || {};
 
       const data = await response.json();
 
-      console.log("Yaha agya:", "ab dekho");
-
-      props.setConfirmRidePopupPanel(true);
       props.setRidePopupPanel(false);
     } catch (error) {
       console.error("Failed to confirm ride:", error);
@@ -89,7 +89,7 @@ const captainData = captain?.captainData || {};
       } else {
 
         // props.confirmRide();
-        confirmRide();
+        confirmRide(props.ride);
         navigate("/captain-ride-pop-up", {
           state: { ride: props.ride }, 
         });
