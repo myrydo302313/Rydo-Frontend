@@ -77,7 +77,7 @@ const CaptainHome = () => {
     return () => {
       socket.off("new-ride");
     };
-  }, [socket]);
+  }, [captainData?._id, socket]);
 
   async function confirmRide() {
     if (
