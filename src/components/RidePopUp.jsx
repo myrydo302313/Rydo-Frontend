@@ -2,12 +2,55 @@ import { toast, Toaster } from "react-hot-toast";
 import { CloudCog } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 const RidePopUp = (props) => {
   const navigate = useNavigate();
+const { captain, captainAuthToken } = useAuth();
+const captainData = captain?.captainData || {};
+  async function confirmRide() {
+    if (
+      props.ride.pickupLocation &&
+      props.ride.pickupLocation.latitude &&
+      props.ride.pickupLocation.longitude
+    ) {
+      const { latitude, longitude } = props.ride.pickupLocation;
+
+      setTimeout(() => {
+        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}&travelmode=driving`;
+        window.open(googleMapsUrl, "_blank");
+      }, 500);
+    }
+    try {
+      const response = await fetch(`${baseURL}/api/rides/confirm`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: captainAuthToken,
+        },
+        body: JSON.stringify({
+          rideId: props.ride._id,
+          captainId: captainData._id,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      props.setRidePopupPanel(false);
+      props.setConfirmRidePopupPanel(true);
+    } catch (error) {
+      console.error("Failed to confirm ride:", error);
+    }
+  }
+
+
   const checkRideStatus = async (rideId) => {
     try {
       const response = await fetch(
@@ -42,8 +85,9 @@ const RidePopUp = (props) => {
           props.setRidePopupPanel(false);
         }, 4000); // Delay execution by 4 seconds
       } else {
-        // props.setConfirmRidePopupPanel(true);
-        props.confirmRide();
+
+        // props.confirmRide();
+        confirmRide();
         navigate("/captain-ride-pop-up", {
           state: { ride: props.ride }, 
         });
