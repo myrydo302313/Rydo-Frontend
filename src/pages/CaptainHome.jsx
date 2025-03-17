@@ -408,7 +408,7 @@ const CaptainHome = () => {
             ride={ride}
             setRidePopupPanel={setRidePopupPanel}
             setConfirmRidePopupPanel={setConfirmRidePopupPanel}
-            confirmRide={confirmRide}
+            // confirmRide={confirmRide}
             cancelRide={cancelRide}
           />
         </div>

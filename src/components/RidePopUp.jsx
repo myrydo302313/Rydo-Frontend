@@ -43,6 +43,8 @@ const captainData = captain?.captainData || {};
 
       const data = await response.json();
 
+      console.log("Yaha agya:", "ab dekho");
+
       props.setRidePopupPanel(false);
       props.setConfirmRidePopupPanel(true);
     } catch (error) {
