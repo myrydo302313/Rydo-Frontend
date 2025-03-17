@@ -70,14 +70,14 @@ const Home = () => {
       console.log("🚗 Ride confirmed event received!");
     
       // Show a system notification
-      if (Notification.permission === "granted") {
-        new Notification("Ride Confirmed! 🚖", {
-          body: `Your ride is on the way! `,
-          icon: "",
-        });
-      } else {
-        console.log("⚠️ Notification permission not granted.");
-      }
+      // if (Notification.permission === "granted") {
+      //   new Notification("Ride Confirmed! 🚖", {
+      //     body: `Your ride is on the way! `,
+      //     icon: "",
+      //   });
+      // } else {
+      //   console.log("⚠️ Notification permission not granted.");
+      // }
     
       setShowSearchingPanel(false);
       setRide(ride);
