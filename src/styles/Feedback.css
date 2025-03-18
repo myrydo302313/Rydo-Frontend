@@ -1,0 +1,120 @@
+/* 🌈 Colorful Gradient Background */
+.feedback-page {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+    /* min-height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    /* margin-top: 15px; */
+  }
+  
+  .feedback-container {
+    max-width: 600px;
+    width: 100%;
+    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  /* 🎀 Title & Subtitles */
+  .feedback-title {
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .feedback-subtitle {
+    color: #f7f7f7;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* ✨ Form Styling */
+  .feedback-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .feedback-label {
+    color: #fff;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+  
+  .feedback-input,
+  .feedback-textarea {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+  }
+  
+  .feedback-textarea {
+    resize: none;
+  }
+  
+  .feedback-submit-button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .feedback-submit-button:hover {
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    transform: scale(1.05);
+  }
+  
+  /* 🎉 Success Message */
+  .feedback-success-message {
+    background: rgba(255, 255, 255, 0.9);
+    color: #4caf50;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  /* 📞 Contact Section */
+  .feedback-contact-details {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .feedback-contact-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .feedback-contact-info {
+    font-size: 14px;
+    color: #fff;
+  }
+  
+  .feedback-contact-info a {
+    color: #ff7eb3;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .feedback-contact-info a:hover {
+    text-decoration: underline;
+  }
+  

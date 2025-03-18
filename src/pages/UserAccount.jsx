@@ -48,7 +48,7 @@ const UserAccount = () => {
         </div>
         <div className="profile-menu-option">
           <img src="/images/feedback.png" alt="Help" width={25} height={25} />
-          <p>Feedback</p>
+          <Link to='/feedback'>Feedback</Link>
         </div>
         <div className="profile-menu-option">
           <img src="/images/contact.png" alt="Help" width={25} height={25} />

@@ -31,6 +31,7 @@ import ShippingDelivery from "./pages/ShippingDelivery";
 import AboutUs from "./pages/AboutUs";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Feedback from "./pages/Feedback";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -50,6 +51,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/feedback" element={<Feedback />} />
           <Route path="/cancel-refund" element={<CancellationRefund />} />
           <Route path="/shipping-delivery" element={<ShippingDelivery />} />
           <Route path="/about-us" element={<AboutUs />} />
