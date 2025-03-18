@@ -8,6 +8,7 @@
   border-radius: 15px;
   border: 2px solid #c0b7ad;
   box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 15px;
 }
 
 .profile-main .user-name {
@@ -79,4 +80,12 @@
 
 .cap-main-head {
   font-weight: 700;
+}
+
+.social-handles{
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1E3C72, #2A5298);
 }

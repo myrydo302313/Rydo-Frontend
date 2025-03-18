@@ -7,29 +7,21 @@ import Signup from "./pages/Signup";
 import CaptainSignup from "./pages/CaptainSignup";
 import UserProtectWrapper from "./pages/UserProtectWrapper";
 import CaptainProtectWrapper from "./pages/CaptainProtectWrapper";
-
-// User Pages
 import Home from "./pages/Home";
 import UserAccount from "./pages/UserAccount";
 import Riding from "./pages/Riding";
 import UserRideFinal from "./pages/UserRideFinal";
 import WaitingForDriver from "./pages/WaitingForDriver";
-
-// Captain Pages
 import CaptainHome from "./pages/CaptainHome";
 import CaptainAccount from "./pages/CaptainAccount";
 import CaptainRides from "./pages/CaptainRides";
 import CaptainRideFinal from "./pages/CaptainRideFinal";
 import CaptainRiding from "./pages/CaptainRiding";
 import ConfirmRidePopUp from "./pages/ConfirmRidePopUp";
-
-// Admin Pages
 import Admin from "./pages/Admin/Admin";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import AdminCaptains from "./pages/Admin/AdminCaptains";
 import AdminRides from "./pages/Admin/AdminRides";
-
-// Public Pages
 import RydoServices from "./pages/RydoServices";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -39,16 +31,16 @@ import ShippingDelivery from "./pages/ShippingDelivery";
 import AboutUs from "./pages/AboutUs";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import { useEffect } from "react";
+
+const baseURL =
+  process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
 function App() {
-
 
   return (
     <div className="App">
       <Router>
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<MainHome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/captainLogin" element={<CaptainLogin />} />
@@ -64,7 +56,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
 
-          {/* 🚀 User Protected Routes */}
+          {/* User Protected Routes */}
           <Route
             path="/home"
             element={
@@ -106,7 +98,7 @@ function App() {
             }
           />
 
-          {/* 🚀 Captain Protected Routes */}
+          {/* Captain Protected Routes */}
           <Route
             path="/captainHome"
             element={
@@ -156,7 +148,7 @@ function App() {
             }
           />
 
-          {/* 🚀 Admin Routes */}
+          {/* Admin Routes */}
           <Route path="/admin" element={<Admin />}>
             <Route path="users" element={<AdminUsers />} />
             <Route path="captains" element={<AdminCaptains />} />

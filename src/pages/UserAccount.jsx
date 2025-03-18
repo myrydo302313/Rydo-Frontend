@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import BottomNav from "../components/BottomNav";
 import "../styles/UserAccount.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PaymentComponent from "../components/PaymentComponent";
+
 
 const UserAccount = () => {
   const [currUser, setCurrUser] = useState({});
@@ -51,7 +52,7 @@ const UserAccount = () => {
         </div>
         <div className="profile-menu-option">
           <img src="/images/contact.png" alt="Help" width={25} height={25} />
-          <p>Contact Us</p>
+          <Link to='/contact-us'>Contact Us</Link>
         </div>
       </div>
 
