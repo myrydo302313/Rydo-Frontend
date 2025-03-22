@@ -72,6 +72,7 @@ const CaptainHome = () => {
     socket.on("new-ride", (data) => {
       setRide(data);
       setRidePopupPanel(true);
+      showNotification("New Ride Request", "A new ride is available!", data);
     });
 
     return () => {

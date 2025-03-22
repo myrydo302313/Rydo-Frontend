@@ -8,7 +8,7 @@ import ContentLoader from "react-content-loader";
 
 const UserAccount = () => {
   const [currUser, setCurrUser] = useState({});
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const { user, logoutUser } = useAuth();
 
