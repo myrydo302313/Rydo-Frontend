@@ -5,7 +5,6 @@ import App from "./App.jsx";
 import { AuthProvider } from "./store/auth.jsx";
 import SocketProvider from "./context/SocketContext.jsx";
 
-
 createRoot(document.getElementById("root")).render(
   <SocketProvider>
     <AuthProvider>
