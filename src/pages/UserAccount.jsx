@@ -9,7 +9,7 @@ import LoadingScreen from "../components/LoadingScreen";
 
 const UserAccount = () => {
   const [currUser, setCurrUser] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const { user, logoutUser } = useAuth();
 
