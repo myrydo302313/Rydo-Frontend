@@ -5,10 +5,11 @@ import "../styles/UserAccount.css";
 import { Link, useNavigate } from "react-router-dom";
 import PaymentComponent from "../components/PaymentComponent";
 import ContentLoader from "react-content-loader";
+import LoadingScreen from "../components/LoadingScreen";
 
 const UserAccount = () => {
   const [currUser, setCurrUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { user, logoutUser } = useAuth();
 
@@ -26,28 +27,7 @@ const UserAccount = () => {
   return (
     <>
       {loading ? (
-        <ContentLoader
-          speed={20}
-          width="100%"
-          height="100vh"
-          viewBox="0 0 400 800"
-          backgroundColor="#f3f3f3"
-          foregroundColor="#ecebeb"
-        >
-          {/* Header */}
-          <rect x="10" y="20" rx="4" ry="4" width="80%" height="40" />
-
-          {/* Multiple content lines */}
-          <rect x="10" y="80" rx="4" ry="4" width="90%" height="20" />
-          <rect x="10" y="120" rx="4" ry="4" width="85%" height="20" />
-          <rect x="10" y="160" rx="4" ry="4" width="95%" height="20" />
-
-          {/* Placeholder for an image */}
-          <rect x="10" y="220" rx="10" ry="10" width="100%" height="300" />
-
-          {/* Footer */}
-          <rect x="10" y="540" rx="4" ry="4" width="60%" height="20" />
-        </ContentLoader>
+        <LoadingScreen/>
       ) : (
         <>
           <div className="profile-main">
