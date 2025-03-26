@@ -1,13 +1,14 @@
 /* 🌈 Colorful Gradient Background */
 .feedback-page {
     background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
-    /* min-height: 100vh; */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 15px;
     /* margin-top: 15px; */
+    margin-bottom: 40px;
   }
   
   .feedback-container {
