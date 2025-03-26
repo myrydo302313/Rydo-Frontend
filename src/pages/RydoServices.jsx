@@ -16,7 +16,7 @@ const RydoServices = () => {
                 <span>Rydo Cab</span>
             </div>
             <div className="service-element">
-                <img src="/images/parcelBanner.jpg" alt=""/>
+                <img src="/images/parcelBanner2.jpg" alt=""/>
                 <span>Rydo Parcel</span>
             </div>
         </div>
