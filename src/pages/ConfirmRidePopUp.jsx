@@ -17,6 +17,10 @@ const ConfirmRidePopUp = () => {
   const location = useLocation();
   const { ride } = location.state || {};
 
+  const callPassenger = () => {
+    window.open(`tel:${ride?.user.phone}`, "_self");
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -150,9 +154,12 @@ const ConfirmRidePopUp = () => {
           </div>
           {ride?.user.phone && (
             <p className="text-blue-600 font-medium underline mt-2">
-              <a href={`tel:${ride?.user.phone}`} className="call-captain-btn">
+              <span
+                onClick={callPassenger}
+                className="call-captain-btn cursor-pointer"
+              >
                 📞 Call Passenger
-              </a>
+              </span>
             </p>
           )}
         </div>
