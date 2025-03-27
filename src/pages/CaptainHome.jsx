@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { initializeApp } from "firebase/app";
 import { useAuth } from "../store/auth";
 import { SocketContext } from "../context/SocketContext";
 import { useGSAP } from "@gsap/react";
@@ -14,6 +16,36 @@ import { useNavigate } from "react-router-dom";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDThI2apXiWXj-xLvRwgxHsPX88D2UBWnM",
+  authDomain: "rydo-636aa.firebaseapp.com",
+  projectId: "rydo-636aa",
+  storageBucket: "rydo-636aa.appspot.com",
+  messagingSenderId: "843567514235",
+  appId: "1:843567514235:web:9a9aa5835d846699d818de",
+  measurementId: "G-KYZXG2822E",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const messaging = getMessaging(firebaseApp);
+
+const showNotification = (title, body) => {
+  if (!("Notification" in window)) {
+    console.error("🚨 This browser does not support desktop notifications.");
+    return;
+  }
+
+  if (Notification.permission === "granted") {
+    new Notification(title, { body });
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        new Notification(title, { body });
+      }
+    });
+  }
+};
 
 const CaptainHome = () => {
   const { socket } = useContext(SocketContext);
@@ -235,6 +267,100 @@ const CaptainHome = () => {
     fetchTotalDistance();
     fetchTotalCommission();
   }, []);
+
+  // Notification Part
+
+  useEffect(() => {
+    const registerServiceWorker = async () => {
+      if ("serviceWorker" in navigator) {
+        try {
+          const registration = await navigator.serviceWorker.register(
+            "/firebase-messaging-sw.js"
+          );
+          console.log("✅ Service Worker Registered:", registration);
+
+          // Ensure FCM Token is retrieved only after SW is registered and captainData is available
+          if (captainData?._id) {
+            requestNotificationPermission(captainData._id);
+          } else {
+            console.warn(
+              "⏳ Waiting for captainData before requesting FCM token..."
+            );
+          }
+        } catch (error) {
+          console.error("❌ Service Worker Registration Failed:", error);
+        }
+      }
+    };
+
+    const requestNotificationPermission = async (captainId) => {
+      if (!captainId) {
+        console.warn("🚨 captainId not available, skipping FCM token request.");
+        return;
+      }
+
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission === "granted") {
+          const token = await getToken(messaging, {
+            vapidKey:
+              "BHqlCp3o_qEs99RjTzss5Lw_pg0V8ueDszdqtkA-FLRmXuZbY9QHh1NJIdxUukd9G3v_RlpPLpuuUxaHBsCpjyI",
+          });
+
+          console.log("🔥 FCM Token:", token);
+          await saveTokenToDatabase(captainId, token);
+        } else {
+          console.warn("🚫 Notification Permission Denied.");
+        }
+      } catch (error) {
+        console.error("❌ Error Getting FCM Token:", error);
+      }
+    };
+
+    const saveTokenToDatabase = async (userId, token) => {
+      if (!userId || !token) {
+        console.error("🚨 Missing userId or FCM token, skipping API call.");
+        return;
+      }
+
+      console.log("📤 Sending to backend:", { userId, fcmToken: token });
+
+      try {
+        const response = await fetch(
+          "http://localhost:2313/api/notifications/save-fcm-token",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId, fcmToken: token, role: "captain" }),
+          }
+        );
+
+        const data = await response.json();
+        console.log("✅ Backend Response:", data);
+
+        if (!response.ok) throw new Error("Failed to store FCM token");
+      } catch (error) {
+        console.error("❌ Error saving FCM token:", error);
+      }
+    };
+
+    const setupForegroundListener = () => {
+      onMessage(messaging, (payload) => {
+        console.log("📩 Foreground Notification Received:", payload);
+        alert(payload.notification?.title || "New Notification");
+      });
+    };
+
+    if (captainData?._id) {
+      registerServiceWorker();
+    } else {
+      console.warn(
+        "⏳ Waiting for captainData before initializing notifications..."
+      );
+    }
+
+    setupForegroundListener();
+  }, [captainData]); // Runs only when captainData changes
 
   useGSAP(
     function () {

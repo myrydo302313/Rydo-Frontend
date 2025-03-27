@@ -1,76 +1,89 @@
-/* Container styles */
+/* Main container */
 .users-table-container {
-    width: 1200px; /* Increased width for larger screens */
-    margin: 30px auto;
-    padding: 30px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #ffffff, #f3f4f6);
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
-    text-align: center;
-  }
-  
-  /* Title */
-  .users-table-container h2 {
-    font-size: 28px;
-    margin-bottom: 25px;
-    color: #333;
-    font-weight: bold;
-    text-transform: uppercase;
-    background: linear-gradient(to right, #007bff, #0056b3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  /* Table styling */
-  .users-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    font-size: 16px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  /* Table header */
-  .users-table th {
-    padding: 14px;
-    text-align: left;
-    background: linear-gradient(135deg, #007bff, #0047ab);
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  /* Table rows */
-  .users-table td {
-    padding: 14px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    background: rgba(255, 255, 255, 0.9);
-  }
-  
-  /* Alternating row colors */
-  .users-table tr:nth-child(even) {
-    background: rgba(235, 235, 255, 0.5);
-  }
-  
-  /* Hover effect */
-  .users-table tr:hover {
-    background: linear-gradient(135deg, #e0f7fa, #d1c4e9);
-    transition: all 0.3s ease;
-  }
+  max-width: 1200px; 
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff, #f3f4f6);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
 
-  
-  /* No orders message */
-  .no-orders {
-    margin-top: 25px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #555;
-    background: linear-gradient(to right, #ff6a00, #ee0979);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+/* Title styling */
+.users-table-container h2 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #007bff, #0056b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-  
+/* Wrapper for horizontal scrolling */
+.users-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+.users-table {
+  width: 100%;
+  min-width: 1000px; /* Ensures horizontal scroll */
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 16px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table header */
+.users-table th {
+  padding: 14px;
+  text-align: left;
+  background: linear-gradient(135deg, #007bff, #0047ab);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Table rows */
+.users-table td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+
+/* Alternating row colors */
+.users-table tr:nth-child(even) {
+  background: rgba(235, 235, 255, 0.5);
+}
+
+/* Hover effect */
+.users-table tr:hover {
+  background: linear-gradient(135deg, #e0f7fa, #d1c4e9);
+  transition: all 0.3s ease;
+}
+
+/* Links in Aadhaar column */
+.users-table td a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* No captains message */
+.no-orders {
+  margin-top: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  background: linear-gradient(to right, #ff6a00, #ee0979);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

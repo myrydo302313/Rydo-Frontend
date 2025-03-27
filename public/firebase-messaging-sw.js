@@ -22,8 +22,8 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = payload.notification?.title || "New Notification";
   const notificationOptions = {
     body: payload.notification?.body || "You have a new message.",
-    icon: "/logo192.png",
-    badge: "/logo192.png",
+    icon: "/images/rydoLogo3.png",
+    badge: "/images/rydoLogo3.png",
     vibrate: [200, 100, 200],
   };
 

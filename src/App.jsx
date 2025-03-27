@@ -1,7 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
-import { initializeApp } from "firebase/app";
 
 import MainHome from "./pages/MainHome";
 import Login from "./pages/Login";
@@ -40,63 +38,7 @@ import { useEffect } from "react";
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDThI2apXiWXj-xLvRwgxHsPX88D2UBWnM",
-  authDomain: "rydo-636aa.firebaseapp.com",
-  projectId: "rydo-636aa",
-  storageBucket: "rydo-636aa.appspot.com",
-  messagingSenderId: "843567514235",
-  appId: "1:843567514235:web:9a9aa5835d846699d818de",
-  measurementId: "G-KYZXG2822E",
-};
-
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-const messaging = getMessaging(firebaseApp);
-
 function App() {
-  useEffect(() => {
-    const registerServiceWorker = async () => {
-      if ("serviceWorker" in navigator) {
-        try {
-          const registration = await navigator.serviceWorker.register("/firebase-messaging-sw.js");
-          console.log("✅ Service Worker Registered:", registration);
-
-          // Ensure FCM Token is retrieved only after SW is registered
-          requestNotificationPermission();
-        } catch (error) {
-          console.error("❌ Service Worker Registration Failed:", error);
-        }
-      }
-    };
-
-    const requestNotificationPermission = async () => {
-      try {
-        const permission = await Notification.requestPermission();
-        if (permission === "granted") {
-          const token = await getToken(messaging, {
-            vapidKey: "BHqlCp3o_qEs99RjTzss5Lw_pg0V8ueDszdqtkA-FLRmXuZbY9QHh1NJIdxUukd9G3v_RlpPLpuuUxaHBsCpjyI",
-          });
-          console.log("🔥 FCM Token:", token);
-        } else {
-          console.warn("🚫 Notification Permission Denied.");
-        }
-      } catch (error) {
-        console.error("❌ Error Getting FCM Token:", error);
-      }
-    };
-
-    const setupForegroundListener = () => {
-      onMessage(messaging, (payload) => {
-        console.log("📩 Foreground Notification Received:", payload);
-        alert(payload.notification?.title || "New Notification");
-      });
-    };
-
-    registerServiceWorker();
-    requestNotificationPermission();
-    setupForegroundListener();
-  }, []);
 
   return (
     <div className="App">
