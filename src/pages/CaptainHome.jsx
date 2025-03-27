@@ -327,7 +327,7 @@ const CaptainHome = () => {
 
       try {
         const response = await fetch(
-          "http://localhost:2313/api/notifications/save-fcm-token",
+          `${baseURL}/api/notifications/save-fcm-token`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
