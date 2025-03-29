@@ -6,21 +6,28 @@ const SocialLinks = () => {
   return (
     <div className="social">
       {/* Open WhatsApp directly */}
-      <SocialIcon
-        network="whatsapp"
-        url="whatsapp://send?phone=7261007718"
-        onClick={(e) => {
-          e.preventDefault(); // Prevent default browser behavior
-          window.location.href = "whatsapp://send?phone=7261007718";
-        }}
-      />
+      <a href="whatsapp://send?phone=7261007718">
+        <SocialIcon network="whatsapp" />
+      </a>
 
       {/* Other social links */}
       <p>
-        <SocialIcon url="https://x.com/Rydo552080" />
+        <a
+          href="https://x.com/Rydo552080"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <SocialIcon url="https://x.com/Rydo552080" />
+        </a>
       </p>
       <p>
-        <SocialIcon url="https://www.instagram.com/rydo302313" />
+        <a
+          href="https://www.instagram.com/rydo302313"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <SocialIcon url="https://www.instagram.com/rydo302313" />
+        </a>
       </p>
     </div>
   );
