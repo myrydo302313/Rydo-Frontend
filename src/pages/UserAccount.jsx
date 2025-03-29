@@ -37,9 +37,9 @@ const UserAccount = () => {
           <div className="profile-menu">
             <div className="profile-menu-option">
               <img src="/images/help.png" alt="Help" width={25} height={25} />
-              <p>Help</p>
+              <Link to="/help">Help</Link>
             </div>
-            <div className="profile-menu-option">
+            {/* <div className="profile-menu-option">
               <img
                 src="/images/payment.png"
                 alt="Help"
@@ -47,7 +47,7 @@ const UserAccount = () => {
                 height={25}
               />
               <p>Payment</p>
-            </div>
+            </div> */}
             <div className="profile-menu-option">
               <img src="/images/rides.png" alt="Help" width={25} height={25} />
               <p>My Rides</p>

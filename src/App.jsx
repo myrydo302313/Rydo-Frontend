@@ -34,6 +34,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Feedback from "./pages/Feedback";
 import { useEffect } from "react";
+import Help from "./pages/Help";
 
 const baseURL =
   process.env.REACT_APP_BASE_URL || "https://rydo-backend.onrender.com";
@@ -57,6 +58,7 @@ function App() {
           <Route path="/cancel-refund" element={<CancellationRefund />} />
           <Route path="/shipping-delivery" element={<ShippingDelivery />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/help" element={<Help />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
 

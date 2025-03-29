@@ -1,0 +1,15 @@
+.help-page{
+    background: linear-gradient(135deg, #4FC3F7, #81D4FA);
+    min-height: 100vh;
+}
+
+.contact-details-help{
+    background: linear-gradient(135deg, #D32F2F, #FF5252);
+    width: 90%;
+    margin: 20px auto;
+    text-align: center;
+    border-radius: 22px;
+    color: aliceblue;
+    padding: 13px;
+}
+
