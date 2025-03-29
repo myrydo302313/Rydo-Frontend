@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CaptainNav from "../components/CaptainNav";
 import { Toaster, toast } from "react-hot-toast";
 import { useAuth } from "../store/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/CaptainAccount.css";
 import PaymentComponent from "../components/PaymentComponent";
 
@@ -102,24 +102,43 @@ const CaptainAccount = () => {
 
       <div className="pay-commission">
         <h3>Pay Your Commission To Stay Active</h3>
-        {currUser?.commission>0 ? (<PaymentComponent amt={currUser?.commission} />):(<span>No Commission to pay</span>)}
-        
+        {currUser?.commission > 0 ? (
+          <PaymentComponent amt={currUser?.commission} />
+        ) : (
+          <span>No Commission to pay</span>
+        )}
       </div>
 
       <div className="profile-menu">
-        {[
-          { img: "help", text: "Help" },
-          { img: "payment", text: "Payment" },
-          { img: "rides", text: "My Rides" },
-          { img: "rewards", text: "My Rewards" },
-          { img: "feedback", text: "Feedback" },
-          { img: "contact", text: "Contact Us" },
-        ].map(({ img, text }) => (
-          <div className="profile-menu-option" key={text}>
-            <img src={`/images/${img}.png`} alt={text} width={25} height={25} />
-            <p>{text}</p>
-          </div>
-        ))}
+        <div className="profile-menu-option">
+          <img src="/images/help.png" alt="Help" width={25} height={25} />
+          <Link to="/captain-help">Help</Link>
+        </div>
+        {/* <div className="profile-menu-option">
+              <img
+                src="/images/payment.png"
+                alt="Help"
+                width={25}
+                height={25}
+              />
+              <p>Payment</p>
+            </div> */}
+        <div className="profile-menu-option">
+          <img src="/images/rides.png" alt="Help" width={25} height={25} />
+          <p>My Rides</p>
+        </div>
+        <div className="profile-menu-option">
+          <img src="/images/rewards.png" alt="Help" width={25} height={25} />
+          <p>My Rewards</p>
+        </div>
+        <div className="profile-menu-option">
+          <img src="/images/feedback.png" alt="Help" width={25} height={25} />
+          <Link to="/captain-feedback">Feedback</Link>
+        </div>
+        <div className="profile-menu-option">
+          <img src="/images/contact.png" alt="Help" width={25} height={25} />
+          <Link to="/captain-contact-us">Contact Us</Link>
+        </div>
       </div>
 
       <div className="logout-btn-div">
