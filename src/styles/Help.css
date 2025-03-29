@@ -1,7 +1,19 @@
-.help-page{
-    background: linear-gradient(135deg, #4FC3F7, #81D4FA);
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.help-page {
+    background: linear-gradient(135deg, #4FC3F7, #81D4FA, #B3E5FC, #E1F5FE);
     min-height: 100vh;
 }
+
+
+.help-page-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.1rem;
+  color: #4B0082; /* Deep Indigo for contrast */
+  text-shadow: 3px 3px 8px rgba(75, 0, 130, 0.4); /* Softer shadow for depth */
+  margin-bottom: 25px;
+}
+
 
 .contact-details-help{
     background: linear-gradient(135deg, #D32F2F, #FF5252);

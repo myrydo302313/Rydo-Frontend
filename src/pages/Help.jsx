@@ -8,7 +8,7 @@ const Help = () => {
     <>
       <div className="help-page">
         <img src="/images/help.png" alt="" />
-        <h2 align="center">For Any Help, You can directly contact us : </h2>
+        <h2 className="help-page-title" align="center">For Any Help, You can directly contact us : </h2>
 
         <SocialLinks />
 
