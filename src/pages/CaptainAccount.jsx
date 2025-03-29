@@ -159,16 +159,7 @@ const CaptainAccount = () => {
             <div className="doc-info">
               <span className="doc-label">{label}:</span>
               {currUser?.[key] ? (
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.open(currUser[key], "_blank");
-                  }}
-                  className="view-doc"
-                >
-                  View {label}
-                </a>
+                <p style={{color:'green'}}>Already Uploaded</p>
               ) : (
                 <span className="not-uploaded">Not Uploaded</span>
               )}
