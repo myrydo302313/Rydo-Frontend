@@ -3,31 +3,37 @@ import { SocialIcon } from "react-social-icons";
 import "../styles/SocialLinks.css";
 
 const SocialLinks = () => {
+  const handleLinkClick = (link) => {
+    window.open(link, "_blank");
+  };
+
   return (
     <div className="social">
       {/* Open WhatsApp directly */}
-      <a href="whatsapp://send?phone=7261007718">
-        <SocialIcon network="whatsapp" />
-      </a>
+      <SocialIcon
+        network="whatsapp"
+        url="whatsapp://send?phone=7261007718"
+        onClick={(url) => {
+          handleLinkClick(url);
+        }}
+      />
 
       {/* Other social links */}
       <p>
-        <a
-          href="https://x.com/Rydo552080"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <SocialIcon url="https://x.com/Rydo552080" />
-        </a>
+        <SocialIcon
+          url="https://x.com/Rydo552080"
+          onClick={(url) => {
+            handleLinkClick(url);
+          }}
+        />
       </p>
       <p>
-        <a
-          href="https://www.instagram.com/rydo302313"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <SocialIcon url="https://www.instagram.com/rydo302313" />
-        </a>
+        <SocialIcon
+          url="https://www.instagram.com/rydo302313"
+          onClick={(url) => {
+            handleLinkClick(url);
+          }}
+        />
       </p>
     </div>
   );
