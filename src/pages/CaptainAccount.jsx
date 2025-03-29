@@ -160,9 +160,11 @@ const CaptainAccount = () => {
               <span className="doc-label">{label}:</span>
               {currUser?.[key] ? (
                 <a
-                  href={currUser[key]}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(currUser[key], "_blank");
+                  }}
                   className="view-doc"
                 >
                   View {label}
