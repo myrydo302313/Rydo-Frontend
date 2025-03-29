@@ -48,10 +48,8 @@ const ConfirmRidePopUp = () => {
       const destLat = ride.destinationLocation.latitude;
       const destLng = ride.destinationLocation.longitude;
 
-      // Construct Google Maps URL using coordinates
       const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${pickupLat},${pickupLng}&destination=${destLat},${destLng}&travelmode=driving`;
 
-      // Open Google Maps in a new tab
       window.open(googleMapsUrl, "_blank");
 
       navigate("/captain-riding", { state: { ride: ride } });
@@ -67,7 +65,7 @@ const ConfirmRidePopUp = () => {
     });
 
     return () => {
-      socket.off("ride-cancelled"); // Clean up the event listener
+      socket.off("ride-cancelled"); 
     };
   }, [socket]);
 
@@ -85,7 +83,7 @@ const ConfirmRidePopUp = () => {
           ride._id
         )}`,
         {
-          method: "POST", // Check if API requires POST or GET
+          method: "POST", 
           headers: {
             Authorization: captainAuthToken,
             "Content-Type": "application/json",
